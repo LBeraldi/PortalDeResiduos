@@ -1,0 +1,28 @@
+{
+  "name": "portal-residuos-ms",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "sync:data": "node scripts/generate-panorama-catalog.mjs && node scripts/generate-selective-collection-catalog.mjs",
+    "preview": "vite preview",
+    "check:types": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "check:data": "node scripts/validate-project.mjs",
+    "check:quality": "npm run check:types && npm test && npm run check:data && npm run build"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5"
+  }
+}

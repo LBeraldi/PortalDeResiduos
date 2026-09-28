@@ -1,0 +1,114 @@
+.elementor-72 .elementor-element.elementor-element-672d6d9{margin-top:0px;margin-bottom:100px;padding:0px 35px 0px 35px;}.elementor-72 .elementor-element.elementor-element-ff34eab > .elementor-element-populated{margin:0% 2% 0% 0%;}.elementor-72 .elementor-element.elementor-element-185f3a7 .aux-modern-heading-primary{font-size:16px;font-weight:900;letter-spacing:-0.5px;}.elementor-72 .elementor-element.elementor-element-185f3a7 .aux-modern-heading-secondary{font-size:50px;font-weight:800;letter-spacing:-2px;margin:0em 0em 0.1em 0em;}.elementor-72 .elementor-element.elementor-element-185f3a7 .aux-modern-heading-description{font-size:16px;font-weight:400;letter-spacing:-0.5px;margin:0em 0em 2em 0em;}.elementor-72 .elementor-element.elementor-element-185f3a7{z-index:1;animation-duration:1500ms;animation-timing-function:cubic-bezier(0.165,0.84,0.44,1);}.elementor-72 .elementor-element.elementor-element-d39d2fa input:not([type="submit"]){height:60px;border-radius:30px 30px 30px 30px;margin:0% 2% 3% 0%;background-color:#EFEFEF;transition:all ease-out 0.3s;}.elementor-72 .elementor-element.elementor-element-d39d2fa input:not([type="submit"])::placeholder{font-size:16px;font-weight:400;text-transform:capitalize;font-style:normal;letter-spacing:-0.48px;}.elementor-72 .elementor-element.elementor-element-d39d2fa input[type="text"]{transition:all ease-out 0.3s;}.elementor-72 .elementor-element.elementor-element-d39d2fa input[type="email"]{transition:all ease-out 0.3s;}.elementor-72 .elementor-element.elementor-element-d39d2fa select{transition:all ease-out 0.3s;}.elementor-72 .elementor-element.elementor-element-d39d2fa textarea{transition:all ease-out 0.3s;}.elementor-72 .elementor-element.elementor-element-d39d2fa input[type="submit"]{font-size:16px;font-weight:400;text-transform:capitalize;letter-spacing:-0.48px;height:50px;border-radius:25px 25px 25px 25px;padding:15px 65px 15px 63px;margin:4% 3% 0% 0%;background-color:transparent;background-image:linear-gradient(284deg, #0CD68A 0%, #309F5E 100%);box-shadow:0px 15px 40px 0px rgba(12, 214, 138, 0.2980392156862745);transition:all ease-out 0.3s;}.elementor-72 .elementor-element.elementor-element-d39d2fa{z-index:1;animation-duration:1500ms;animation-timing-function:cubic-bezier(0.165,0.84,0.44,1);}.elementor-72 .elementor-element.elementor-element-5216e59 .aux-media-image{border-radius:20px 20px 20px 20px;overflow:hidden;box-shadow:0px 20px 60px 0px rgba(43,61,54,0.2);}.elementor-72 .elementor-element.elementor-element-5216e59{z-index:1;animation-duration:1500ms;animation-timing-function:cubic-bezier(0.165,0.84,0.44,1);}@media(min-width:768px){.elementor-72 .elementor-element.elementor-element-ff34eab{width:59%;}.elementor-72 .elementor-element.elementor-element-57d364b{width:41%;}}@media(max-width:1284px) and (min-width:768px){.elementor-72 .elementor-element.elementor-element-ff34eab{width:100%;}.elementor-72 .elementor-element.elementor-element-57d364b{width:100%;}}@media(max-width:1284px){.elementor-72 .elementor-element.elementor-element-ff34eab > .elementor-element-populated{margin:0px 0px 0px 0px;}.elementor-72 .elementor-element.elementor-element-57d364b > .elementor-element-populated{margin:0px 0px 50px 0px;}}@media(max-width:767px){.elementor-72 .elementor-element.elementor-element-185f3a7 .aux-modern-heading-secondary{font-size:2.2em;line-height:45px;margin:0em 0em 00.5em 0em;}.elementor-72 .elementor-element.elementor-element-d39d2fa input[type="submit"]{margin:12% 0% 0% 0%;}}/* Start custom CSS for aux_contact_form, class: .elementor-element-d39d2fa */.elementor-72 .elementor-element.elementor-element-d39d2fa label {
+    font-family: "Nunito";
+    font-size: 16px;
+    font-weight: 800;
+    color: #000000;
+    margin-bottom: 3%;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa select option{
+    font-family: 'Quicksand';
+    font-size: 16px;
+    letter-spacing: -0.48px;
+    color: #000000;
+    opacity: 0.7;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-form-section {
+    margin-bottom: 3%;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-cleaning-mail-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-phone-right-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-phone-left-field {
+    width: 48%;
+    display: inline-block;
+    border: none;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-right-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-center-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-left-field {
+    width: 31%;
+    display: inline-block;
+    border: none;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-right-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-center-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-left-field {
+    padding-left: 20px;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-right-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-center-field {
+    background-repeat: no-repeat;
+    background-position: 90%;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-center-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-right-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-left-field {
+    text-align: center;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa form .aux-dropdown{
+    margin-right: 1%;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-date-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-time-field {
+    width: 31%;
+    display: inline-block;
+    border-radius: 30px;
+    border: none;
+    background-color: #EFEFEF;
+    height: 60px;
+    padding-left: 4%;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-date-field {
+    font-family: "Quicksand";
+    font-weight: 400;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-dropdown {
+    width: 31%;
+    border-radius: 30px;
+    background-color: #EFEFEF;
+    border: none;
+    background-image: url('http://portalresiduosms.online/wp-content/uploads/2019/10/Path-29.svg');
+    background-repeat: no-repeat;
+    background-position: 90%;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-dropdown-container:after, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-select:after, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-dropdown:after {
+    border: none;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .date-icon {
+    background-image: url('http://portalresiduosms.online/wp-content/uploads/2019/10/event.svg');
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    transform: translateX(-55px) translateY(20px);
+    opacity: 0.6;
+}
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-time-field {
+    background-image: url('http://portalresiduosms.online/wp-content/uploads/2019/10/clock1.svg');
+    background-repeat: no-repeat;
+    background-position: 85%;
+}
+
+.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-submit-button {
+    float: right;
+    width: 200px;
+}
+
+@media screen and (max-width:767px) {
+    .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-cleaning-mail-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-phone-right-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-phone-left-field {
+        width :100%;
+    }
+    .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-phone-right-field {
+    margin-left: 0;
+    }
+    .elementor-72 .elementor-element.elementor-element-d39d2fa label {
+        margin-bottom : 8%;
+    }
+    .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-right-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-center-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-left-field {
+        width : 100%;
+        margin-bottom : 25px;
+    }
+    .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-right-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-text-center-field {
+        background-position : 270px;
+    }
+    .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-date-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-time-field, .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-dropdown {
+        width : 100%;
+    }
+    .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-time-field,.elementor-72 .elementor-element.elementor-element-d39d2fa .aux-date-field {
+        margin-left : 0;
+    }
+    .elementor-72 .elementor-element.elementor-element-d39d2fa .aux-dropdown {
+        margin-bottom : 10%;
+    }
+    .elementor-72 .elementor-element.elementor-element-d39d2fa .date-icon {
+        transform : translateX(240px) translateY(-70px);
+    }
+}/* End custom CSS */

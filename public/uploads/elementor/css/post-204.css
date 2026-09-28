@@ -1,0 +1,42 @@
+.elementor-204 .elementor-element.elementor-element-a6e7d1b .elementor-spacer-inner{height:150px;}.elementor-204 .elementor-element.elementor-element-f3dfe6a{z-index:1;animation-duration:1500ms;animation-timing-function:cubic-bezier(0.165,0.84,0.44,1);}.elementor-204 .elementor-element.elementor-element-7ce39f2 > .elementor-element-populated{padding:0% 0% 0% 11%;}.elementor-204 .elementor-element.elementor-element-cf64fd5 .aux-modern-heading-primary{font-size:1em;font-weight:900;letter-spacing:-0.5px;}.elementor-204 .elementor-element.elementor-element-cf64fd5 .aux-modern-heading-secondary{font-size:3em;font-weight:800;text-transform:capitalize;line-height:60px;letter-spacing:-1.5px;margin:0.4em 0em 1em 0em;max-width:90%;}.elementor-204 .elementor-element.elementor-element-cf64fd5 .aux-modern-heading-description{font-size:16px;line-height:25px;letter-spacing:-0.5px;max-width:85%;}.elementor-204 .elementor-element.elementor-element-cf64fd5{z-index:1;animation-duration:1500ms;animation-delay:200ms;animation-timing-function:cubic-bezier(0.165,0.84,0.44,1);}.elementor-204 .elementor-element.elementor-element-c577247 .elementor-spacer-inner{height:250px;}@media(max-width:1284px) and (min-width:768px){.elementor-204 .elementor-element.elementor-element-7ce39f2{width:100%;}}@media(max-width:1284px){.elementor-204 .elementor-element.elementor-element-7ce39f2 > .elementor-element-populated{padding:0% 2% 0% 2%;}.elementor-204 .elementor-element.elementor-element-cf64fd5 .aux-modern-heading-secondary{font-size:2.5em;max-width:100%;}.elementor-204 .elementor-element.elementor-element-cf64fd5 .aux-modern-heading-description{font-size:1em;max-width:100%;}}@media(max-width:767px){.elementor-204 .elementor-element.elementor-element-7ce39f2 > .elementor-element-populated{padding:0% 3% 0% 3%;}.elementor-204 .elementor-element.elementor-element-cf64fd5 .aux-modern-heading-secondary{font-size:2.2em;line-height:40px;max-width:100%;}.elementor-204 .elementor-element.elementor-element-cf64fd5 .aux-modern-heading-description{max-width:100%;}}/* Start custom CSS for html, class: .elementor-element-f0a5fb8 *//* Dropdown Button */
+        .dropbtn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        border-radius: 100px;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+        position: relative;
+        display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {background-color: #ddd;}
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {display: block;}
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {background-color: #3e8e41;}/* End custom CSS */
