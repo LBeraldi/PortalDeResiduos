@@ -10,6 +10,8 @@ type PageHeroProps = {
   crumbs?: Crumb[]
   /** Conteúdo curto abaixo da descrição, como selos. */
   children?: ReactNode
+  /** `title` usa a escala de h2 no título (artigos com títulos longos). */
+  size?: 'display' | 'title'
 }
 
 /**
@@ -18,9 +20,9 @@ type PageHeroProps = {
  * LegacyPages e o antigo `PageIntro` de App.tsx. Sempre em papel: o verde-mata
  * fica para a página inicial e o rodapé (CP-10.2).
  */
-export function PageHero({ eyebrow, title, description, image, crumbs, children }: PageHeroProps) {
+export function PageHero({ eyebrow, title, description, image, crumbs, children, size = 'display' }: PageHeroProps) {
   return (
-    <section className={`page-hero${image ? ' has-figure' : ''}`}>
+    <section className={`page-hero page-hero--${size}${image ? ' has-figure' : ''}`}>
       <div className="container page-hero-inner">
         <div className="page-hero-copy">
           {crumbs && <Breadcrumbs items={crumbs} className="page-hero-crumbs" />}

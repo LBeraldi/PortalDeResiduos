@@ -259,3 +259,22 @@ test('D3.3: a inicial tem três atalhos iguais, sem carimbo, e o GRS a um clique
   assert.match(home, /"https:\/\/sadgrs\.streamlit\.app\/"/)
   assert.match(home, /newsByDate\.slice\(0, 3\)/)
 })
+
+test('D3.4: "Em números" só mostra fatos com número (RC-3)', async () => {
+  const { numericFacts } = await import('../src/data/newsDate.ts')
+  const fatos = [...read('src/pages/NewsPages.tsx').matchAll(/\{ label: '([^']+)', value: '([^']+)' \}/g)].map((m) => ({ label: m[1], value: m[2] }))
+  assert.equal(fatos.length, 24)
+  const numericos = numericFacts(fatos).map((f) => f.value)
+  assert.ok(numericos.every((v) => /\d/.test(v)))
+  assert.deepEqual(numericFacts([{ label: 'Responsabilidade', value: 'Compartilhada' }]), [])
+  assert.ok(numericos.includes('76 de 79') && numericos.includes('96,2%') && !numericos.includes('Sisrev/MS'))
+})
+
+test('D3.4: a notícia mostra data e resumo uma vez e a trilha não repete o título', () => {
+  const src = read('src/pages/NewsPages.tsx')
+  const artigo = src.match(/export function NewsArticle[\s\S]*?\n\}/)[0]
+  assert.doesNotMatch(artigo, /news-story-meta|news-story-lead|Em foco/)
+  assert.match(artigo, /Em números/)
+  assert.match(artigo, /numericFacts\(item\.facts\)/)
+  assert.doesNotMatch(src, /label: title \}/)
+})

@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 3
-- Próxima tarefa: D3.4. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1–D3.3. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D3.5. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1–D3.4. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -38,8 +38,13 @@ Texto novo ou alterado visível ao público. Nada disso vai ao ar sem aprovaçã
 | D3.1 | Índice de municípios | "Todos", "Com plano de coleta seletiva", "N de 79 municípios para “termo”", "Nenhum município encontrado para “termo”.", "Limpar busca", selo "Plano de coleta seletiva" | spec CP-06 e mockup |
 | D3.2 | Ficha do município | **"Sobre o panorama"**: "Diagnóstico da gestão, do gerenciamento e da disposição final dos resíduos sólidos no município, parte do levantamento feito para os 79 municípios de Mato Grosso do Sul." (ADR-004: aprovar antes de publicar); "Documentos deste município"; "N documentos"; "Panorama de gestão de resíduos de <Município>" | texto já publicado em Disposição Legal |
 | D3.3 | Página inicial | "Abrir diretórios municipais", "Abrir Projeto Valoriza", "Abrir Nota Técnica"; título "Nota Técnica" (era "Notas Técnicas"); "Abrir sistema GRS" | rótulos já existentes (leitor de tela e Apoio a Decisão) |
+| D3.4 | Notícia | "Em foco" → "Em números" | spec PG-04.3 |
 
 ## Sessões
+
+### 2026-09-29 — D3.4 notícia
+
+- Data e categoria na sobrelinha, resumo uma vez, trilha sem o título, "Em números" só com números (RC-3), título na escala de h2.
 
 ### 2026-09-29 — D3.3 página inicial
 

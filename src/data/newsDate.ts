@@ -16,3 +16,8 @@ export function dateKey(date: string): number {
 export function sortByDate<T extends { date: string }>(items: readonly T[]): T[] {
   return [...items].sort((a, b) => dateKey(b.date) - dateKey(a.date))
 }
+
+/** "Em números" (RC-3): só fatos cujo valor tem dígito; "Compartilhada" ou "Sisrev/MS" não entram. */
+export function numericFacts<T extends { value: string }>(facts: readonly T[]): T[] {
+  return facts.filter((fact) => /\d/.test(fact.value))
+}

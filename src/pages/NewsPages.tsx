@@ -2,7 +2,7 @@ import { PageHero } from '../components/PageHero'
 import type { Crumb } from '../components/Breadcrumbs'
 import { ArrowRight, CalendarDays, ExternalLink, FileText, Link as LinkIcon, Newspaper } from 'lucide-react'
 import { Link } from '../components/router'
-import { sortByDate } from '../data/newsDate'
+import { numericFacts, sortByDate } from '../data/newsDate'
 
 const ASSET = '/uploads/'
 type Navigate = (to: string) => void
@@ -149,12 +149,12 @@ export const newsRecords: NewsRecord[] = [
 /** Ordem de leitura do portal: da mais recente para a mais antiga (capa e arquivo). */
 export const newsByDate = sortByDate(newsRecords)
 
-function NewsHero({ title, excerpt, image, date, crumbs }: Pick<NewsRecord, "title" | "excerpt" | "image" | "date"> & { crumbs?: Crumb[] }) { return <PageHero eyebrow={date} title={title} description={excerpt} image={image} crumbs={crumbs} /> }
+function NewsHero({ title, excerpt, image, date, category, crumbs }: Pick<NewsRecord, "title" | "excerpt" | "image" | "date" | "category"> & { crumbs?: Crumb[] }) { return <PageHero size="title" eyebrow={`${category} · ${date}`} title={title} description={excerpt} image={image} crumbs={crumbs} /> }
 
-const newsCrumbs = (title?: string) => [
+/** Trilha das notícias: no artigo, "Notícias" é o nível acima e o título não se repete. */
+const newsCrumbs = (artigo = false): Crumb[] => [
   { label: 'Início', href: '/' },
-  title ? { label: 'Notícias', href: '/noticias/' } : { label: 'Notícias' },
-  ...(title ? [{ label: title }] : []),
+  artigo ? { label: 'Notícias', href: '/noticias/' } : { label: 'Notícias' },
 ]
 
 export function NewsArchive({ navigate }: { navigate: Navigate }) {
@@ -165,7 +165,10 @@ export function NewsArticle({ path, navigate }: { path: string; navigate: Naviga
   const slug = path.split('/').filter(Boolean).pop() ?? ''
   const item = newsRecords.find((record) => record.slug === slug)
   if (!item) return <ArticleFallback navigate={navigate} />
-  return <><NewsHero {...item} crumbs={newsCrumbs(item.title)} /><section className="section container news-story"><article className="news-story-main"><div className="news-story-meta"><span>{item.category}</span><span>{item.date}</span></div><div className="news-story-lead">{item.excerpt}</div>{item.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{item.source && <a className="news-source" href={item.source.href} target="_blank" rel="noreferrer"><LinkIcon size={16} /><span><small>Fonte original</small><strong>{item.source.label}</strong></span><ExternalLink size={15} /></a>}{item.links && <div className="news-links"><div className="eyebrow"><span className="eyebrow-line" /> Links citados no artigo</div>{item.links.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noreferrer"><FileText size={15} /> {link.label} <ExternalLink size={14} /></a>)}</div>}<Link to="/noticias/" className="text-link"><ArrowRight size={15} className="back-arrow" /> Voltar para notícias</Link></article><aside className="news-story-aside"><div className="news-aside-label"><Newspaper size={18} /> Em foco</div>{item.facts.map((fact) => <div className="news-fact" key={fact.label}><strong>{fact.value}</strong><span>{fact.label}</span></div>)}<Link to="/publicacoes/" className="button button-primary">Ver publicações <ArrowRight size={15} /></Link></aside></section></>
+  const numeros = numericFacts(item.facts)
+  // Resumo uma vez (PG-04.2): se o primeiro parágrafo já começa com ele, a linha fina sai.
+  const resumoRepetido = item.paragraphs[0]?.startsWith(item.excerpt) ?? false
+  return <><NewsHero {...item} excerpt={resumoRepetido ? '' : item.excerpt} crumbs={newsCrumbs(true)} /><section className={`section container news-story${numeros.length ? '' : ' news-story--single'}`}><article className="news-story-main">{item.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{item.source && <a className="news-source" href={item.source.href} target="_blank" rel="noreferrer"><LinkIcon size={16} /><span><small>Fonte original</small><strong>{item.source.label}</strong></span><ExternalLink size={15} /></a>}{item.links && <div className="news-links"><div className="eyebrow"><span className="eyebrow-line" /> Links citados no artigo</div>{item.links.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noreferrer"><FileText size={15} /> {link.label} <ExternalLink size={14} /></a>)}</div>}<Link to="/noticias/" className="text-link"><ArrowRight size={15} className="back-arrow" /> Voltar para notícias</Link></article>{numeros.length > 0 && <aside className="news-story-aside"><div className="news-aside-label"><Newspaper size={18} /> Em números</div>{numeros.map((fact) => <div className="news-fact" key={fact.label}><strong>{fact.value}</strong><span>{fact.label}</span></div>)}</aside>}</section></>
 }
 
 function ArticleFallback({ navigate }: { navigate: Navigate }) {
