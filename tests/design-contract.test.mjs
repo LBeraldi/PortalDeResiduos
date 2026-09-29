@@ -182,3 +182,24 @@ test('D2.5: barra informativa fora do cabeçalho fixo, Cidades no menu e busca f
   assert.match(read('src/components/SiteSearch.tsx'), /<span className="header-search-label">Buscar<\/span>/)
   assert.match(read('src/styles.css'), /\.header-inner \{[^}]*min-height: 68px/)
 })
+
+test('D2.6: hover sem deslocamento, uma sombra só para sobreposições e transições curtas', () => {
+  const css = read('src/styles.css')
+  const regras = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map((m) => ({ sel: m[1].trim(), body: m[2] }))
+  for (const { sel, body } of regras.filter((r) => /:hover/.test(r.sel))) {
+    assert.doesNotMatch(body, /transform|box-shadow/, sel)
+  }
+  for (const { sel, body } of regras) {
+    for (const s of body.matchAll(/box-shadow:\s*([^;]+)/g)) assert.equal(s[1].trim(), 'var(--shadow-overlay)', sel)
+    for (const t of body.matchAll(/transition:\s*([^;]+)/g)) {
+      for (const parte of t[1].split(',')) {
+        const [prop, dur] = parte.trim().split(/\s+/)
+        assert.match(prop, /^(color|background|background-color|border-color)$/, `${sel}: ${prop}`)
+        assert.ok(parseFloat(dur) <= 0.18, `${sel}: ${dur}`)
+      }
+    }
+  }
+  assert.doesNotMatch(css, /--shadow-card/)
+  assert.match(css.match(/:root\s*\{[^}]*\}/)[0], /--section-y: clamp\(3rem, 6vw, 4rem\);/)
+  assert.doesNotMatch(css, /padding-block: clamp\(3rem, 7vw, 5\.5rem\)/)
+})
