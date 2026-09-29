@@ -1,24 +1,27 @@
 import type { ReactNode } from 'react'
+import { Breadcrumbs, type Crumb } from './Breadcrumbs'
 
 type PageHeroProps = {
   eyebrow: string
   title: ReactNode
   description?: ReactNode
   image?: string
-  /** `paper` (padrão) para a maioria das páginas; `mata` para poucas telas de alto impacto. */
-  tone?: 'paper' | 'mata'
+  /** Trilha de navegação, mostrada acima da sobrelinha e do título (CP-10.1). */
+  crumbs?: Crumb[]
 }
 
 /**
  * Herói de página compartilhado. Substitui os componentes quase idênticos que
  * existiam em InstitutionalPages, ResourcePages, ProductionPages, NewsPages,
- * LegacyPages e o antigo `PageIntro` de App.tsx.
+ * LegacyPages e o antigo `PageIntro` de App.tsx. Sempre em papel: o verde-mata
+ * fica para a página inicial e o rodapé (CP-10.2).
  */
-export function PageHero({ eyebrow, title, description, image, tone = 'paper' }: PageHeroProps) {
+export function PageHero({ eyebrow, title, description, image, crumbs }: PageHeroProps) {
   return (
-    <section className={`page-hero page-hero--${tone}${image ? ' has-figure' : ''}`}>
+    <section className={`page-hero${image ? ' has-figure' : ''}`}>
       <div className="container page-hero-inner">
         <div className="page-hero-copy">
+          {crumbs && <Breadcrumbs items={crumbs} className="page-hero-crumbs" />}
           <div className="eyebrow">
             <span className="eyebrow-line" aria-hidden="true" /> {eyebrow}
           </div>

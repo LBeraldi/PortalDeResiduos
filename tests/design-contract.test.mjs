@@ -203,3 +203,15 @@ test('D2.6: hover sem deslocamento, uma sombra só para sobreposições e transi
   assert.match(css.match(/:root\s*\{[^}]*\}/)[0], /--section-y: clamp\(3rem, 6vw, 4rem\);/)
   assert.doesNotMatch(css, /padding-block: clamp\(3rem, 7vw, 5\.5rem\)/)
 })
+
+test('D2.7: a trilha fica dentro do herói, acima do título, e as internas usam herói em papel', () => {
+  const walk = (dir) => fs.readdirSync(path.join(root, dir), { withFileTypes: true })
+    .flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]))
+  for (const f of walk('src/pages').concat('src/App.tsx')) {
+    const src = read(f)
+    assert.doesNotMatch(src, /<Breadcrumbs /, f)
+    assert.doesNotMatch(src, /tone="mata"/, f)
+  }
+  const hero = read('src/components/PageHero.tsx')
+  assert.match(hero, /\{crumbs && <Breadcrumbs items=\{crumbs\} className="page-hero-crumbs" \/>\}\s*<div className="eyebrow">/)
+})

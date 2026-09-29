@@ -1,6 +1,6 @@
 import { ArrowRight, ExternalLink, Link2, Recycle, ShieldCheck } from 'lucide-react'
 import { PageHero } from '../components/PageHero'
-import { Breadcrumbs } from '../components/Breadcrumbs'
+import type { Crumb } from '../components/Breadcrumbs'
 import { Eyebrow } from '../components/Eyebrow'
 import { Link } from '../components/router'
 
@@ -9,8 +9,7 @@ type Navigate = (to: string) => void
 
 export function ReverseLogistics({ navigate }: { navigate: Navigate }) {
   return <>
-    <PageHero tone="mata" eyebrow="Sistema estadual" title={<>Logística <span>Reversa</span></>} description="Um caminho para que embalagens e outros resíduos retornem ao setor empresarial e tenham uma destinação ambientalmente adequada." image={`${ASSET}2021/10/logistica-reversa-ilust.png`} />
-    <Breadcrumbs items={[{ label: 'Início', href: '/' }, { label: 'Produções do Convênio', href: '/producoes-do-convenio/' }, { label: 'Logística Reversa' }]} />
+    <PageHero eyebrow="Sistema estadual" title={<>Logística <span>Reversa</span></>} description="Um caminho para que embalagens e outros resíduos retornem ao setor empresarial e tenham uma destinação ambientalmente adequada." image={`${ASSET}2021/10/logistica-reversa-ilust.png`} crumbs={[{ label: 'Início', href: '/' }, { label: 'Produções do Convênio', href: '/producoes-do-convenio/' }, { label: 'Logística Reversa' }]} />
     <section className="section container legacy-layout">
       <article className="prose">
         <Eyebrow>Responsabilidade compartilhada</Eyebrow>
@@ -36,8 +35,7 @@ export function ReverseLogistics({ navigate }: { navigate: Navigate }) {
 
 export function ReciclaMatch({ navigate }: { navigate: Navigate }) {
   return <>
-    <PageHero tone="mata" eyebrow="Conexões para reciclar" title={<>Recicla <span>Match</span></>} description="Uma ideia do projeto para aproximar cooperativas, organizações e parceiros da cadeia da reciclagem." image={`${ASSET}2021/07/recicla-2048x1001.png`} />
-    <Breadcrumbs items={[{ label: 'Início', href: '/' }, { label: 'Produções do Convênio', href: '/producoes-do-convenio/' }, { label: 'Recicla Match' }]} />
+    <PageHero eyebrow="Conexões para reciclar" title={<>Recicla <span>Match</span></>} description="Uma ideia do projeto para aproximar cooperativas, organizações e parceiros da cadeia da reciclagem." image={`${ASSET}2021/07/recicla-2048x1001.png`} crumbs={[{ label: 'Início', href: '/' }, { label: 'Produções do Convênio', href: '/producoes-do-convenio/' }, { label: 'Recicla Match' }]} />
     <section className="section container legacy-layout">
       <article className="prose">
         <Eyebrow>Uma frente de inovação</Eyebrow>

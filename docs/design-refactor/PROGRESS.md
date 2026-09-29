@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 2
-- Próxima tarefa: D2.7. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.6. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D2.8. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.7. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -34,8 +34,13 @@ Texto novo ou alterado visível ao público. Nada disso vai ao ar sem aprovaçã
 | D1.3 | Controles dos destaques da inicial | "Pausar destaques", "Continuar destaques", "Destaque anterior", "Próximo destaque", "Mostrar destaque N: …", "N de 4", rótulo "Destaques" (leitor de tela) | spec CP-03 |
 | D2.5 | Barra superior | "Convênio técnico-científico MPMS · UEMS" · "Mato Grosso do Sul" | spec CP-01.3 e mockup |
 | D2.5 | Cabeçalho | botão "Buscar"; item de menu "Cidades" | spec CP-01.4 e CP-01.5 |
+| D2.7 | Contato | trilha "Início / Contato" (rótulos existentes) | spec CP-10.1 |
 
 ## Sessões
+
+### 2026-09-29 — D2.7 trilha e herói em papel
+
+- Trilha dentro do herói, acima da sobrelinha, em todas as internas (Contato ganhou trilha); herói sempre em papel (`tone` removido).
 
 ### 2026-09-29 — D2.6 hover, sombra e seções
 

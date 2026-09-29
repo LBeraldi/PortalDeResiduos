@@ -22,6 +22,7 @@ import { NewsArchive, NewsArticle, newsRecords } from './pages/NewsPages'
 import { LegacyNotice, ReciclaMatch, ReverseLogistics } from './pages/LegacyPages'
 import { HomePage } from './components/HomePage'
 import { PageHero } from './components/PageHero'
+import type { Crumb } from './components/Breadcrumbs'
 import { SiteSearch } from './components/SiteSearch'
 import { Link, NavProvider, type NavigateFn } from './components/router'
 
@@ -190,8 +191,8 @@ function Header({ route, menuOpen, setMenuOpen, navigate }: { route: RouteKey; m
   )
 }
 
-function PageIntro({ eyebrow, title, description, image }: { eyebrow: string; title: string; description?: string; image?: string }) {
-  return <PageHero eyebrow={eyebrow} title={title} description={description} image={image} />
+function PageIntro({ eyebrow, title, description, image, crumbs }: { eyebrow: string; title: string; description?: string; image?: string; crumbs?: Crumb[] }) {
+  return <PageHero eyebrow={eyebrow} title={title} description={description} image={image} crumbs={crumbs} />
 }
 
 function NotFound({ navigate }: { navigate: NavigateFn }) {
@@ -218,7 +219,7 @@ function Projects({ navigate }: { navigate: NavigateFn }) {
     { icon: <MapPin />, tag: 'Território', title: 'Cidades', text: 'Acesse informações municipais, pontos de entrega e coleta seletiva.', href: '/cidades/' },
     { icon: <ShieldCheck />, tag: 'Sistema', title: 'Logística Reversa', text: 'Diretrizes e referências para uma destinação ambientalmente adequada.', href: '/logistica-reversa/' },
   ]
-  return <><PageIntro eyebrow="Nossos produtos" title="Produções do Convênio" description="Neste ambiente você encontra os produtos desenvolvidos pelo convênio celebrado entre o Ministério Público de Mato Grosso do Sul e a Universidade Estadual de Mato Grosso do Sul." image={`${ASSET}2021/07/recicla.png`} /><section className="section container"><div className="project-grid">{projects.map((project) => <Link to={project.href} className="project-card" key={project.title}><span className="card-kicker">{project.tag}</span><span className="project-icon">{project.icon}</span><h2>{project.title}</h2><p>{project.text}</p><span className="text-link">Acessar produção <ArrowRight size={15} /></span></Link>)}</div></section></>
+  return <><PageIntro eyebrow="Nossos produtos" title="Produções do Convênio" description="Neste ambiente você encontra os produtos desenvolvidos pelo convênio celebrado entre o Ministério Público de Mato Grosso do Sul e a Universidade Estadual de Mato Grosso do Sul." image={`${ASSET}2021/07/recicla.png`} crumbs={[{ label: 'Início', href: '/' }, { label: 'Produções do Convênio' }]} /><section className="section container"><div className="project-grid">{projects.map((project) => <Link to={project.href} className="project-card" key={project.title}><span className="card-kicker">{project.tag}</span><span className="project-icon">{project.icon}</span><h2>{project.title}</h2><p>{project.text}</p><span className="text-link">Acessar produção <ArrowRight size={15} /></span></Link>)}</div></section></>
 }
 
 function Contact() {
@@ -234,7 +235,7 @@ function Contact() {
     window.location.href = `mailto:contato@portalresiduosms.online?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
     setSent(true)
   }
-  return <><PageIntro eyebrow="Fale conosco" title="Contato" description="Envie uma mensagem para o Projeto Resíduos Sólidos — Disposição Legal." /><section className="section container contact-layout"><div className="contact-copy"><div className="eyebrow"><span className="eyebrow-line" /> Contate-nos</div><h2>Envie uma <span>mensagem</span></h2><p>Use o formulário para montar uma mensagem no seu aplicativo de e-mail, ou escreva diretamente para a nossa equipe.</p><div className="contact-detail"><Mail size={18} /><div><small>E-mail</small><strong>contato@portalresiduosms.online</strong></div></div><div className="contact-detail"><MapPin size={18} /><div><small>Localização</small><strong>Campo Grande — Mato Grosso do Sul</strong></div></div></div><form className="contact-form" onSubmit={submit}>{sent ? <div className="form-success"><Check size={28} /><h3>Abrimos seu aplicativo de e-mail</h3><p>A mensagem foi montada com o que você preencheu. Se nada abriu, escreva diretamente para contato@portalresiduosms.online.</p><button type="button" className="text-link" onClick={() => setSent(false)}>Escrever outra mensagem <ArrowRight size={15} /></button></div> : <><label>Seu nome<input required name="name" placeholder="Como podemos chamar você?" /></label><label>Seu e-mail<input required type="email" name="email" placeholder="voce@exemplo.com" /></label><label>Assunto<input required name="subject" placeholder="Sobre o que você quer falar?" /></label><label>Mensagem<textarea required name="message" rows={5} placeholder="Escreva sua mensagem" /></label><button className="button button-dark" type="submit">Montar e-mail <ArrowRight size={16} /></button></>}</form></section></>
+  return <><PageIntro eyebrow="Fale conosco" title="Contato" description="Envie uma mensagem para o Projeto Resíduos Sólidos — Disposição Legal." crumbs={[{ label: 'Início', href: '/' }, { label: 'Contato' }]} /><section className="section container contact-layout"><div className="contact-copy"><div className="eyebrow"><span className="eyebrow-line" /> Contate-nos</div><h2>Envie uma <span>mensagem</span></h2><p>Use o formulário para montar uma mensagem no seu aplicativo de e-mail, ou escreva diretamente para a nossa equipe.</p><div className="contact-detail"><Mail size={18} /><div><small>E-mail</small><strong>contato@portalresiduosms.online</strong></div></div><div className="contact-detail"><MapPin size={18} /><div><small>Localização</small><strong>Campo Grande — Mato Grosso do Sul</strong></div></div></div><form className="contact-form" onSubmit={submit}>{sent ? <div className="form-success"><Check size={28} /><h3>Abrimos seu aplicativo de e-mail</h3><p>A mensagem foi montada com o que você preencheu. Se nada abriu, escreva diretamente para contato@portalresiduosms.online.</p><button type="button" className="text-link" onClick={() => setSent(false)}>Escrever outra mensagem <ArrowRight size={15} /></button></div> : <><label>Seu nome<input required name="name" placeholder="Como podemos chamar você?" /></label><label>Seu e-mail<input required type="email" name="email" placeholder="voce@exemplo.com" /></label><label>Assunto<input required name="subject" placeholder="Sobre o que você quer falar?" /></label><label>Mensagem<textarea required name="message" rows={5} placeholder="Escreva sua mensagem" /></label><button className="button button-dark" type="submit">Montar e-mail <ArrowRight size={16} /></button></>}</form></section></>
 }
 
 function Footer({ navigate }: { navigate: NavigateFn }) {

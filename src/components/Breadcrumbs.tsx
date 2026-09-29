@@ -6,9 +6,9 @@ export type Crumb = { label: string; href?: string }
  * Trilha de navegação única do portal. Substitui as seis cópias que existiam,
  * uma por arquivo de página, com duas APIs diferentes.
  */
-export function Breadcrumbs({ items }: { items: Crumb[] }) {
+export function Breadcrumbs({ items, className = 'container' }: { items: Crumb[]; className?: string }) {
   return (
-    <nav className="breadcrumbs container" aria-label="Trilha de navegação">
+    <nav className={`breadcrumbs ${className}`} aria-label="Trilha de navegação">
       <ol>
         {items.map((item, index) => {
           const last = index === items.length - 1
