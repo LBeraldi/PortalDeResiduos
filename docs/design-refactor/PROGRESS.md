@@ -25,6 +25,16 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | páginas de erro alcançáveis por clique | 4 | 0 | 0 |
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
+## Textos públicos para aprovação
+
+Texto novo ou alterado visível ao público. Nada disso vai ao ar sem aprovação (regra do `AGENTS.md` e de `06-tdd-loop.md`).
+
+| Tarefa | Onde | Texto | Origem |
+|---|---|---|---|
+| D1.3 | Controles dos destaques da inicial | "Pausar destaques", "Continuar destaques", "Destaque anterior", "Próximo destaque", "Mostrar destaque N: …", "N de 4", rótulo "Destaques" (leitor de tela) | spec CP-03 |
+| D2.5 | Barra superior | "Convênio técnico-científico MPMS · UEMS" · "Mato Grosso do Sul" | spec CP-01.3 e mockup |
+| D2.5 | Cabeçalho | botão "Buscar"; item de menu "Cidades" | spec CP-01.4 e CP-01.5 |
+
 ## Sessões
 
 ### 2026-09-29 — D2.5 cabeçalho
