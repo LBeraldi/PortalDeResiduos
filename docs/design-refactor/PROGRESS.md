@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 2
-- Próxima tarefa: D2.5. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.4. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D2.6. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.5. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -26,6 +26,10 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
 ## Sessões
+
+### 2026-09-29 — D2.5 cabeçalho
+
+- Barra superior com o convênio, fora da parte fixa; parte fixa 57/69 px (antes 100/110); "Cidades" no menu; "Buscar" com rótulo no desktop e ícone de 44 px ao lado do menu no celular. Textos da barra na lista de aprovação.
 
 ### 2026-09-29 — D2.4 DocumentRow
 

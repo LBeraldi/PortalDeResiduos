@@ -314,13 +314,13 @@ textarea.field-control { resize: vertical; }
 .site-header { position: sticky; top: 0; z-index: 30; background: var(--paper); border-bottom: 1px solid var(--line); }
 .header-inner {
   width: min(var(--maxw), 100% - 2 * var(--gutter)); margin-inline: auto;
-  min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+  min-height: 68px; display: flex; align-items: center; gap: 1.5rem;
 }
 .brand { padding: 0; background: transparent; display: block; flex: none; text-decoration: none; }
 .brand img { display: block; width: auto; height: 44px; }
 .menu-toggle { display: none; color: var(--ink); padding: 0.4rem; margin-right: -0.4rem; }
 
-.main-nav { display: flex; align-items: center; gap: 1.9rem; }
+.main-nav { display: flex; align-items: center; gap: 1.75rem; margin-left: auto; }
 .main-nav a {
   position: relative; padding: 0.5rem 0; background: transparent; text-decoration: none;
   font-family: var(--font-sans); font-size: var(--step-ui); font-weight: 600;
@@ -336,12 +336,12 @@ textarea.field-control { resize: vertical; }
 .main-nav a.active { color: var(--mata); }
 
 .header-search {
-  display: grid; place-items: center; width: 38px; height: 38px; padding: 0;
-  color: var(--ink); background: transparent;
-  border: 1px solid var(--line-strong); border-radius: 50%;
+  display: inline-flex; align-items: center; gap: 0.5rem; min-height: 40px; padding: 0 0.85rem;
+  color: var(--ink); background: var(--paper-raised);
+  font-family: var(--font-sans); font-size: var(--step-ui); font-weight: 600;
+  border: 1px solid var(--line-strong); border-radius: var(--radius);
   transition: border-color 0.18s ease, background 0.18s ease;
 }
-.header-search::after { display: none; }
 .header-search:hover { border-color: var(--mata); background: var(--paper-raised); }
 
 /* =========================================================================
@@ -623,8 +623,8 @@ textarea.field-control { resize: vertical; }
 @media (max-width: 900px) {
   .topline-right { display: none; }
   .topline { justify-content: flex-start; }
-  .menu-toggle { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; margin-right: -0.6rem; }
-  .header-inner { min-height: 64px; gap: 1rem; }
+  .menu-toggle { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: var(--paper-raised); border: 1px solid var(--line-strong); border-radius: var(--radius); }
+  .header-inner { min-height: 56px; gap: 0.5rem; }
   /* Só a marca do projeto (os ~405 px iniciais do logo composto de 853 × 85). */
   .brand img { height: 38px; width: 182px; object-fit: cover; object-position: left center; }
   .main-nav {
@@ -636,8 +636,10 @@ textarea.field-control { resize: vertical; }
   .main-nav.open { display: flex; }
   .main-nav a { padding: 0.8rem 0; text-align: left; }
   .main-nav a::after { display: none; }
-  .header-search { align-self: flex-start; margin-top: 0.5rem; width: auto; height: auto; padding: 0.55rem 0.9rem; border-radius: var(--radius); gap: 0.5rem; }
-  .header-search::before { content: 'Buscar'; font-family: var(--font-sans); font-size: var(--step-ui); font-weight: 600; }
+  /* DOM: logo, menu, navegação, busca. No celular a busca aparece antes do botão de menu. */
+  .header-search { order: 1; justify-content: center; width: 44px; height: 44px; padding: 0; margin-left: auto; }
+  .menu-toggle { order: 2; }
+  .header-search-label { display: none; }
 
   .hero-content,
   .page-hero.has-figure .page-hero-inner,

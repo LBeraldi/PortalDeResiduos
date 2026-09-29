@@ -172,3 +172,13 @@ test('D2.4: DocumentRow abre em nova aba com aviso para leitor de tela e mostra 
   assert.match(row, /'Google Drive'/)
   assert.match(row, /'Abrir no Drive'/)
 })
+
+test('D2.5: barra informativa fora do cabeçalho fixo, Cidades no menu e busca fora do <nav>', () => {
+  const app = read('src/App.tsx')
+  assert.match(app, /<div className="topline">[\s\S]*?Convênio técnico-científico MPMS · UEMS[\s\S]*?<\/div>\s*<header className="site-header">/)
+  assert.match(app, /\['Cidades', '\/cidades\/', 'cities'\]/)
+  const nav = app.match(/<nav id="main-navigation"[\s\S]*?<\/nav>/)[0]
+  assert.doesNotMatch(nav, /SiteSearch/)
+  assert.match(read('src/components/SiteSearch.tsx'), /<span className="header-search-label">Buscar<\/span>/)
+  assert.match(read('src/styles.css'), /\.header-inner \{[^}]*min-height: 68px/)
+})

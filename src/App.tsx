@@ -143,6 +143,7 @@ function App() {
 const NAV_LINKS = [
   ['Início', '/', 'home'],
   ['Produções do Convênio', '/producoes-do-convenio/', 'projects'],
+  ['Cidades', '/cidades/', 'cities'],
   ['Notícias', '/noticias/', 'news'],
   ['Contato', '/contact/', 'contact'],
 ] as const
@@ -162,10 +163,12 @@ function Header({ route, menuOpen, setMenuOpen, navigate }: { route: RouteKey; m
   }, [menuOpen, setMenuOpen])
 
   return (
-    <header className="site-header">
+    <>
       <div className="topline">
-        <span>Projeto Resíduos Sólidos — Disposição Legal</span>
+        <span>Convênio técnico-científico MPMS · UEMS</span>
+        <span className="topline-right">Mato Grosso do Sul</span>
       </div>
+      <header className="site-header">
       <div className="header-inner">
         <Link to="/" className="brand" aria-label="Portal Resíduos MS — ir para o início">
           <img src={`${ASSET}2020/03/logo.png`} alt="Portal Resíduos MS" />
@@ -179,10 +182,11 @@ function Header({ route, menuOpen, setMenuOpen, navigate }: { route: RouteKey; m
               {label}
             </Link>
           ))}
-          <SiteSearch navigate={navigate} />
         </nav>
+        <SiteSearch navigate={navigate} />
       </div>
-    </header>
+      </header>
+    </>
   )
 }
 

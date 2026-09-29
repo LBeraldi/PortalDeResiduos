@@ -117,7 +117,8 @@ export function SiteSearch({ navigate }: SiteSearchProps) {
         aria-label="Buscar no portal"
         onClick={() => setOpen(true)}
       >
-        <Search size={18} />
+        <Search size={18} aria-hidden="true" />
+        <span className="header-search-label">Buscar</span>
       </button>
 
       {open &&
