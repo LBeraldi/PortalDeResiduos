@@ -38,16 +38,16 @@ Em qualquer largura entre 320 e 900 px, o botão de menu aparece inteiro e abre 
 
 ## Critérios de aceite
 
-- [ ] Comportamento principal
-- [ ] Regressão coberta por teste ou contrato (`tests/design-contract.test.mjs`)
-- [ ] Acessibilidade e responsividade avaliadas (E7 e E8, 390 e 1440)
-- [ ] `npm run check:quality` passou
-- [ ] `npm run check:design` passou, com teto atualizado quando aplicável
-- [ ] `docs/design-refactor/PROGRESS.md` atualizado
+- [x] Comportamento principal
+- [x] Regressão coberta por teste ou contrato (`tests/design-contract.test.mjs`)
+- [x] Acessibilidade e responsividade avaliadas (E7 e E8, 390 e 1440)
+- [x] `npm run check:quality` passou
+- [x] `npm run check:design` passou, com teto atualizado quando aplicável
+- [x] `docs/design-refactor/PROGRESS.md` atualizado
 
 ## Handoff
 
-- Alterações:
-- Evidências:
-- Limitações/riscos:
-- Próximo passo:
+- Alterações: `src/App.tsx` (Esc no menu móvel com foco de volta ao botão), `src/styles.css` (logo recortado com `object-fit`, botão 44 × 44 abaixo de 900 px), `tests/design-contract.test.mjs`.
+- Evidências: `docs/design-refactor/evals/2026-09-29-D1.1.md` — botão em x = 380 (antes 446) em 390 px; 320 px sem rolagem; teclado ok; nenhuma outra métrica mudou.
+- Limitações/riscos: o botão "Buscar" do menu móvel continua empilhado (fica para a D2.5).
+- Próximo passo: D1.2.

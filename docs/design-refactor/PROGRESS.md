@@ -4,8 +4,8 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 
 ## Estado
 
-- Fase atual: 0
-- Próxima tarefa: D1.1. D0.1 e D1.10 concluídas; review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Fase atual: 1
+- Próxima tarefa: D1.2. Concluídas: D0.1, D0.2, D1.10, D1.1. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -18,7 +18,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | hex fora de :root | 14 | 14 | 0 |
 | altura / em 390 | 6.395 | 6.307 | ≤ 4.800 |
 | altura panoramas em 390 | 24.921 | 24.900 | ≤ 5.000 |
-| menu visível em 390 | não | não | sim |
+| menu visível em 390 | não | sim | sim |
 | destinos internos quebrados | 7 | 0 | 0 |
 | páginas de conteúdo órfãs | 7 | 7 | 0 |
 | documentos sem caminho por clique | 75 URLs (74 coleta + cartilha) | 0 | 0 |
@@ -26,6 +26,11 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
 ## Sessões
+
+### 2026-09-29 — D1.1 menu no celular
+
+- Botão de menu 44 × 44 dentro da tela de 320 a 900 px; logo recortado na marca do projeto; Esc fecha e devolve o foco.
+- E7: `menu 446 → 380` em 390 px, nada mais mudou. Eval em `evals/2026-09-29-D1.1.md`.
 
 ### 2026-09-29 — D0.2 gate de design
 

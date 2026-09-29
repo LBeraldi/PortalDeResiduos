@@ -15,3 +15,16 @@ test('D0.2: check:quality roda o gate de design', () => {
   assert.match(scripts['check:design'], /check-design-rules\.mjs/)
   assert.match(scripts['check:quality'], /npm run check:design/)
 })
+
+test('D1.1: no celular o logo é recortado na marca do projeto e o botão de menu tem 44 px', () => {
+  const css = read('src/styles.css')
+  const mobile = [...css.matchAll(/@media \(max-width: 900px\) \{([\s\S]*?)\n\}/g)].map((m) => m[1]).join('\n')
+  assert.match(mobile, /\.brand img \{[^}]*object-fit: cover[^}]*object-position: left/)
+  assert.match(mobile, /\.menu-toggle \{[^}]*width: 44px[^}]*height: 44px/)
+})
+
+test('D1.1: Esc fecha o menu móvel e devolve o foco ao botão', () => {
+  const app = read('src/App.tsx')
+  assert.match(app, /event\.key !== 'Escape'/)
+  assert.match(app, /menuToggleRef\.current\?\.focus\(\)/)
+})

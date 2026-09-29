@@ -139,6 +139,19 @@ const NAV_LINKS = [
 ] as const
 
 function Header({ route, menuOpen, setMenuOpen, navigate }: { route: RouteKey; menuOpen: boolean; setMenuOpen: (open: boolean) => void; navigate: NavigateFn }) {
+  const menuToggleRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+      setMenuOpen(false)
+      menuToggleRef.current?.focus()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [menuOpen, setMenuOpen])
+
   return (
     <header className="site-header">
       <div className="topline">
@@ -148,7 +161,7 @@ function Header({ route, menuOpen, setMenuOpen, navigate }: { route: RouteKey; m
         <Link to="/" className="brand" aria-label="Portal Resíduos MS — ir para o início">
           <img src={`${ASSET}2020/03/logo.png`} alt="Portal Resíduos MS" />
         </Link>
-        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'} aria-expanded={menuOpen} aria-controls="main-navigation">
+        <button ref={menuToggleRef} className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'} aria-expanded={menuOpen} aria-controls="main-navigation">
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
         <nav id="main-navigation" className={`main-nav ${menuOpen ? 'open' : ''}`} aria-label="Navegação principal">

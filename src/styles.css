@@ -545,9 +545,10 @@ main:focus { outline: none; }
 @media (max-width: 900px) {
   .topline-right { display: none; }
   .topline { justify-content: flex-start; }
-  .menu-toggle { display: block; }
-  .header-inner { min-height: 64px; }
-  .brand img { height: 38px; }
+  .menu-toggle { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; margin-right: -0.6rem; }
+  .header-inner { min-height: 64px; gap: 1rem; }
+  /* Só a marca do projeto (os ~405 px iniciais do logo composto de 853 × 85). */
+  .brand img { height: 38px; width: 182px; object-fit: cover; object-position: left center; }
   .main-nav {
     position: absolute; top: 100%; left: 0; right: 0; z-index: 40;
     display: none; flex-direction: column; align-items: stretch; gap: 0;
