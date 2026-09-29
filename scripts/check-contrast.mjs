@@ -1,12 +1,15 @@
 // E1. Contraste dos pares de tokens (WCAG 2.2). Sem dependências.
 // Uso: node scripts/check-contrast.mjs
-// Lê os valores de :root em src/styles.css; os pares são declarados pelo nome do token.
+// Lê os valores de :root (src/styles/tokens.css, via src/styles.css); os pares são declarados pelo nome do token.
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const css = fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8')
+// Lê src/styles.css seguindo os @import locais, na ordem (camadas de src/styles/, D2.8).
+const lerCss = (rel) => fs.readFileSync(path.join(root, rel), 'utf8')
+  .replace(/@import '(\.\/[^']+)';/g, (_, arquivo) => lerCss(path.join(path.dirname(rel), arquivo)))
+const css = lerCss('src/styles.css')
 const bloco = css.match(/:root\s*{[^}]*}/)?.[0] ?? ''
 const tokens = Object.fromEntries([...bloco.matchAll(/--([a-z0-9-]+):\s*(#[0-9a-fA-F]{6})\b/g)].map((m) => [m[1], m[2]]))
 

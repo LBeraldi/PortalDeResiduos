@@ -40,7 +40,7 @@ Uso frequente em celular. A tarefa mais comum é "achar o documento de um munic�
 | Produções, panoramas | `src/pages/ProductionPages.tsx` |
 | Notícias | `src/pages/NewsPages.tsx` |
 | Publicações, Valoriza | `src/pages/ResourcePages.tsx` |
-| Estilos e tokens | `src/styles.css` (arquivo único, ~1.250 linhas) |
+| Estilos e tokens | `src/styles.css` importa as camadas de `src/styles/`: `tokens.css` (`:root`), `base.css`, `components.css`, `pages.css` (D2.8) |
 | Catálogos gerados (não editar) | `src/data/panoramas.generated.ts`, `selective-collection-plans.generated.ts` |
 | Geradores | `scripts/generate-*.mjs` |
 

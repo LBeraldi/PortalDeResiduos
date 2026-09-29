@@ -1,0 +1,67 @@
+/* =========================================================================
+   Portal Resíduos MS — sistema de design "Dossiê público"
+   Fundação (tokens, base, primitivos) · chrome (cabeçalho, busca, rodapé)
+   · Home · primitivos de página compartilhados (page-hero, prose, breadcrumbs).
+   Os blocos por página (institucional, recursos, produções, cidades, notícias,
+   legado) são mantidos abaixo e recebem a nova paleta pelos aliases de token;
+   o refino estrutural deles é a Fase 2.
+   ========================================================================= */
+
+:root {
+  /* --- Cor --- */
+  --paper: #f5f3ec;
+  --paper-raised: #fbfaf5;
+  --paper-sunk: #ece9de;
+  --ink: #1a231e;
+  --ink-soft: #55605a;
+  --ink-faint: #636a61; /* ~4.7:1 sobre --paper — texto auxiliar acessível (AA) */
+  --mata: #1b4b3a;
+  --mata-deep: #12352a;
+  --cerrado: #b0742e;
+  --cerrado-claro: #d4a15f; /* rótulo e foco sobre --mata-deep (5,78:1) */
+  --cerrado-texto: #8a5a1f; /* texto cerrado sobre papel (5,31:1); o --cerrado nunca é texto */
+  --line: #e0dccd;
+  --line-strong: #cec8b4; /* borda decorativa de cartão */
+  --field-border: #8a8470; /* borda de campo de formulário (3,58:1, WCAG 1.4.11) */
+  --on-mata: #edf0e9;
+  --on-mata-soft: #a9c0b0;
+  --on-mata-strong: #ffffff; /* títulos e hovers sobre mata */
+
+  /* Estados (DS-02). Informação neutra usa --mata sobre --paper-sunk. */
+  --positive: #256b3f;
+  --positive-bg: #e4efe6;
+  --warning: #8a5a1f;
+  --warning-bg: #f6ecdc;
+  --negative: #a13f22;
+  --negative-bg: #f6e4de;
+
+  /* --- Tipografia --- */
+  --font-display: 'Spectral', Georgia, 'Times New Roman', serif;
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --step-meta: 0.75rem; /* registro (mono) mínimo */
+  --step--1: 0.8125rem; /* registro: sobrelinha, trilha */
+  --step-small: 0.875rem; /* apoio */
+  --step-ui: 0.9375rem; /* interface: menu, botões, links-texto */
+  --step-0: 1rem;
+  --step-body: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.5rem;
+  --step-3: 2rem;
+  --step-4: clamp(1.75rem, 3.4vw, 2.5rem); /* h2 */
+  --step-5: clamp(2.25rem, 5vw, 4rem); /* display */
+
+  /* --- Espaço e forma --- */
+  --gutter: clamp(1.25rem, 5vw, 2.5rem);
+  --section-y: clamp(3rem, 6vw, 4rem); /* 48 px no celular, 64 px no desktop (DS-08) */
+  --maxw: 1200px;
+  --radius: 3px;
+  --shadow-overlay: 0 24px 48px -24px rgba(18, 53, 42, 0.5); /* única sombra: busca e menu móvel (DS-10) */
+
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--paper);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

@@ -20,7 +20,10 @@ const TETO = {
   navegacaoPorBotao: 0, // D1.4: era 48 (CP-02)
 }
 
-const css = read('src/styles.css')
+// Lê src/styles.css seguindo os @import locais, na ordem (camadas de src/styles/, D2.8).
+const lerCss = (rel) => fs.readFileSync(path.join(root, rel), 'utf8')
+  .replace(/@import '(\.\/[^']+)';/g, (_, arquivo) => lerCss(path.join(path.dirname(rel), arquivo)))
+const css = lerCss('src/styles.css')
 const rootBlock = css.match(/:root\s*{[^}]*}/)?.[0] ?? ''
 const cssSemRoot = css.replace(rootBlock, '')
 

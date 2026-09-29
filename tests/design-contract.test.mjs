@@ -8,6 +8,8 @@ import { fileURLToPath } from 'node:url'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const read = (p) => fs.readFileSync(path.join(root, p), 'utf8')
+// CSS resolvido: src/styles.css com os @import das camadas de src/styles/ (D2.8).
+const readCss = (p = 'src/styles.css') => read(p).replace(/@import '(\.\/[^']+)';/g, (_, f) => readCss(path.join(path.dirname(p), f)))
 
 test('D0.2: check:quality roda o gate de design', () => {
   const scripts = JSON.parse(read('package.json')).scripts
@@ -17,7 +19,7 @@ test('D0.2: check:quality roda o gate de design', () => {
 })
 
 test('D1.1: no celular o logo é recortado na marca do projeto e o botão de menu tem 44 px', () => {
-  const css = read('src/styles.css')
+  const css = readCss()
   const mobile = [...css.matchAll(/@media \(max-width: 900px\) \{([\s\S]*?)\n\}/g)].map((m) => m[1]).join('\n')
   assert.match(mobile, /\.brand img \{[^}]*object-fit: cover[^}]*object-position: left/)
   assert.match(mobile, /\.menu-toggle \{[^}]*width: 44px[^}]*height: 44px/)
@@ -33,7 +35,7 @@ test('D1.2: a busca do herói mostra foco e as sugestões têm chave única', ()
   const home = read('src/components/HomePage.tsx')
   assert.doesNotMatch(home, /key=\{`-`\}/)
   assert.match(home, /key=\{`\$\{entry\.kind\}-\$\{entry\.href\}`\}/)
-  const css = read('src/styles.css')
+  const css = readCss()
   assert.match(css, /--cerrado-claro: #d4a15f;/)
   assert.match(css, /\.home-hero-search-form:focus-within \{[^}]*outline: 2px solid var\(--cerrado-claro\)/)
 })
@@ -82,7 +84,7 @@ test('D1.6: o rodapé não tem links sociais sem destino e mantém o e-mail', ()
 })
 
 test('D1.7: texto cerrado sobre mata usa --cerrado-claro (5,78:1)', () => {
-  const css = read('src/styles.css')
+  const css = readCss()
   assert.match(css, /\.home-hero-slide-label \{[^}]*color: var\(--cerrado-claro\)/)
   assert.match(css, /\.home-impact-card--change small span \{ color: var\(--cerrado-claro\)/)
 })
@@ -96,11 +98,11 @@ test('D1.8: o título da aba de ficha e notícia vem dos dados reais', () => {
 })
 
 test('D1.9: a busca global não mostra o × nativo do navegador', () => {
-  assert.match(read('src/styles.css'), /\.search-input::-webkit-search-cancel-button \{[^}]*display: none/)
+  assert.match(readCss(), /\.search-input::-webkit-search-cancel-button \{[^}]*display: none/)
 })
 
 test('D2.1: tokens da DS-02 em :root e nenhum alias legado', () => {
-  const css = read('src/styles.css')
+  const css = readCss()
   const root = css.match(/:root\s*\{[^}]*\}/)[0]
   for (const [nome, valor] of Object.entries({
     '--cerrado-texto': '#8a5a1f', '--field-border': '#8a8470', '--positive': '#256b3f', '--positive-bg': '#e4efe6',
@@ -110,7 +112,7 @@ test('D2.1: tokens da DS-02 em :root e nenhum alias legado', () => {
 })
 
 test('D2.1: foco em mata usa --cerrado-claro e o painel de busca (papel) usa o anel padrão', () => {
-  const css = read('src/styles.css')
+  const css = readCss()
   assert.doesNotMatch(css, /\.search-panel :focus-visible/)
   assert.match(css, /\.site-footer :focus-visible[^{]*\{ outline-color: var\(--cerrado-claro\)/)
   assert.match(css, /\.search-field:focus-within \{[^}]*outline: 2px solid var\(--cerrado\)/)
@@ -118,7 +120,7 @@ test('D2.1: foco em mata usa --cerrado-claro e o painel de busca (papel) usa o a
 })
 
 test('D2.2: escala tipográfica da DS-05 e mono fora da navegação', () => {
-  const css = read('src/styles.css')
+  const css = readCss()
   const root = css.match(/:root\s*\{[^}]*\}/)[0]
   assert.match(root, /--step-5: clamp\(2\.25rem, 5vw, 4rem\);/)
   assert.match(root, /--step-4: clamp\(1\.75rem, 3\.4vw, 2\.5rem\);/)
@@ -142,7 +144,7 @@ test('D2.3: Badge, Alert e Field existem com as variantes e ligações da CP-08'
   assert.match(field, /htmlFor=\{id\}/)
   assert.match(field, /'aria-describedby': message \? messageId : undefined/)
   assert.match(field, /'aria-invalid': error \? true : undefined/)
-  const css = read('src/styles.css')
+  const css = readCss()
   assert.match(css, /\.badge \{[^}]*font-family: var\(--font-mono\)[^}]*border-radius: var\(--radius\)/)
   assert.match(css, /\.alert--error \{[^}]*border-left-color: var\(--negative\)/)
   assert.match(css, /\.field-control \{[^}]*min-height: 44px[^}]*border: 1px solid var\(--field-border\)/)
@@ -180,11 +182,11 @@ test('D2.5: barra informativa fora do cabeçalho fixo, Cidades no menu e busca f
   const nav = app.match(/<nav id="main-navigation"[\s\S]*?<\/nav>/)[0]
   assert.doesNotMatch(nav, /SiteSearch/)
   assert.match(read('src/components/SiteSearch.tsx'), /<span className="header-search-label">Buscar<\/span>/)
-  assert.match(read('src/styles.css'), /\.header-inner \{[^}]*min-height: 68px/)
+  assert.match(readCss(), /\.header-inner \{[^}]*min-height: 68px/)
 })
 
 test('D2.6: hover sem deslocamento, uma sombra só para sobreposições e transições curtas', () => {
-  const css = read('src/styles.css')
+  const css = readCss()
   const regras = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map((m) => ({ sel: m[1].trim(), body: m[2] }))
   for (const { sel, body } of regras.filter((r) => /:hover/.test(r.sel))) {
     assert.doesNotMatch(body, /transform|box-shadow/, sel)
@@ -214,4 +216,12 @@ test('D2.7: a trilha fica dentro do herói, acima do título, e as internas usam
   }
   const hero = read('src/components/PageHero.tsx')
   assert.match(hero, /\{crumbs && <Breadcrumbs items=\{crumbs\} className="page-hero-crumbs" \/>\}\s*<div className="eyebrow">/)
+})
+
+test('D2.8: os scripts de design leem todas as camadas de CSS', async () => {
+  const { execFileSync } = await import('node:child_process')
+  const regras = execFileSync('node', ['scripts/check-design-rules.mjs'], { cwd: root, encoding: 'utf8' })
+  const distintos = Number(regras.match(/tamanhosDistintos\s+(\d+)/)[1])
+  assert.ok(distintos > 0, 'check-design-rules não encontrou nenhum font-size: não está lendo as camadas')
+  execFileSync('node', ['scripts/check-contrast.mjs'], { cwd: root, encoding: 'utf8' })
 })
