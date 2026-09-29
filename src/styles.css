@@ -72,6 +72,8 @@ img, svg, iframe { display: block; max-width: 100%; }
 button, input, textarea, select { font: inherit; color: inherit; }
 button { border: 0; background: none; cursor: pointer; }
 a { color: inherit; }
+/* Componentes com classe (cartões, botões e links-texto) não herdam o sublinhado do navegador. */
+:where(a[class]) { text-decoration: none; }
 ::selection { background: var(--mata); color: var(--paper); }
 
 h1, h2, h3, h4 {
@@ -375,6 +377,8 @@ main:focus { outline: none; }
 }
 .home-impact-card { display: block; width: 100%; text-align: left; position: relative; min-height: 11rem; padding: 1.35rem; overflow: hidden; border: 1px solid var(--line); background: var(--paper-raised); transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .home-impact-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+/* Como <a>, o cartão não centraliza o conteúdo sozinho, como o <button> fazia. */
+.home-impact-card:not(.home-impact-card--image) { display: flex; flex-direction: column; justify-content: center; }
 .home-impact-label { display: block; font-family: var(--font-mono); font-size: 0.625rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
 .home-impact-card > strong { display: block; margin: 1.55rem 0 0.35rem; color: var(--mata); font-family: var(--font-display); font-size: clamp(2.25rem, 1.5rem + 2.8vw, 3.6rem); font-weight: 500; line-height: 0.9; letter-spacing: -0.055em; }
 .home-impact-card > p { max-width: 23ch; color: var(--ink-soft); font-size: var(--step--1); line-height: 1.5; }
@@ -519,11 +523,11 @@ main:focus { outline: none; }
   margin: 0 0 1.1rem; font-family: var(--font-mono); font-size: var(--step--1); font-weight: 500;
   letter-spacing: 0.06em; text-transform: uppercase; color: var(--on-mata);
 }
-.footer-main > div:not(.footer-brand) a {
+.footer-main > div:not(.footer-brand) a:not(.footer-cta) {
   display: block; padding: 0; margin: 0 0 0.75rem; background: transparent; text-decoration: none;
   font-size: var(--step--1); text-align: left; color: var(--on-mata-soft);
 }
-.footer-main > div:not(.footer-brand) a:hover { color: #fff; }
+.footer-main > div:not(.footer-brand) a:not(.footer-cta):hover { color: #fff; }
 .footer-contact p { margin: 0 0 0.6rem; font-size: var(--step--1); color: var(--on-mata-soft); }
 .footer-cta {
   display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.9rem;

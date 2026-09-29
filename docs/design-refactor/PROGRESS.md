@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 1
-- Próxima tarefa: D1.4. Concluídas: D0.1, D0.2, D1.10, D1.1, D1.2, D1.3. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D1.5. Concluídas: D0.1, D0.2, D1.10, D1.1–D1.4. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -14,7 +14,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | Métrica | Baseline | Atual | Meta |
 |---|---|---|---|
 | font-size < 12 px | 32 | 32 | 0 |
-| navegação por botão | 48 | 48 | 0 |
+| navegação por botão | 48 | 0 | 0 |
 | hex fora de :root | 14 | 14 | 0 |
 | altura / em 390 | 6.395 | 6.436 (D1.3: +129 temporário) | ≤ 4.800 |
 | altura panoramas em 390 | 24.921 | 24.900 | ≤ 5.000 |
@@ -26,6 +26,11 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
 ## Sessões
+
+### 2026-09-29 — D1.4 navegação por Link
+
+- 48 botões de navegação → `<Link>`; âncora interna e `ResourceCard` também. `navegacaoPorBotao` 48 → 0 (teto baixado).
+- Regressão visual por diff de pixels: sem mudança visível. Eval em `evals/2026-09-29-D1.4.md`.
 
 ### 2026-09-29 — D1.3 H1 fixo e destaques
 

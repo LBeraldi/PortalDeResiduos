@@ -1,6 +1,7 @@
 import { useId } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { municipalities, territoryStats } from '../data/territory'
+import { Link } from './router'
 
 type TerritoryIndexProps = {
   navigate: (to: string) => void
@@ -49,14 +50,10 @@ export function TerritoryIndex({ navigate, variant = 'full', title = 'Onde o pro
         {municipalities.map((m) => (
           <li key={m.slug}>
             {m.hasPanorama ? (
-              <button
-                type="button"
-                className="territory-cell is-linked"
-                onClick={() => navigate(`/cidades/${m.slug}/`)}
-              >
+              <Link to={`/cidades/${m.slug}/`} className="territory-cell is-linked">
                 {m.name}
                 <span className="sr-only"> — abrir panorama municipal</span>
-              </button>
+              </Link>
             ) : (
               <span className="territory-cell" title={`${m.name} — panorama em migração`}>
                 {m.name}
@@ -75,9 +72,9 @@ export function TerritoryIndex({ navigate, variant = 'full', title = 'Onde o pro
         ) : (
           <p className="territory-hint">Clique em um município para abrir o panorama de gestão de resíduos.</p>
         )}
-        <button type="button" className="text-link" onClick={() => navigate('/cidades/')}>
+        <Link to="/cidades/" className="text-link">
           Ver diretório de cidades <ArrowRight size={15} />
-        </button>
+        </Link>
       </div>
     </section>
   )

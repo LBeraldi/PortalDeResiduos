@@ -2,6 +2,7 @@ import { ArrowRight, ExternalLink, Link2, Recycle, ShieldCheck } from 'lucide-re
 import { PageHero } from '../components/PageHero'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { Eyebrow } from '../components/Eyebrow'
+import { Link } from '../components/router'
 
 const ASSET = '/uploads/'
 type Navigate = (to: string) => void
@@ -19,7 +20,7 @@ export function ReverseLogistics({ navigate }: { navigate: Navigate }) {
         <div className="legacy-callout"><ShieldCheck size={22} /><div><strong>O que muda na prática?</strong><span>Separar corretamente, entregar nos pontos indicados e acompanhar as orientações do sistema ajuda a manter materiais em circulação e reduz o envio de rejeitos aos aterros.</span></div></div>
         <div className="legacy-actions">
           <a className="button button-primary" href="https://sisrev.imasul.ms.gov.br/acesso?destino=%2F" target="_blank" rel="noreferrer">Acessar o Sisrev <ExternalLink size={15} /></a>
-          <button className="text-link" onClick={() => navigate('/noticias/sistema-estadual-de-logistica-reversa-de-embalagens-em-ms-tem-2-956-empresas-regulares')}>Ler notícia relacionada <ArrowRight size={15} /></button>
+          <Link to="/noticias/sistema-estadual-de-logistica-reversa-de-embalagens-em-ms-tem-2-956-empresas-regulares/" className="text-link">Ler notícia relacionada <ArrowRight size={15} /></Link>
         </div>
       </article>
       <aside className="legacy-card">
@@ -27,7 +28,7 @@ export function ReverseLogistics({ navigate }: { navigate: Navigate }) {
         <Eyebrow>Referência do projeto</Eyebrow>
         <h3>Uma ponte entre quem produz e quem cuida.</h3>
         <p>Consulte também os materiais compilados e as publicações do portal para aprofundar o entendimento sobre gestão e destinação de resíduos.</p>
-        <button className="text-link" onClick={() => navigate('/publicacoes/')}>Abrir publicações <ArrowRight size={15} /></button>
+        <Link to="/publicacoes/" className="text-link">Abrir publicações <ArrowRight size={15} /></Link>
       </aside>
     </section>
   </>
@@ -45,8 +46,8 @@ export function ReciclaMatch({ navigate }: { navigate: Navigate }) {
         <p>Enquanto a plataforma original é localizada ou disponibilizada novamente, os materiais do projeto continuam acessíveis pelas áreas de cooperativas, catadores e produções do convênio.</p>
         <div className="legacy-callout"><Recycle size={22} /><div><strong>Conteúdo preservado</strong><span>A rota está pronta para receber o endereço da aplicação ou novos materiais quando forem fornecidos.</span></div></div>
         <div className="legacy-actions">
-          <button className="button button-primary" onClick={() => navigate('/cooperativas/')}>Ver materiais para cooperativas <ArrowRight size={15} /></button>
-          <button className="text-link" onClick={() => navigate('/panorama-e-censo-dos-catadores/')}>Conhecer o censo dos catadores <ArrowRight size={15} /></button>
+          <Link to="/cooperativas/" className="button button-primary">Ver materiais para cooperativas <ArrowRight size={15} /></Link>
+          <Link to="/panorama-e-censo-dos-catadores/" className="text-link">Conhecer o censo dos catadores <ArrowRight size={15} /></Link>
         </div>
       </article>
       <aside className="legacy-card">
@@ -54,7 +55,7 @@ export function ReciclaMatch({ navigate }: { navigate: Navigate }) {
         <Eyebrow>Cadeia da reciclagem</Eyebrow>
         <h3>Valorizar o trabalho que recupera materiais.</h3>
         <p>Conheça o Projeto Valoriza, iniciativa que reúne dados, referências e ações para fortalecer a inclusão socioprodutiva dos catadores.</p>
-        <button className="text-link" onClick={() => navigate('/projeto-valoriza/')}>Abrir Projeto Valoriza <ArrowRight size={15} /></button>
+        <Link to="/projeto-valoriza/" className="text-link">Abrir Projeto Valoriza <ArrowRight size={15} /></Link>
       </aside>
     </section>
   </>
@@ -67,8 +68,8 @@ export function LegacyNotice({ title, description, navigate }: { title: string; 
     <h1 id="legacy-notice-title">{title}</h1>
     <p>{description}</p>
     <div className="legacy-actions">
-      <button className="button button-dark" onClick={() => navigate('/')}>Voltar ao início <ArrowRight size={16} /></button>
-      <button className="text-link" onClick={() => navigate('/producoes-do-convenio/')}>Explorar produções <ArrowRight size={15} /></button>
+      <Link to="/" className="button button-dark">Voltar ao início <ArrowRight size={16} /></Link>
+      <Link to="/producoes-do-convenio/" className="text-link">Explorar produções <ArrowRight size={15} /></Link>
     </div>
   </section>
 }

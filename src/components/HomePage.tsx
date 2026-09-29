@@ -4,6 +4,7 @@ import { openSiteSearch } from "./SiteSearch"
 import { newsRecords } from "../pages/NewsPages"
 import { territoryStats } from "../data/territory"
 import { searchSite, type SearchEntry } from "../data/search"
+import { Link } from "./router"
 
 const ASSET = "/uploads/"
 type Navigate = (to: string) => void
@@ -177,30 +178,30 @@ export function HomePage({ navigate }: { navigate: Navigate }) {
         <h2>Conhecimento organizado para <span>virar ação.</span></h2>
         <p>Diagnósticos, planos, publicações e ferramentas para aproximar informação de quem planeja e de quem participa do cotidiano das cidades.</p>
         <div className="home-summary-actions">
-          <button type="button" className="button button-dark" onClick={() => navigate("/producoes-do-convenio/")}>Explorar produções <ArrowRight size={16} /></button>
-          <button type="button" className="text-link" onClick={() => navigate("/cidades/")}>Ver municípios <ArrowRight size={16} /></button>
+          <Link to="/producoes-do-convenio/" className="button button-dark">Explorar produções <ArrowRight size={16} /></Link>
+          <Link to="/cidades/" className="text-link">Ver municípios <ArrowRight size={16} /></Link>
         </div>
       </div>
       <div className="home-summary-mosaic" aria-label="Principais áreas do portal">
-        <button type="button" className="home-impact-card home-impact-card--territory" onClick={() => navigate("/diretorios/")}>
+        <Link to="/diretorios/" className="home-impact-card home-impact-card--territory">
           <span className="home-impact-label">Pareceres</span>
           <strong>{territoryStats.withPanorama}</strong>
           <p>municípios com parecer ou panorama publicado.</p>
           <span className="home-impact-stamp">MS</span>
           <span className="sr-only"> — abrir diretórios municipais</span>
-        </button>
-        <button type="button" className="home-impact-card home-impact-card--image" onClick={() => navigate("/projeto-valoriza/")}>
+        </Link>
+        <Link to="/projeto-valoriza/" className="home-impact-card home-impact-card--image">
           <img src="/uploads/2021/07/JOB-090-Banner-Projeto-Resíduos-Sólidos.jpg" alt="Trabalhadores e materiais da cadeia da reciclagem" loading="lazy" />
           <div><span className="home-impact-label">Inclusão socioprodutiva</span><strong>Projeto Valoriza</strong><p>Cadeia da reciclagem mais justa.</p></div>
           <span className="sr-only"> — abrir Projeto Valoriza</span>
-        </button>
-        <button type="button" className="home-impact-card home-impact-card--change" onClick={() => navigate("/nota-tecnica/")}>
+        </Link>
+        <Link to="/nota-tecnica/" className="home-impact-card home-impact-card--change">
           <span className="home-impact-label">Documento técnico</span>
           <strong>Notas Técnicas</strong>
           <p>Reconhecimento dos catadores recicláveis.</p>
           <small>Publicação <span>·</span> Projeto Valoriza</small>
           <span className="sr-only"> — abrir Nota Técnica</span>
-        </button>
+        </Link>
       </div>
     </section>
 
@@ -210,14 +211,14 @@ export function HomePage({ navigate }: { navigate: Navigate }) {
         <p className="section-heading-note">Cada área responde a uma necessidade concreta da gestão de resíduos.</p>
       </div>
       <div className="home-areas">
-        {homeAreas.map((area) => <button type="button" className="feature-card" key={area.title} onClick={() => navigate(area.href)}><div className="feature-visual"><img src={area.image} alt="" loading="lazy" /><span className="card-icon">{area.icon}</span></div><div className="feature-card-content"><span className="card-kicker">{area.kicker}</span><h3>{area.title}</h3><p>{area.text}</p><span className="card-arrow">Acessar <ArrowRight size={17} /></span></div></button>)}
+        {homeAreas.map((area) => <Link to={area.href} className="feature-card" key={area.title}><div className="feature-visual"><img src={area.image} alt="" loading="lazy" /><span className="card-icon">{area.icon}</span></div><div className="feature-card-content"><span className="card-kicker">{area.kicker}</span><h3>{area.title}</h3><p>{area.text}</p><span className="card-arrow">Acessar <ArrowRight size={17} /></span></div></Link>)}
       </div>
     </section>
 
     <section className="section news-section">
-      <div className="container"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" /> Atualizações</div><h2>Notícias do <span>território.</span></h2></div><button type="button" className="text-link" onClick={() => navigate("/noticias/")}>Ver todas <ArrowRight size={16} /></button></div><div className="news-grid">{newsRecords.slice(0, 3).map((item) => <button type="button" className="news-card" key={item.slug} onClick={() => navigate("/noticias/" + item.slug + "/")}><div className="news-image"><img src={item.image} alt="" loading="lazy" /><span className="news-date">{item.date}</span></div><div className="news-card-copy"><h3>{item.title}</h3><p>{item.excerpt}</p><span className="text-link">Ler notícia <ArrowRight size={15} /></span></div></button>)}</div></div>
+      <div className="container"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" /> Atualizações</div><h2>Notícias do <span>território.</span></h2></div><Link to="/noticias/" className="text-link">Ver todas <ArrowRight size={16} /></Link></div><div className="news-grid">{newsRecords.slice(0, 3).map((item) => <Link to={"/noticias/" + item.slug + "/"} className="news-card" key={item.slug}><div className="news-image"><img src={item.image} alt="" loading="lazy" /><span className="news-date">{item.date}</span></div><div className="news-card-copy"><h3>{item.title}</h3><p>{item.excerpt}</p><span className="text-link">Ler notícia <ArrowRight size={15} /></span></div></Link>)}</div></div>
     </section>
 
-    <section className="section container reverse-strip"><div className="reverse-art"><img src={ASSET + "2021/10/logistica-reversa-ilust.png"} alt="Ciclo de logística reversa" loading="lazy" /></div><div className="reverse-copy"><div className="eyebrow"><span className="eyebrow-line" /> Sistema estadual</div><h2>Logística <span>Reversa</span></h2><p>Um caminho para que embalagens retornem ao setor empresarial e tenham destinação ambientalmente adequada.</p><button type="button" className="text-link" onClick={() => navigate("/logistica-reversa/")}>Entender o sistema <ArrowRight size={16} /></button></div></section>
+    <section className="section container reverse-strip"><div className="reverse-art"><img src={ASSET + "2021/10/logistica-reversa-ilust.png"} alt="Ciclo de logística reversa" loading="lazy" /></div><div className="reverse-copy"><div className="eyebrow"><span className="eyebrow-line" /> Sistema estadual</div><h2>Logística <span>Reversa</span></h2><p>Um caminho para que embalagens retornem ao setor empresarial e tenham destinação ambientalmente adequada.</p><Link to="/logistica-reversa/" className="text-link">Entender o sistema <ArrowRight size={16} /></Link></div></section>
   </>
 }

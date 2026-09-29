@@ -189,8 +189,8 @@ function NotFound({ navigate }: { navigate: NavigateFn }) {
       <h1 id="not-found-title">Esta página ainda não está disponível.</h1>
       <p>O endereço não corresponde a uma rota conhecida do Portal Resíduos MS. Volte ao início ou consulte as áreas principais do projeto.</p>
       <div className="not-found-actions">
-        <button className="button button-dark" onClick={() => navigate('/')}>Voltar ao início <ArrowRight size={16} /></button>
-        <button className="text-link" onClick={() => navigate('/producoes-do-convenio/')}>Explorar produções <ArrowRight size={15} /></button>
+        <Link to="/" className="button button-dark">Voltar ao início <ArrowRight size={16} /></Link>
+        <Link to="/producoes-do-convenio/" className="text-link">Explorar produções <ArrowRight size={15} /></Link>
       </div>
     </section>
   )
@@ -205,7 +205,7 @@ function Projects({ navigate }: { navigate: NavigateFn }) {
     { icon: <MapPin />, tag: 'Território', title: 'Cidades', text: 'Acesse informações municipais, pontos de entrega e coleta seletiva.', href: '/cidades/' },
     { icon: <ShieldCheck />, tag: 'Sistema', title: 'Logística Reversa', text: 'Diretrizes e referências para uma destinação ambientalmente adequada.', href: '/logistica-reversa/' },
   ]
-  return <><PageIntro eyebrow="Nossos produtos" title="Produções do Convênio" description="Neste ambiente você encontra os produtos desenvolvidos pelo convênio celebrado entre o Ministério Público de Mato Grosso do Sul e a Universidade Estadual de Mato Grosso do Sul." image={`${ASSET}2021/07/recicla.png`} /><section className="section container"><div className="project-grid">{projects.map((project) => <button className="project-card" key={project.title} onClick={() => navigate(project.href)}><span className="card-kicker">{project.tag}</span><span className="project-icon">{project.icon}</span><h2>{project.title}</h2><p>{project.text}</p><span className="text-link">Acessar produção <ArrowRight size={15} /></span></button>)}</div></section></>
+  return <><PageIntro eyebrow="Nossos produtos" title="Produções do Convênio" description="Neste ambiente você encontra os produtos desenvolvidos pelo convênio celebrado entre o Ministério Público de Mato Grosso do Sul e a Universidade Estadual de Mato Grosso do Sul." image={`${ASSET}2021/07/recicla.png`} /><section className="section container"><div className="project-grid">{projects.map((project) => <Link to={project.href} className="project-card" key={project.title}><span className="card-kicker">{project.tag}</span><span className="project-icon">{project.icon}</span><h2>{project.title}</h2><p>{project.text}</p><span className="text-link">Acessar produção <ArrowRight size={15} /></span></Link>)}</div></section></>
 }
 
 function Contact() {
@@ -225,7 +225,7 @@ function Contact() {
 }
 
 function Footer({ navigate }: { navigate: NavigateFn }) {
-  return <footer className="site-footer"><div className="container footer-main"><div className="footer-brand"><img src={`${ASSET}2021/07/logo_white-1.png`} alt="Portal Resíduos MS" /><p>Informação, cooperação e ferramentas para uma gestão responsável dos resíduos sólidos.</p><div className="socials"><a href="#facebook" aria-label="Facebook"><Globe2 size={17} /></a><a href="#linkedin" aria-label="LinkedIn"><MessageCircle size={17} /></a><a href="mailto:contato@portalresiduosms.online" aria-label="E-mail"><Mail size={17} /></a></div></div><div><h3>Explorar</h3><Link to="/#sobre-projeto">Sobre o projeto</Link><Link to="/producoes-do-convenio/">Produções do convênio</Link><Link to="/noticias/">Notícias</Link></div><div><h3>Ferramentas</h3><Link to="/cidades/">Cidades</Link><Link to="/diretorios/">Diretórios</Link><Link to="/publicacoes/">Publicações</Link><Link to="/projeto-valoriza/">Projeto Valoriza</Link></div><div className="footer-contact"><h3>Fale com a gente</h3><p>contato@portalresiduosms.online</p><p>Campo Grande — MS</p><button className="footer-cta" onClick={() => navigate('/contact/')}>Enviar mensagem <ArrowRight size={15} /></button></div></div><div className="footer-bottom container"><span>© {new Date().getFullYear()} Portal Resíduos MS</span><span>Projeto Disposição Legal · MPMS + UEMS</span></div></footer>
+  return <footer className="site-footer"><div className="container footer-main"><div className="footer-brand"><img src={`${ASSET}2021/07/logo_white-1.png`} alt="Portal Resíduos MS" /><p>Informação, cooperação e ferramentas para uma gestão responsável dos resíduos sólidos.</p><div className="socials"><a href="#facebook" aria-label="Facebook"><Globe2 size={17} /></a><a href="#linkedin" aria-label="LinkedIn"><MessageCircle size={17} /></a><a href="mailto:contato@portalresiduosms.online" aria-label="E-mail"><Mail size={17} /></a></div></div><div><h3>Explorar</h3><Link to="/#sobre-projeto">Sobre o projeto</Link><Link to="/producoes-do-convenio/">Produções do convênio</Link><Link to="/noticias/">Notícias</Link></div><div><h3>Ferramentas</h3><Link to="/cidades/">Cidades</Link><Link to="/diretorios/">Diretórios</Link><Link to="/publicacoes/">Publicações</Link><Link to="/projeto-valoriza/">Projeto Valoriza</Link></div><div className="footer-contact"><h3>Fale com a gente</h3><p>contato@portalresiduosms.online</p><p>Campo Grande — MS</p><Link to="/contact/" className="footer-cta">Enviar mensagem <ArrowRight size={15} /></Link></div></div><div className="footer-bottom container"><span>© {new Date().getFullYear()} Portal Resíduos MS</span><span>Projeto Disposição Legal · MPMS + UEMS</span></div></footer>
 }
 
 export default App

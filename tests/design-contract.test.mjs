@@ -53,3 +53,13 @@ test('D1.3: destaques trocam a cada 8 s, com pausa e região viva só quando pau
   assert.match(home, /"Continuar destaques"/)
   assert.match(home, /className="home-hero-slides" aria-live=\{paused \? "polite" : "off"\}/)
 })
+
+test('D1.4: navegação interna usa <Link>, nunca <a href="/…"> nem botão com navigate()', () => {
+  const walk = (dir) => fs.readdirSync(path.join(root, dir), { withFileTypes: true })
+    .flatMap((e) => (e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]))
+  for (const f of walk('src').filter((f) => f.endsWith('.tsx') && !f.endsWith('router.tsx'))) {
+    const src = read(f)
+    assert.doesNotMatch(src, /<a [^>]*href="\/(?!uploads\/)/, f)
+    assert.doesNotMatch(src, /onClick=\{\(\)\s*=>\s*navigate\(/, f)
+  }
+})

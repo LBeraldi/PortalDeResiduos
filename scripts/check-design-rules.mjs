@@ -17,7 +17,7 @@ const TETO = {
   tamanhosDistintos: 13, // meta 8 valores fixos fora de clamp() (DS-07)
   hexForaDoRoot: 14, // meta 0 (regra 1 do AGENTS)
   hexEmTsx: 0, // manter 0
-  navegacaoPorBotao: 48, // meta 0 (CP-02)
+  navegacaoPorBotao: 0, // D1.4: era 48 (CP-02)
 }
 
 const css = read('src/styles.css')
