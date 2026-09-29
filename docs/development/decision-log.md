@@ -30,3 +30,11 @@
 - **Decisão:** o dono do projeto pediu a execução de todas as fases (D0 a D3) na ordem do backlog, com review do código ao final, em vez de um PR revisado por vez.
 - **Como fica:** uma branch e um commit por tarefa, empilhados. Texto público novo ou alterado usa o texto já proposto nas specs e na auditoria aprovada e fica listado em `docs/design-refactor/PROGRESS.md` para aprovação antes de publicar (inclui "Sobre o panorama", ADR-004). Nenhum arquivo é apagado; arquivos que ficarem sem uso são listados no handoff. Dependências continuam proibidas (ADR-003 pendente).
 
+
+## 2026-09-29 — Índice de municípios em colunas em vez de tabela (D3.1)
+
+- **Contexto:** a CP-06.5 pede tabela no desktop (Município, Documentos disponíveis, Abrir ficha) e lista de linhas no celular; a PG-02.3 pede altura ≤ 5.000 px em 390.
+- **Medida:** com uma linha por município (44 px de alvo mínimo, DS-13), a lista sozinha ocupa ~4.400 px no celular; `/cidades/` ficou com 6.312 px em 390 e 5.817 px em 1440 (a grade anterior tinha 4.414 px em 1440).
+- **Decisão:** índice remissivo — grupos por letra (`<h3>` + lista), em 3 colunas no desktop e 2 no celular. O nome do município é o link para a ficha. O selo "Panorama publicado" aparece nos 79 e por isso não distingue ninguém: fica fora da linha, e só o selo "Plano de coleta seletiva" (15) aparece. A descrição de cada rota já informa que os 79 têm panorama.
+- **Resultado:** `/cidades/` 4.497 px (390) e 2.724 px (1440); `/diretorios/` 4.344 px (390). `/panoramas-da-gestao-de-residuos/` fica em 5.263 px (390) até a D3.6 tirar a capa do herói (ADR-004).
+- **Consequência:** as ações por linha da D3.10 (Panorama · PDF, Plano) entram ao lado do nome, dentro da coluna.

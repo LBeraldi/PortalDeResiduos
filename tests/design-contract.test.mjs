@@ -225,3 +225,16 @@ test('D2.8: os scripts de design leem todas as camadas de CSS', async () => {
   assert.ok(distintos > 0, 'check-design-rules não encontrou nenhum font-size: não está lendo as camadas')
   execFileSync('node', ['scripts/check-contrast.mjs'], { cwd: root, encoding: 'utf8' })
 })
+
+test('D3.1: as três rotas de municípios usam o mesmo MunicipalityIndex', () => {
+  const cidades = read('src/pages/CityPages.tsx')
+  const producoes = read('src/pages/ProductionPages.tsx')
+  assert.equal((cidades.match(/<MunicipalityIndex /g) ?? []).length, 2)
+  assert.doesNotMatch(cidades, /TerritoryIndex/)
+  assert.match(producoes.match(/export function Panoramas[\s\S]*?\n\}/)[0], /<MunicipalityIndex /)
+  const indice = read('src/components/MunicipalityIndex.tsx')
+  assert.match(indice, /cityRecords/)
+  assert.match(indice, /selectiveCollectionPlans/)
+  assert.match(indice, /Nenhum município encontrado para “\{query\}”\./)
+  assert.match(indice, /Limpar busca/)
+})

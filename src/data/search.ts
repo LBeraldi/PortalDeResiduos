@@ -4,7 +4,7 @@
 
 import { siteRoutes } from './siteMap'
 import { newsRecords } from '../pages/NewsPages'
-import { cityRecords } from '../pages/CityPages'
+import { cityRecords } from './cities'
 
 export type SearchKind = 'Página' | 'Notícia' | 'Município' | 'Publicação'
 

@@ -1,30 +1,16 @@
 import { PageHero } from '../components/PageHero'
-import { TerritoryIndex } from '../components/TerritoryIndex'
+import { MunicipalityIndex } from '../components/MunicipalityIndex'
 import type { Crumb } from '../components/Breadcrumbs'
 import { Eyebrow } from '../components/Eyebrow'
-import { ArrowRight, FileText, MapPin, Search } from 'lucide-react'
-import { useMemo, useState } from 'react'
-import { panoramaRecords } from '../data/panoramas.generated'
+import { ArrowRight, FileText, MapPin } from 'lucide-react'
 import { Link } from '../components/router'
 
 const ASSET = '/uploads/'
 type Navigate = (to: string) => void
 
-export type CityRecord = {
-  slug: string
-  name: string
-  file: string
-  cover: string
-  legacyPath?: string
-}
+import { cityRecords } from '../data/cities'
 
-export const cityRecords: CityRecord[] = panoramaRecords.map((panorama) => ({
-  slug: panorama.slug,
-  name: panorama.name,
-  file: panorama.file,
-  cover: panorama.cover,
-  ...(panorama.slug === "corumba" ? { legacyPath: "/corumba/" } : {}),
-}))
+export { cityRecords, type CityRecord } from '../data/cities'
 
 function Hero({ title, description, image, crumbs }: { title: string; description: string; image?: string; crumbs?: Crumb[] }) { return <PageHero eyebrow="Dados municipais" title={title} description={description} image={image} crumbs={crumbs} /> }
 
@@ -34,15 +20,12 @@ const cityCrumbs = (city?: string) => [
   ...(city ? [{ label: city }] : []),
 ]
 
-export function CityDirectory({ navigate }: { navigate: Navigate }) {
-  const [query, setQuery] = useState('')
-  const normalizedQuery = query.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-  const filteredCities = useMemo(() => cityRecords.filter((city) => city.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(normalizedQuery)), [normalizedQuery])
-  return <><Hero title="Cidades" description="Consulte os panoramas municipais e encontre referências para compreender a gestão de resíduos sólidos em Mato Grosso do Sul." image={`${ASSET}2021/07/JOB-090-Banner-Projeto-Resíduos-Sólidos-768x600.jpg`} crumbs={cityCrumbs()} /><section className="section container city-directory"><div className="city-directory-heading"><div><Eyebrow>Mato Grosso do Sul</Eyebrow><h2>Escolha um <span>município.</span></h2><p>{cityRecords.length} municípios com panorama local identificado no acervo.</p></div><label className="search-field"><Search size={17} /><span className="sr-only">Buscar município</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar município" /></label></div><div className="city-directory-grid">{filteredCities.map((city) => <Link to={`/cidades/${city.slug}/`} className="city-directory-card" key={city.slug}><span className="city-directory-icon"><MapPin size={17} /></span><span><strong>{city.name}</strong><small>Panorama municipal disponível</small></span><ArrowRight size={16} /></Link>)}</div>{filteredCities.length === 0 && <p className="city-empty">Nenhum município encontrado. Tente outro termo.</p>}</section><section className="section container"><TerritoryIndex navigate={navigate} variant="strip" title="Cobertura do território" /></section></>
+export function CityDirectory({ navigate: _navigate }: { navigate: Navigate }) {
+  return <><Hero title="Cidades" description="Consulte os panoramas municipais e encontre referências para compreender a gestão de resíduos sólidos em Mato Grosso do Sul." image={`${ASSET}2021/07/JOB-090-Banner-Projeto-Resíduos-Sólidos-768x600.jpg`} crumbs={cityCrumbs()} /><MunicipalityIndex eyebrow="Mato Grosso do Sul" title={<>Escolha um <span>município.</span></>} description={`${cityRecords.length} municípios com panorama local identificado no acervo.`} /></>
 }
 
-export function Directories({ navigate }: { navigate: Navigate }) {
-  return <><Hero title="Diretórios" description="Acesse os pareceres e panoramas de gestão de resíduos sólidos de cada município de Mato Grosso do Sul." crumbs={[{ label: 'Início', href: '/' }, { label: 'Diretórios' }]} /><section className="section container"><TerritoryIndex navigate={navigate} variant="full" title="Pareceres e panoramas por município" /></section></>
+export function Directories({ navigate: _navigate }: { navigate: Navigate }) {
+  return <><Hero title="Diretórios" description="Acesse os pareceres e panoramas de gestão de resíduos sólidos de cada município de Mato Grosso do Sul." crumbs={[{ label: 'Início', href: '/' }, { label: 'Diretórios' }]} /><MunicipalityIndex title="Pareceres e panoramas por município" /></>
 }
 
 export function CityDetail({ path, navigate }: { path: string; navigate: Navigate }) {
