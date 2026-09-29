@@ -94,8 +94,8 @@ main:focus { outline: none; }
 .site-footer .button:hover { background: var(--on-mata-strong); border-color: var(--on-mata-strong); }
 
 /* --- Hover de cartão (DS-11): a borda escurece e o título ganha sublinhado; nada se desloca. --- */
-:is(.news-card, .feature-card, .news-archive-card, .production-card, .production-link-card, .resource-card, .file-card,
-  .project-card, .city-directory-card, .municipality-card, .document-tile, .home-impact-card):hover :is(h2, h3, strong) {
+:is(.news-card, .news-archive-card, .production-card, .production-link-card, .resource-card, .file-card,
+  .project-card, .city-directory-card, .municipality-card,  .document-tile):hover :is(h2, h3, strong) {
   text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em;
 }
 

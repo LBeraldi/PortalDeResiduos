@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 3
-- Próxima tarefa: D3.3. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1, D3.2. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D3.4. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1–D3.3. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -16,7 +16,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | font-size < 12 px | 32 | 0 | 0 |
 | navegação por botão | 48 | 0 | 0 |
 | hex fora de :root | 14 | 0 | 0 |
-| altura / em 390 | 6.395 | 6.440 (temporário, meta na D3.3) | ≤ 4.800 |
+| altura / em 390 | 6.395 | 4.773 | ≤ 4.800 |
 | altura panoramas em 390 | 24.921 | 5.263 (meta na D3.6) | ≤ 5.000 |
 | menu visível em 390 | não | sim | sim |
 | destinos internos quebrados | 7 | 0 | 0 |
@@ -37,8 +37,13 @@ Texto novo ou alterado visível ao público. Nada disso vai ao ar sem aprovaçã
 | D2.7 | Contato | trilha "Início / Contato" (rótulos existentes) | spec CP-10.1 |
 | D3.1 | Índice de municípios | "Todos", "Com plano de coleta seletiva", "N de 79 municípios para “termo”", "Nenhum município encontrado para “termo”.", "Limpar busca", selo "Plano de coleta seletiva" | spec CP-06 e mockup |
 | D3.2 | Ficha do município | **"Sobre o panorama"**: "Diagnóstico da gestão, do gerenciamento e da disposição final dos resíduos sólidos no município, parte do levantamento feito para os 79 municípios de Mato Grosso do Sul." (ADR-004: aprovar antes de publicar); "Documentos deste município"; "N documentos"; "Panorama de gestão de resíduos de <Município>" | texto já publicado em Disposição Legal |
+| D3.3 | Página inicial | "Abrir diretórios municipais", "Abrir Projeto Valoriza", "Abrir Nota Técnica"; título "Nota Técnica" (era "Notas Técnicas"); "Abrir sistema GRS" | rótulos já existentes (leitor de tela e Apoio a Decisão) |
 
 ## Sessões
+
+### 2026-09-29 — D3.3 página inicial
+
+- Três atalhos iguais (Diretórios, Valoriza, Nota Técnica); áreas só texto com Logística Reversa e GRS direto; notícias compactas. `/`: 1440 2.394 (meta 3.200), 390 4.773 (meta 4.800; folga de 27 px). Regressão temporária da D1.3 resolvida.
 
 ### 2026-09-29 — D3.2 ficha do município
 

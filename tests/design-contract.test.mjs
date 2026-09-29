@@ -86,7 +86,8 @@ test('D1.6: o rodapé não tem links sociais sem destino e mantém o e-mail', ()
 test('D1.7: texto cerrado sobre mata usa --cerrado-claro (5,78:1)', () => {
   const css = readCss()
   assert.match(css, /\.home-hero-slide-label \{[^}]*color: var\(--cerrado-claro\)/)
-  assert.match(css, /\.home-impact-card--change small span \{ color: var\(--cerrado-claro\)/)
+  // O separador do antigo cartão verde de Nota Técnica saiu na D3.3; nenhum texto usa --cerrado (DS-02).
+  assert.doesNotMatch(css, /(^|[;{\s])color: var\(--cerrado\)/)
 })
 
 test('D1.8: o título da aba de ficha e notícia vem dos dados reais', () => {
@@ -248,4 +249,13 @@ test('D3.2: a ficha lista os documentos reais e explica o panorama uma vez', () 
   assert.doesNotMatch(src, /city-data-strip|Compare este município|Um retrato local para orientar/)
   assert.equal((src.match(/Sobre o panorama/g) ?? []).length, 1)
   assert.match(src.match(/function UnknownCity[\s\S]*?\n\}/)[0], /<Alert tone="warning"/)
+})
+
+test('D3.3: a inicial tem três atalhos iguais, sem carimbo, e o GRS a um clique', () => {
+  const home = read('src/components/HomePage.tsx')
+  const destinos = [...home.matchAll(/<Link to="([^"]+)" className="home-tile"/g)].map((m) => m[1])
+  assert.deepEqual(destinos, ['/diretorios/', '/projeto-valoriza/', '/nota-tecnica/'])
+  assert.doesNotMatch(home, /home-impact-stamp|>MS</)
+  assert.match(home, /"https:\/\/sadgrs\.streamlit\.app\/"/)
+  assert.match(home, /newsByDate\.slice\(0, 3\)/)
 })

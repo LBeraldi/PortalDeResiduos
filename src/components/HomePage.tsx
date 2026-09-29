@@ -1,12 +1,11 @@
 import { type FormEvent, useEffect, useRef, useState } from "react"
-import { ArrowRight, BarChart3, BookOpen, ChevronLeft, ChevronRight, Pause, Play, Recycle, Search } from "lucide-react"
+import { ArrowRight, ChevronLeft, ChevronRight, ExternalLink, Pause, Play, Search } from "lucide-react"
 import { openSiteSearch } from "./SiteSearch"
 import { newsByDate } from "../pages/NewsPages"
 import { territoryStats } from "../data/territory"
 import { searchSite, type SearchEntry } from "../data/search"
 import { Link } from "./router"
 
-const ASSET = "/uploads/"
 type Navigate = (to: string) => void
 
 type InstitutionalSlide = {
@@ -49,10 +48,13 @@ const institutionalSlides: InstitutionalSlide[] = [
   },
 ]
 
-const homeAreas = [
-  { icon: <BarChart3 />, kicker: "Ferramenta digital", title: "Apoio a decisão", text: "Indicadores e cenários para qualificar o gerenciamento municipal.", href: "/apoio-a-decisao/", image: "/uploads/2023/07/machine-learning.png" },
-  { icon: <Recycle />, kicker: "Inclusão socioprodutiva", title: "Cooperativas", text: "Materiais para fortalecer a organização e o trabalho dos catadores.", href: "/cooperativas/", image: "/uploads/2022/08/cartilha_frente.png" },
-  { icon: <BookOpen />, kicker: "Biblioteca pública", title: "Publicações", text: "Estudos, artigos e notas técnicas para consulta e compartilhamento.", href: "/publicacoes/", image: "/uploads/2025/12/Revista-IBRAPARC-pdf.jpg" },
+type HomeArea = { kicker: string; title: string; text: string; href: string; cta: string; external?: { label: string; href: string } }
+
+const homeAreas: HomeArea[] = [
+  { kicker: "Ferramenta digital", title: "Apoio a decisão", text: "Indicadores e cenários para qualificar o gerenciamento municipal.", href: "/apoio-a-decisao/", cta: "Acessar", external: { label: "Abrir sistema GRS", href: "https://sadgrs.streamlit.app/" } },
+  { kicker: "Inclusão socioprodutiva", title: "Cooperativas", text: "Materiais para fortalecer a organização e o trabalho dos catadores.", href: "/cooperativas/", cta: "Acessar" },
+  { kicker: "Biblioteca pública", title: "Publicações", text: "Estudos, artigos e notas técnicas para consulta e compartilhamento.", href: "/publicacoes/", cta: "Acessar" },
+  { kicker: "Sistema estadual", title: "Logística Reversa", text: "Um caminho para que embalagens retornem ao setor empresarial e tenham destinação ambientalmente adequada.", href: "/logistica-reversa/", cta: "Entender o sistema" },
 ]
 
 function HomeHeroSearch({ navigate }: { navigate: Navigate }) {
@@ -172,35 +174,25 @@ export function HomePage({ navigate }: { navigate: Navigate }) {
   return <>
     <HomeInstitutionalHero navigate={navigate} />
 
-    <section className="section container home-summary">
-      <div className="home-summary-copy">
-        <div className="eyebrow"><span className="eyebrow-line" /> Um acervo para agir</div>
-        <h2>Conhecimento organizado para <span>virar ação.</span></h2>
-        <p>Diagnósticos, planos, publicações e ferramentas para aproximar informação de quem planeja e de quem participa do cotidiano das cidades.</p>
-        <div className="home-summary-actions">
-          <Link to="/producoes-do-convenio/" className="button button-dark">Explorar produções <ArrowRight size={16} /></Link>
-          <Link to="/cidades/" className="text-link">Ver municípios <ArrowRight size={16} /></Link>
-        </div>
-      </div>
-      <div className="home-summary-mosaic" aria-label="Principais áreas do portal">
-        <Link to="/diretorios/" className="home-impact-card home-impact-card--territory">
-          <span className="home-impact-label">Pareceres</span>
-          <strong>{territoryStats.withPanorama}</strong>
+    <section className="section container home-shortcuts" aria-label="Atalhos">
+      <div className="home-tiles">
+        <Link to="/diretorios/" className="home-tile">
+          <span className="home-tile-kicker">Pareceres</span>
+          <strong className="home-tile-number">{territoryStats.withPanorama}</strong>
           <p>municípios com parecer ou panorama publicado.</p>
-          <span className="home-impact-stamp">MS</span>
-          <span className="sr-only"> — abrir diretórios municipais</span>
+          <span className="home-tile-cta">Abrir diretórios municipais <ArrowRight size={16} aria-hidden="true" /></span>
         </Link>
-        <Link to="/projeto-valoriza/" className="home-impact-card home-impact-card--image">
-          <img src="/uploads/2021/07/JOB-090-Banner-Projeto-Resíduos-Sólidos.jpg" alt="Trabalhadores e materiais da cadeia da reciclagem" loading="lazy" />
-          <div><span className="home-impact-label">Inclusão socioprodutiva</span><strong>Projeto Valoriza</strong><p>Cadeia da reciclagem mais justa.</p></div>
-          <span className="sr-only"> — abrir Projeto Valoriza</span>
+        <Link to="/projeto-valoriza/" className="home-tile">
+          <span className="home-tile-kicker">Inclusão socioprodutiva</span>
+          <strong className="home-tile-title">Projeto Valoriza</strong>
+          <p>Cadeia da reciclagem mais justa.</p>
+          <span className="home-tile-cta">Abrir Projeto Valoriza <ArrowRight size={16} aria-hidden="true" /></span>
         </Link>
-        <Link to="/nota-tecnica/" className="home-impact-card home-impact-card--change">
-          <span className="home-impact-label">Documento técnico</span>
-          <strong>Notas Técnicas</strong>
+        <Link to="/nota-tecnica/" className="home-tile">
+          <span className="home-tile-kicker">Documento técnico</span>
+          <strong className="home-tile-title">Nota Técnica</strong>
           <p>Reconhecimento dos catadores recicláveis.</p>
-          <small>Publicação <span>·</span> Projeto Valoriza</small>
-          <span className="sr-only"> — abrir Nota Técnica</span>
+          <span className="home-tile-cta">Abrir Nota Técnica <ArrowRight size={16} aria-hidden="true" /></span>
         </Link>
       </div>
     </section>
@@ -211,14 +203,20 @@ export function HomePage({ navigate }: { navigate: Navigate }) {
         <p className="section-heading-note">Cada área responde a uma necessidade concreta da gestão de resíduos.</p>
       </div>
       <div className="home-areas">
-        {homeAreas.map((area) => <Link to={area.href} className="feature-card" key={area.title}><div className="feature-visual"><img src={area.image} alt="" loading="lazy" /><span className="card-icon">{area.icon}</span></div><div className="feature-card-content"><span className="card-kicker">{area.kicker}</span><h3>{area.title}</h3><p>{area.text}</p><span className="card-arrow">Acessar <ArrowRight size={17} /></span></div></Link>)}
+        {homeAreas.map((area) => <article className="home-area" key={area.title}>
+          <span className="card-kicker">{area.kicker}</span>
+          <h3>{area.title}</h3>
+          <p>{area.text}</p>
+          <div className="home-area-actions">
+            <Link to={area.href} className="text-link">{area.cta}<span className="sr-only">: {area.title}</span> <ArrowRight size={16} aria-hidden="true" /></Link>
+            {area.external && <a className="text-link" href={area.external.href} target="_blank" rel="noopener">{area.external.label} <ExternalLink size={15} aria-hidden="true" /><span className="sr-only"> (abre em nova aba)</span></a>}
+          </div>
+        </article>)}
       </div>
     </section>
 
     <section className="section news-section">
-      <div className="container"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" /> Atualizações</div><h2>Notícias do <span>território.</span></h2></div><Link to="/noticias/" className="text-link">Ver todas <ArrowRight size={16} /></Link></div><div className="news-grid">{newsByDate.slice(0, 3).map((item) => <Link to={"/noticias/" + item.slug + "/"} className="news-card" key={item.slug}><div className="news-image"><img src={item.image} alt="" loading="lazy" /><span className="news-date">{item.date}</span></div><div className="news-card-copy"><h3>{item.title}</h3><p>{item.excerpt}</p><span className="text-link">Ler notícia <ArrowRight size={15} /></span></div></Link>)}</div></div>
+      <div className="container"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" /> Atualizações</div><h2>Notícias do <span>território.</span></h2></div><Link to="/noticias/" className="text-link">Ver todas <ArrowRight size={16} /></Link></div><div className="news-grid">{newsByDate.slice(0, 3).map((item) => <Link to={"/noticias/" + item.slug + "/"} className="news-card" key={item.slug}><div className="news-image"><img src={item.image} alt="" loading="lazy" /></div><div className="news-card-copy"><p className="news-card-meta"><span className="news-card-category">{item.category}</span><span>{item.date}</span></p><h3>{item.title}</h3></div></Link>)}</div></div>
     </section>
-
-    <section className="section container reverse-strip"><div className="reverse-art"><img src={ASSET + "2021/10/logistica-reversa-ilust.png"} alt="Ciclo de logística reversa" loading="lazy" /></div><div className="reverse-copy"><div className="eyebrow"><span className="eyebrow-line" /> Sistema estadual</div><h2>Logística <span>Reversa</span></h2><p>Um caminho para que embalagens retornem ao setor empresarial e tenham destinação ambientalmente adequada.</p><Link to="/logistica-reversa/" className="text-link">Entender o sistema <ArrowRight size={16} /></Link></div></section>
   </>
 }

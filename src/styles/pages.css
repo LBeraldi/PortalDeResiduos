@@ -4,77 +4,33 @@
    HOME
    ========================================================================= */
 
-.hero { border-bottom: 1px solid var(--line); }
-.hero-backdrop { display: none; }
-.hero-content {
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
-  gap: clamp(2.5rem, 6vw, 5rem); align-items: center;
-  padding-block: var(--section-y);
-}
-.hero h1 {
-  margin: 1.1rem 0 0; font-size: var(--step-5); line-height: 1.06;
-  letter-spacing: -0.015em; max-width: 22ch;
-}
-.hero h1 em { color: var(--mata); font-style: italic; }
-.hero-copy { margin: 1.4rem 0 2rem; max-width: 46ch; font-size: var(--step-body); line-height: 1.7; color: var(--ink-soft); }
-.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 1.75rem; }
-.hero-mark,
-.hero-scroll { display: none; }
-
-.home-summary { display: grid; grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr); gap: clamp(2.5rem, 7vw, 6rem); align-items: center; }
-.home-summary-copy { padding-block: clamp(0.5rem, 2vw, 1.5rem); }
-.home-summary-copy h2 { max-width: 14ch; margin: 0.75rem 0 0; }
-.home-summary-copy p { margin: 1.2rem 0 1.85rem; max-width: 46ch; color: var(--ink-soft); line-height: 1.75; }
-.home-summary-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.35rem; }
-
-.home-summary-mosaic {
-  display: grid; grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr); grid-template-rows: repeat(2, minmax(11rem, 1fr));
-  gap: 0.75rem; width: 100%; max-width: 37rem; justify-self: end;
-}
-.home-impact-card { display: block; width: 100%; text-align: left; position: relative; min-height: 11rem; padding: 1.35rem; overflow: hidden; border: 1px solid var(--line); background: var(--paper-raised);  }
-/* Como <a>, o cartão não centraliza o conteúdo sozinho, como o <button> fazia. */
-.home-impact-card:not(.home-impact-card--image) { display: flex; flex-direction: column; justify-content: center; }
-.home-impact-label { display: block; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
-.home-impact-card > strong { display: block; margin: 1.55rem 0 0.35rem; color: var(--mata); font-family: var(--font-display); font-size: clamp(2.25rem, 1.5rem + 2.8vw, 3.6rem); font-weight: 500; line-height: 0.9; letter-spacing: -0.055em; }
-.home-impact-card > p { max-width: 23ch; color: var(--ink-soft); font-size: var(--step-small); line-height: 1.5; }
-.home-impact-stamp { position: absolute; right: 1.05rem; bottom: 0.85rem; color: var(--line-strong); font-family: var(--font-display); font-size: 3.75rem; font-style: italic; line-height: 1; }
-.home-impact-card--image { grid-column: 2; grid-row: 1 / span 2; display: flex; align-items: flex-end; min-height: 22.75rem; border-color: var(--mata-deep); color: var(--on-mata); isolation: isolate; }
-.home-impact-card--image > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.6) contrast(0.94);  }
-.home-impact-card--image::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(18, 53, 42, 0.05) 15%, rgba(18, 53, 42, 0.9) 100%); }
-.home-impact-card--image > div { padding: 0.25rem; }
-.home-impact-card--image .home-impact-label { color: var(--on-mata-soft); }
-.home-impact-card--image strong { display: block; margin: 0.45rem 0 0.15rem; font-family: var(--font-display); font-size: var(--step-3); font-weight: 500; letter-spacing: -0.03em; }
-.home-impact-card--image p { color: var(--on-mata-soft); font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase; }
-.home-impact-card--change { background: var(--mata-deep); border-color: var(--mata-deep); color: var(--on-mata); }
-.home-impact-card--change > strong { margin-top: 1.3rem; color: var(--on-mata); font-family: var(--font-mono); font-size: clamp(1.7rem, 1.25rem + 1.6vw, 2.4rem); letter-spacing: -0.06em; }
-.home-impact-card--change > p { color: var(--on-mata-soft); }
-.home-impact-card--change small { display: block; padding-top: 0.75rem; margin-top: 0.75rem; border-top: 1px solid rgba(237, 240, 233, 0.23); color: var(--on-mata); font-size: var(--step-small); line-height: 1.45; }
-.home-impact-card--change small span { color: var(--cerrado-claro); }
+/* Atalhos abaixo do herói: mesma anatomia nos três (sobrelinha, título ou número, frase, link). */
+.home-shortcuts { padding-bottom: 0; }
+.home-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); background: var(--paper-raised); }
+.home-tile { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.4rem 1.5rem; color: var(--ink); transition: background 0.18s ease; }
+.home-tile + .home-tile { border-left: 1px solid var(--line); }
+.home-tile:hover { background: var(--paper); }
+.home-tile-kicker { font-family: var(--font-mono); font-size: var(--step-meta); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
+.home-tile-number { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 500; line-height: 1; letter-spacing: -0.03em; color: var(--mata); }
+.home-tile-title { font-family: var(--font-display); font-size: var(--step-2); font-weight: 600; line-height: 1.1; }
+.home-tile p { flex: 1; color: var(--ink-soft); font-size: var(--step-small); line-height: 1.55; }
+.home-tile-cta { display: inline-flex; align-items: center; gap: 0.45rem; font-size: var(--step-ui); font-weight: 600; color: var(--mata); }
+.home-tile:hover .home-tile-cta { text-decoration: underline; text-underline-offset: 0.18em; }
 
 .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem 2rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
 .section-heading h2 { margin: 0.7rem 0 0; }
 .section-heading > div { max-width: 34ch; }
 
-.home-areas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-.feature-card { display: flex; flex-direction: column; padding: 0; overflow: hidden; background: var(--paper-raised); color: var(--ink); text-align: left; transition: background 0.18s ease; }
-.feature-visual { position: relative; aspect-ratio: 16 / 7; overflow: hidden; background: var(--paper-sunk); }
-.feature-visual img { width: 100%; height: 100%; object-fit: cover;  }
-.feature-visual .card-icon { position: absolute; top: 1rem; right: 1rem; z-index: 1; display: grid; width: 2.6rem; height: 2.6rem; place-items: center; color: var(--mata); background: var(--paper-raised); border: 1px solid var(--line); }
-.feature-card-content { display: flex; flex: 1; flex-direction: column; align-items: flex-start; padding: 1.35rem 1.4rem 1.25rem; }
 .card-kicker,
 .card-number,
 .project-number { font-family: var(--font-mono); font-size: var(--step--1); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint); }
-.feature-card h3 { margin: 1rem 0 0.55rem; font-size: var(--step-2); letter-spacing: -0.02em; }
-.feature-card p { flex: 1; color: var(--ink-soft); font-size: var(--step-small); line-height: 1.6; }
-.card-arrow { display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 1.35rem; color: var(--mata); font-family: var(--font-sans); font-size: var(--step-ui); font-weight: 600; }
 
-.split-feature { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
-.image-frame { overflow: hidden; border: 1px solid var(--line); background: var(--paper-sunk); }
-.image-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.split-image { min-height: 24rem; }
-.split-copy { max-width: 42ch; }
-.split-copy p,
-.reverse-copy p { margin: 1.1rem 0 1.75rem; color: var(--ink-soft); font-size: var(--step-body); line-height: 1.7; }
+/* Áreas: cartões só de texto (RC-4), com a ação principal e, quando existe, o sistema externo. */
+.home-areas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.home-area { display: flex; flex-direction: column; gap: 0.6rem; padding: 1.35rem 1.4rem; background: var(--paper-raised); }
+.home-area h3 { font-size: var(--step-1); }
+.home-area p { flex: 1; color: var(--ink-soft); font-size: var(--step-small); line-height: 1.6; }
+.home-area-actions { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: 0.4rem; }
 
 .news-section { background: var(--paper-raised); }
 .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
@@ -84,21 +40,11 @@
   transition: border-color 0.18s ease;
 }
 .news-card:hover { border-color: var(--line-strong); }
-.news-image { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--paper-sunk); }
-.news-image img { width: 100%; height: 100%; object-fit: cover;  }
-.news-date {
-  position: absolute; left: 0.85rem; bottom: 0.85rem; padding: 0.4rem 0.55rem;
-  background: var(--paper); color: var(--ink-soft);
-  font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.03em; text-transform: uppercase;
-}
-.news-card-copy { display: flex; flex-direction: column; flex: 1; padding: 1.2rem 1.25rem 1.35rem; }
-.news-card-copy h3 { margin: 0 0 0.7rem; font-size: var(--step-1); line-height: 1.2; letter-spacing: -0.015em; }
-.news-card-copy p { flex: 1; margin: 0 0 1rem; color: var(--ink-soft); font-size: var(--step-small); line-height: 1.6; }
-
-.reverse-strip { display: grid; grid-template-columns: 0.85fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
-.reverse-art { border: 1px solid var(--line); background: var(--paper-sunk); padding: 2rem; }
-.reverse-art img { width: 100%; height: 100%; max-height: 18rem; object-fit: contain; }
-.reverse-copy { max-width: 44ch; }
+.news-image { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--paper-sunk); }
+.news-image img { width: 100%; height: 100%; object-fit: cover; }
+.news-card-copy { display: grid; gap: 0.55rem; padding: 1rem 1.15rem 1.2rem; }
+.news-card-copy h3 { font-size: var(--step-1); line-height: 1.25; letter-spacing: -0.01em; }
+.news-card-category { color: var(--cerrado-texto); }
 
 /* =========================================================================
    TERRITORY INDEX — elemento-assinatura
@@ -215,12 +161,7 @@
   .menu-toggle { order: 2; }
   .header-search-label { display: none; }
 
-  .hero-content,
-  .page-hero.has-figure .page-hero-inner,
-  .home-summary,
-  .split-feature,
-  .reverse-strip { grid-template-columns: 1fr; }
-  .split-image { min-height: 16rem; }
+  .page-hero.has-figure .page-hero-inner { grid-template-columns: 1fr; }
   .home-areas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .news-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-main { grid-template-columns: 1fr 1fr; }
@@ -229,9 +170,9 @@
 
 @media (max-width: 560px) {
   .home-areas { grid-template-columns: 1fr; }
-  .feature-card-content { padding: 1.15rem 1.1rem 1.1rem; }
-  .home-summary-mosaic { grid-template-columns: 1fr; grid-template-rows: none; }
-  .home-impact-card--image { grid-column: auto; grid-row: auto; min-height: 15rem; }
+  .home-tiles { grid-template-columns: 1fr; }
+  .home-tile + .home-tile { border-left: 0; border-top: 1px solid var(--line); }
+  .home-tile { padding: 1.1rem 1.15rem; }
   .news-grid { grid-template-columns: 1fr; }
   .footer-main { grid-template-columns: 1fr; }
   .section-heading { align-items: flex-start; }
@@ -310,7 +251,7 @@
 .about-aside p { grid-column: 1 / -1; margin: 0.6rem 0; color: var(--ink-soft); font-size: var(--step-small); line-height: 1.7; }
 .stat-callout { display: flex; align-items: center; gap: 1.1rem; padding: 1.6rem 0; margin-top: 2rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .stat-callout strong { font-family: var(--font-mono); font-weight: 500; font-size: 1.6rem; color: var(--mata); }
-.stat-callout strong span { color: var(--cerrado); font-style: normal; }
+.stat-callout strong span { color: var(--cerrado-texto); font-style: normal; }
 .stat-callout > span { max-width: 24ch; font-size: var(--step-small); line-height: 1.5; color: var(--ink-soft); }
 
 .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
@@ -372,8 +313,6 @@
 /* Cabeçalhos de seção herdados (antes Space Grotesk + palavra colorida) */
 .intro h2,
 .section-heading h2,
-.split-copy h2,
-.reverse-copy h2,
 .contact-copy h2,
 .city-toolbar h2,
 .resource-intro h2,
