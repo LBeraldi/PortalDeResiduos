@@ -274,12 +274,8 @@
 .contact-detail small { display: block; margin-bottom: 0.3rem; font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); }
 .contact-detail strong { display: block; color: var(--ink); font-size: var(--step-small); font-weight: 600; }
 .contact-form { padding: clamp(1.5rem, 4vw, 2.25rem); background: var(--paper-raised); border: 1px solid var(--line); }
-.contact-form label { display: block; margin-bottom: 1.15rem; font-family: var(--font-sans); font-size: var(--step-small); font-weight: 600; color: var(--ink); }
-.contact-form input,
-.contact-form textarea { display: block; width: 100%; margin-top: 0.5rem; padding: 0.7rem 0; border: 0; border-bottom: 1px solid var(--line-strong); background: transparent; color: var(--ink); font-size: var(--step-0); font-family: var(--font-sans); resize: vertical; }
-.contact-form input:focus,
-.contact-form textarea:focus { border-color: var(--mata); }
-.contact-form .button { margin-top: 0.6rem; }
+.contact-form > .field + .field { margin-top: 1.15rem; }
+.contact-form .button { margin-top: 1.5rem; }
 .form-success { min-height: 22rem; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; color: var(--mata); }
 .form-success h3 { margin: 1.1rem 0 0.4rem; color: var(--ink); font-size: var(--step-2); }
 .form-success p { max-width: 40ch; color: var(--ink-soft); font-size: var(--step-small); line-height: 1.7; }

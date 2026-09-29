@@ -309,3 +309,10 @@ test('D3.6: imagem de herói só em notícia, Logística Reversa e Recicla Match
   assert.match(read('src/pages/NewsPages.tsx'), /function NewsHero[^\n]*image=\{image\}/)
   assert.match(readCss(), /\.page-hero-figure img \{[^}]*object-fit: contain/)
 })
+
+test('D3.7: o contato usa Field e a confirmação não afirma que o aplicativo abriu', () => {
+  const contato = read('src/App.tsx').match(/function Contact\(\)[\s\S]*?\n\}/)[0]
+  assert.equal((contato.match(/<Field /g) ?? []).length, 4)
+  assert.match(contato, /Mensagem montada/)
+  assert.doesNotMatch(contato, /Abrimos seu aplicativo/)
+})
