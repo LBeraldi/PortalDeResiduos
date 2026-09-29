@@ -4,8 +4,8 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 
 ## Estado
 
-- Fase atual: 1
-- Próxima tarefa: D1.11. Concluídas: D0.1, D0.2, D1.1–D1.10. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Fase atual: 2
+- Próxima tarefa: D2.1. Concluídas: D0.1, D0.2, D1.1–D1.11. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -20,12 +20,17 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | altura panoramas em 390 | 24.921 | 24.904 | ≤ 5.000 |
 | menu visível em 390 | não | sim | sim |
 | destinos internos quebrados | 7 | 0 | 0 |
-| páginas de conteúdo órfãs | 7 | 7 | 0 |
+| páginas de conteúdo órfãs | 7 | 0 | 0 |
 | documentos sem caminho por clique | 75 URLs (74 coleta + cartilha) | 0 | 0 |
 | páginas de erro alcançáveis por clique | 4 | 0 | 0 |
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
 ## Sessões
+
+### 2026-09-29 — D1.11 páginas órfãs (fim da fase 1)
+
+- Produções e Educação Ambiental ligam Disposição Legal, Usinas, Como separar e Lixão e aterro, com textos já publicados. E10: 113 páginas alcançáveis, 0 de erro, 0 órfãs de conteúdo; as quatro a 2 cliques.
+- Fase 1 concluída (D1.1–D1.11). Próximo: D2.1.
 
 ### 2026-09-29 — D1.9 × nativo da busca
 
