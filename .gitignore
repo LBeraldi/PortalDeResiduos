@@ -1,10 +1,37 @@
+# Dependencies
 node_modules/
-dist/
-uploads.zip
 
-# Local environment and editor files
+# Build output and tool caches
+dist/
+.vite/
+coverage/
+*.tsbuildinfo
+
+# Large local exports and archives
+*.zip
+/*.patch
+
+# Temporary design/agent artifacts in the repository root.
+# Canonical versions live under docs/, tasks/ and docs/design-refactor/.
+/[0-9]*.md
+/2026-*.md
+/PROGRESS.md
+/PROMPT-AGENTE.md
+/TASK_*.md
+
+# Local environment files
 .env
 .env.*
 !.env.example
-.DS_Store
+
+# Logs and local tool output
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
