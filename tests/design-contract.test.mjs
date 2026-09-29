@@ -344,3 +344,15 @@ test('D3.10: cada município abre o panorama e, quando há, o plano direto da li
   assert.match(indice, /Panorama · PDF/)
   assert.match(indice, /\(abre em nova aba\)/)
 })
+
+test('D3.11: Produções em uma página, com ações diretas, e sem páginas só de links (NAV-2, NAV-3)', () => {
+  const src = read('src/pages/ProductionPages.tsx')
+  const hub = src.match(/export function ProductionHub[\s\S]*?\n\}/)[0]
+  assert.match(hub, /production-anchors/)
+  const ids = [...src.matchAll(/\{ id: '([a-z-]+)', eyebrow:/g)].map((m) => m[1])
+  assert.deepEqual(ids, ['apoio-a-decisao', 'materiais-compilados', 'projeto-valoriza', 'educacao-ambiental', 'disposicao-legal', 'usinas-de-triagem', 'cooperativas'])
+  assert.match(src, /https:\/\/sadgrs\.streamlit\.app\//)
+  assert.match(src, /arquivo\('Panorama e Censo dos Catadores'\)/)
+  assert.match(src.match(/export function MaterialsCompiled[\s\S]*?\n\}/)[0], /<MunicipalityIndex /)
+  assert.match(src.match(/export function Municipalities[\s\S]*?\n\}/)[0], /filtroInicial=/)
+})

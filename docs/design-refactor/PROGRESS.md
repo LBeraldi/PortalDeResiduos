@@ -4,9 +4,9 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 
 ## Estado
 
-- Fase atual: 3
-- Próxima tarefa: D3.11. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1–D3.10. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
-- Decisões pendentes: ADR-003, ADR-007 (altura do índice no celular × ações por linha) (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
+- Fase atual: 3 (concluída)
+- Próxima tarefa: review do dono do projeto. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1–D3.11. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Decisões pendentes: ADR-003, ADR-007 (altura do índice no celular × ações por linha), ADR-008 (arquivos secundários dos planos a 3 cliques) (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
 ## Métricas (atualizar a cada tarefa)
@@ -21,7 +21,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | menu visível em 390 | não | sim | sim |
 | destinos internos quebrados | 7 | 0 | 0 |
 | páginas de conteúdo órfãs | 7 | 0 | 0 |
-| documentos sem caminho por clique | 75 URLs (74 coleta + cartilha) | 0 | 0 |
+| documentos sem caminho por clique | 75 URLs (74 coleta + cartilha) | 0 (105 a 2 cliques, 59 a 3) | 0 |
 | páginas de erro alcançáveis por clique | 4 | 0 | 0 |
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
@@ -45,6 +45,11 @@ Texto novo ou alterado visível ao público. Nada disso vai ao ar sem aprovaçã
 | D3.10 | Índice de municípios | "Panorama · PDF", "Plano de coleta seletiva"; no celular "PDF" e "Plano" | 10-navegacao.md (NAV-1) |
 
 ## Sessões
+
+### 2026-09-29 — D3.11 Produções em uma página (fim da fase 3)
+
+- Produções com âncoras e 7 seções com ação direta; Materiais Compilados e Municípios Contemplados mostram o índice (NAV-2). E10 final: tabela do `10-navegacao.md` toda a ≤ 2 cliques (GRS e notícia a 1); 105 documentos a 2, 59 a 3 (arquivos secundários dos planos, ADR-008 pendente), 0 páginas de erro, 0 órfãs.
+- Fases 0 a 3 concluídas. Aguardando review do código e as decisões ADR-003, ADR-007 e ADR-008, além da lista de textos para aprovação.
 
 ### 2026-09-29 — D3.10 ações por linha
 

@@ -805,3 +805,19 @@
 .document-library .document-list { margin-top: 0.5rem; }
 .document-library-note { display: grid; gap: 0.6rem; justify-items: start; margin-top: 2.5rem; padding: 1.25rem 1.4rem; background: var(--paper-raised); border: 1px solid var(--line); }
 .document-library-note p { color: var(--ink-soft); font-size: var(--step-small); }
+
+/* Produções do Convênio em uma página (D3.11): âncoras e uma seção por produção. */
+.production-anchors { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; padding-block: 1rem; border-bottom: 1px solid var(--line); }
+.production-anchors a { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--step-small); font-weight: 600; color: var(--mata); text-decoration: none; }
+.production-anchors a:hover { text-decoration: underline; text-underline-offset: 0.18em; }
+.production-list { padding-bottom: var(--section-y); }
+.production-item {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem clamp(2rem, 6vw, 4rem); align-items: center;
+  padding-block: clamp(1.75rem, 4vw, 2.5rem); border-bottom: 1px solid var(--line); scroll-margin-top: 5rem;
+}
+.production-item h2 { margin: 0.6rem 0 0.5rem; font-size: var(--step-3); }
+.production-item p { max-width: 52ch; color: var(--ink-soft); font-size: var(--step-body); line-height: 1.65; }
+.production-item-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.5rem; }
+@media (max-width: 700px) {
+  .production-item { grid-template-columns: 1fr; }
+}

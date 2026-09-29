@@ -1,12 +1,13 @@
 import { PageHero } from '../components/PageHero'
 import type { Crumb } from '../components/Breadcrumbs'
 import { Eyebrow } from '../components/Eyebrow'
-import { ArrowRight, BookOpen, FileText, Leaf, MapPin, Recycle, Search, Sprout, Users } from 'lucide-react'
+import { ArrowRight, BookOpen, ExternalLink, FileText, Leaf, MapPin, Recycle, Sprout, Users } from 'lucide-react'
 import { useMemo, useState, type ReactNode } from 'react'
 import { panoramaRecords } from '../data/panoramas.generated'
 import { selectiveCollectionPlans } from "../data/selective-collection-plans.generated"
 import { Link } from '../components/router'
 import { MunicipalityIndex } from '../components/MunicipalityIndex'
+import { documents } from '../data/documents'
 
 const ASSET = '/uploads/'
 type Navigate = (to: string) => void
@@ -26,18 +27,50 @@ function LinkCard({ icon, title, text, href, navigate }: { icon: ReactNode; titl
   return <Link to={href} className="production-link-card"><span className="production-link-icon">{icon}</span><span><strong>{title}</strong><small>{text}</small></span><ArrowRight size={16} /></Link>
 }
 
-export function ProductionHub({ navigate }: { navigate: Navigate }) {
-  const products = [
-    { icon: <BarChartIcon />, eyebrow: 'Sistema digital', title: 'Apoio a decisão', text: 'Ferramentas e indicadores para analisar cenários e qualificar a gestão municipal.', meta: 'Aplicação externa', href: '/apoio-a-decisao/', image: `${ASSET}2023/07/machine-learning.png` },
-    { icon: <BookOpen />, eyebrow: 'Biblioteca territorial', title: 'Materiais compilados', text: 'Panoramas, planos e documentos organizados para consulta por tema e município.', meta: 'Documentos e planos', href: '/materiais-compilados/', image: panoramaAsset(featuredPanorama.cover) },
-    { icon: <Sprout />, eyebrow: 'Mobilização', title: 'Educação ambiental', text: 'Conteúdos e planos para aproximar informação, escola, comunidade e território.', meta: 'Planos de ação', href: '/educacao-ambiental/', image: `${ASSET}2025/03/Cartilha_compostagem_acelerada-pdf.jpg` },
-    { icon: <Users />, eyebrow: 'Inclusão socioprodutiva', title: 'Panorama e censo dos catadores', text: 'Dados e referências para reconhecer o trabalho dos catadores em Mato Grosso do Sul.', meta: 'Publicação em PDF', href: '/panorama-e-censo-dos-catadores/', image: `${ASSET}2025/12/Panorama-e-Censo-dos-Catadores-LIVRO-versao-final-pdf.jpg` },
-  ]
-  return <><ProductionHero eyebrow="Produtos do convênio" title="Produções do Convênio" description="Um mapa para encontrar estudos, planos, ferramentas e referências desenvolvidos pelo convênio técnico-científico." crumbs={[{ label: 'Início', href: '/' }, { label: 'Produções do Convênio' }]} /><section className="section container production-overview"><div className="production-heading"><div><Eyebrow>Escolha um caminho</Eyebrow><h2>Conhecimento organizado para <span>virar ação.</span></h2></div><p>As produções estão agrupadas pelo tipo de decisão que ajudam a tomar: planejar, educar, acompanhar indicadores e fortalecer pessoas.</p></div><div className="production-grid">{products.map((product) => <ProductionCard key={product.title} {...product} navigate={navigate} />)}</div></section><section className="section container production-related"><Eyebrow>Próximos caminhos</Eyebrow><h2>Explore as soluções desenvolvidas</h2><div className="production-link-grid"><LinkCard icon={<FileText />} title="Disposição Legal" text="Uma agenda de cooperação para transformar a destinação dos resíduos sólidos em Mato Grosso do Sul." href="/disposicao-legal/" navigate={navigate} /><LinkCard icon={<Recycle />} title="Modelo de Usinas de Triagem de Resíduos" text="Uma referência arquitetônica para apoiar municípios na implantação de estruturas de triagem." href="/modelo-de-usinas-de-triagem-de-residuos/" navigate={navigate} /><LinkCard icon={<Leaf />} title="Como Separar Corretamente Seu Lixo" text="Pequenas decisões no dia a dia ajudam a reduzir impactos e fortalecem a reciclagem." href="/como-separar-corretamente-seu-lixo/" navigate={navigate} /><LinkCard icon={<MapPin />} title="Diferença de Lixão e Aterro Sanitário" text="Destinação adequada exige controle, planejamento e proteção do solo, da água e das pessoas." href="/diferenca-de-lixao-e-aterro-sanitario/" navigate={navigate} /></div></section><section className="production-band"><div className="container production-band-inner"><div><Eyebrow>Leitura transversal</Eyebrow><h2>Comece pelo território.</h2><p>Os panoramas municipais reúnem um retrato da gestão de resíduos e ajudam a transformar dados gerais em prioridades locais.</p></div><Link to="/panoramas-da-gestao-de-residuos/" className="button button-primary">Explorar panoramas <ArrowRight size={16} /></Link></div></section></>
+type Acao = { label: string; href: string; externo?: boolean }
+type Producao = { id: string; eyebrow: string; title: string; text: string; acoes: Acao[] }
+
+/** Arquivo de um documento do acervo pelo título (fonte única: documents.ts). */
+const arquivo = (titulo: string) => documents.find((doc) => doc.title === titulo)?.href ?? '/publicacoes/'
+
+// Uma seção por produção (10-navegacao.md). Textos e rótulos são os já publicados nas páginas de cada produção.
+const PRODUCOES: Producao[] = [
+  { id: 'apoio-a-decisao', eyebrow: 'Sistema digital', title: 'Apoio a decisão', text: 'Ferramentas e indicadores para analisar cenários e qualificar a gestão municipal.', acoes: [{ label: 'Abrir sistema GRS', href: 'https://sadgrs.streamlit.app/', externo: true }, { label: 'Ler guia do usuário', href: '/apoio-a-decisao/guia-do-usuario-do-grs/' }, { label: 'Acessar produção', href: '/apoio-a-decisao/' }] },
+  { id: 'materiais-compilados', eyebrow: 'Biblioteca territorial', title: 'Materiais compilados', text: 'Panoramas, planos e documentos organizados para consulta por tema e município.', acoes: [{ label: 'Ver municípios', href: '/cidades/' }, { label: 'Panoramas da gestão de resíduos', href: '/panoramas-da-gestao-de-residuos/' }, { label: 'Plano de coleta seletiva', href: '/plano-de-coleta-seletiva/' }, { label: 'Acessar produção', href: '/materiais-compilados/' }] },
+  { id: 'projeto-valoriza', eyebrow: 'Inclusão socioprodutiva', title: 'Projeto Valoriza', text: 'Catadores no centro de uma cadeia de reciclagem mais justa, reconhecida e sustentável.', acoes: [{ label: 'Abrir panorama e censo', href: arquivo('Panorama e Censo dos Catadores'), externo: true }, { label: 'Panorama e Censo dos Catadores', href: '/panorama-e-censo-dos-catadores/' }, { label: 'Ler a nota técnica', href: '/nota-tecnica/' }, { label: 'Acessar projeto', href: '/projeto-valoriza/' }] },
+  { id: 'educacao-ambiental', eyebrow: 'Mobilização', title: 'Educação ambiental', text: 'Conteúdos e planos para aproximar informação, escola, comunidade e território.', acoes: [{ label: 'Abrir cartilha', href: arquivo('Cartilha de compostagem acelerada'), externo: true }, { label: 'Plano de compostagem', href: '/plano-de-compostagem/' }, { label: 'Como Separar Corretamente Seu Lixo', href: '/como-separar-corretamente-seu-lixo/' }, { label: 'Acessar produção', href: '/educacao-ambiental/' }] },
+  { id: 'disposicao-legal', eyebrow: 'Diretriz do projeto', title: 'Disposição Legal', text: 'Uma agenda de cooperação para transformar a destinação dos resíduos sólidos em Mato Grosso do Sul.', acoes: [{ label: 'Acessar produção', href: '/disposicao-legal/' }, { label: 'Diferença de Lixão e Aterro Sanitário', href: '/diferenca-de-lixao-e-aterro-sanitario/' }] },
+  { id: 'usinas-de-triagem', eyebrow: 'Infraestrutura e planejamento', title: 'Modelo de Usinas de Triagem de Resíduos', text: 'Uma referência arquitetônica para apoiar municípios na implantação de estruturas de triagem.', acoes: [{ label: 'Acessar produção', href: '/modelo-de-usinas-de-triagem-de-residuos/' }] },
+  { id: 'cooperativas', eyebrow: 'Inclusão e cidadania', title: 'Cooperativas', text: 'Materiais para apoiar a organização, a formalização e o reconhecimento do trabalho dos catadores.', acoes: [{ label: 'Abrir cartilha', href: arquivo('Cartilha para cooperativas'), externo: true }, { label: 'Acessar produção', href: '/cooperativas/' }] },
+]
+
+export function ProductionHub({ navigate: _navigate }: { navigate: Navigate }) {
+  return <>
+    <ProductionHero eyebrow="Produtos do convênio" title="Produções do Convênio" description="Um mapa para encontrar estudos, planos, ferramentas e referências desenvolvidos pelo convênio técnico-científico." crumbs={[{ label: 'Início', href: '/' }, { label: 'Produções do Convênio' }]} />
+    <nav className="container production-anchors" aria-label="Produções nesta página">
+      {PRODUCOES.map((producao) => <a key={producao.id} href={`#${producao.id}`}>{producao.title}</a>)}
+    </nav>
+    <div className="container production-list">
+      {PRODUCOES.map((producao) => (
+        <section key={producao.id} id={producao.id} className="production-item" aria-labelledby={`${producao.id}-titulo`}>
+          <div>
+            <Eyebrow>{producao.eyebrow}</Eyebrow>
+            <h2 id={`${producao.id}-titulo`}>{producao.title}</h2>
+            <p>{producao.text}</p>
+          </div>
+          <div className="production-item-actions">
+            {producao.acoes.map((acao, index) => acao.externo
+              ? <a key={acao.href} className={index === 0 ? 'button button-primary' : 'text-link'} href={acao.href} target="_blank" rel="noopener">{acao.label}<span className="sr-only">: {producao.title} (abre em nova aba)</span> <ExternalLink size={15} aria-hidden="true" /></a>
+              : <Link key={acao.href} to={acao.href} className={index === 0 ? 'button button-primary' : 'text-link'}>{acao.label}{acao.label === 'Acessar produção' && <span className="sr-only">: {producao.title}</span>} <ArrowRight size={15} aria-hidden="true" /></Link>)}
+          </div>
+        </section>
+      ))}
+    </div>
+  </>
 }
 
-export function MaterialsCompiled({ navigate }: { navigate: Navigate }) {
-  return <><ProductionHero eyebrow="Biblioteca territorial" title="Materiais Compilados" description="Documentos de referência para conhecer a realidade dos municípios, planejar serviços e acompanhar a evolução da gestão." crumbs={[{ label: 'Início', href: '/' }, { label: 'Produções do Convênio', href: '/producoes-do-convenio/' }, { label: 'Materiais Compilados' }]} /><section className="section container production-overview"><div className="production-heading"><div><Eyebrow>Três conjuntos de documentos</Eyebrow><h2>Do diagnóstico ao <span>planejamento.</span></h2></div><p>Entre por um tema e encontre documentos locais, panoramas municipais e o diretório de cidades atendidas pelo projeto.</p></div><div className="production-link-grid"><LinkCard icon={<MapPin />} title="Panoramas da gestão de resíduos" text="Diagnósticos e referências para os municípios de MS." href="/panoramas-da-gestao-de-residuos/" navigate={navigate} /><LinkCard icon={<Recycle />} title="Plano de coleta seletiva" text="Diretrizes para organizar a coleta e a recuperação de materiais." href="/plano-de-coleta-seletiva/" navigate={navigate} /><LinkCard icon={<Leaf />} title="Plano de compostagem" text="Caminhos para tratar a fração orgânica na escala local." href="/plano-de-compostagem/" navigate={navigate} /><LinkCard icon={<Users />} title="Municípios contemplados" text="Acesse o recorte territorial e os panoramas disponíveis." href="/municipios-contemplados/" navigate={navigate} /></div></section></>
+export function MaterialsCompiled({ navigate: _navigate }: { navigate: Navigate }) {
+  return <><ProductionHero eyebrow="Biblioteca territorial" title="Materiais Compilados" description="Documentos de referência para conhecer a realidade dos municípios, planejar serviços e acompanhar a evolução da gestão." crumbs={[{ label: 'Início', href: '/' }, { label: 'Produções do Convênio', href: '/producoes-do-convenio/' }, { label: 'Materiais Compilados' }]} /><MunicipalityIndex eyebrow="Três conjuntos de documentos" title={<>Do diagnóstico ao <span>planejamento.</span></>} description="Entre por um tema e encontre documentos locais, panoramas municipais e o diretório de cidades atendidas pelo projeto." /></>
 }
 
 export function Panoramas({ navigate: _navigate }: { navigate: Navigate }) {
@@ -99,27 +132,13 @@ export function Composting({ navigate, nested = false }: { navigate: Navigate; n
   return <><ProductionHero eyebrow="Cuidado com a matéria orgânica" title="Plano de Compostagem" description="Orientações para reduzir o envio de resíduos orgânicos aos aterros e transformar matéria em recurso para o território." crumbs={[{ label: 'Início', href: '/' }, { label: 'Materiais Compilados', href: '/materiais-compilados/' }, { label: 'Plano de Compostagem' }]} /><section className="section container education-layout"><article className="prose"><Eyebrow>Resíduo orgânico é recurso</Eyebrow><h2>Mais vida no solo, menos rejeito.</h2><p>A compostagem aproxima a gestão de resíduos da agricultura, da educação ambiental e do cuidado cotidiano com o território. O planejamento ajuda a escolher escala, método e parceiros.</p><p>Use a cartilha como ponto de partida para entender a compostagem acelerada e construir uma estratégia adequada ao município.</p><div className="education-points"><div><Sprout size={20} /><strong>Redução na origem</strong><span>Menos matéria orgânica no fluxo de rejeitos.</span></div><div><Leaf size={20} /><strong>Benefício ambiental</strong><span>Transformação em composto e melhoria do solo.</span></div><div><BookOpen size={20} /><strong>Educação prática</strong><span>Conhecimento que pode ser aplicado em escolas e comunidades.</span></div></div><Link to="/producoes-do-convenio/materiais-compilados/plano-de-compostagem/municipios-contemplados/" className="button button-dark">Ver municípios contemplados <ArrowRight size={16} /></Link></article><aside className="education-aside"><Eyebrow>Material local</Eyebrow><img src={`${ASSET}2025/03/Cartilha_compostagem_acelerada-pdf.jpg`} alt="Capa da cartilha de compostagem" /><strong>Cartilha de compostagem acelerada</strong><p>Material introdutório para consulta e compartilhamento.</p><a className="text-link" href={href} target="_blank" rel="noreferrer">Abrir cartilha <ArrowRight size={15} /></a></aside></section></>
 }
 
-export function Municipalities({ navigate, mode = "coleta" }: { navigate: Navigate; mode?: "coleta" | "compostagem" }) {
-  const [query, setQuery] = useState("")
-  const resourceItems = useMemo(() => {
-    if (mode === "coleta") return selectiveCollectionPlans.map((plan) => ({ name: plan.name, href: plan.primaryDocumentUrl, meta: plan.documents.length + " documentos de coleta seletiva" }))
-    return municipalities.map((item) => ({ name: item.name, href: panoramaAsset(item.file), meta: "Panorama municipal · PDF" }))
-  }, [mode])
-  const normalizedQuery = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-  const filtered = useMemo(() => resourceItems.filter((item) => item.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedQuery)), [normalizedQuery, resourceItems])
+export function Municipalities({ navigate: _navigate, mode = "coleta" }: { navigate: Navigate; mode?: "coleta" | "compostagem" }) {
   const isSelectiveCollection = mode === "coleta"
   const parent = isSelectiveCollection ? "Plano de Coleta Seletiva" : "Plano de Compostagem"
   const back = isSelectiveCollection ? "/plano-de-coleta-seletiva/" : "/plano-de-compostagem/"
-
   return <>
     <ProductionHero eyebrow="Recorte territorial" title="Municípios Contemplados" description={"Consulte os municípios associados ao " + parent.toLowerCase() + " e acesse os materiais municipais disponíveis."} crumbs={[{ label: "Início", href: "/" }, { label: "Materiais Compilados", href: "/materiais-compilados/" }, { label: parent, href: back }, { label: "Municípios Contemplados" }]} />
-    <section className="section container municipality-section">
-      <div className="catalogue-heading"><div><Eyebrow>Diretório territorial</Eyebrow><h2>Escolha um <span>município.</span></h2></div><label className="search-field"><Search size={17} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar município" /></label></div>
-      <p className="municipality-description">{isSelectiveCollection ? resourceItems.length + " municípios possuem materiais de coleta seletiva publicados no acervo." : "Consulte os panoramas municipais disponíveis no acervo."}</p>
-      <div className="municipality-grid">{filtered.map((item) => <a className="municipality-card" key={item.name} href={item.href} target="_blank" rel="noreferrer"><MapPin size={17} /><span><strong>{item.name}</strong><small>{item.meta}</small></span><ArrowRight size={16} /></a>)}</div>
-      {filtered.length === 0 && <div className="empty-note">Nenhum município encontrado. Tente outro termo.</div>}
-      <Link to={back} className="text-link">Voltar para {parent} <ArrowRight size={15} /></Link>
-    </section>
+    <MunicipalityIndex filtroInicial={isSelectiveCollection ? "com-plano" : "todos"} eyebrow="Diretório territorial" title={<>Escolha um <span>município.</span></>} description={isSelectiveCollection ? selectiveCollectionPlans.length + " municípios possuem materiais de coleta seletiva publicados no acervo." : "Consulte os panoramas municipais disponíveis no acervo."} />
   </>
 }
 

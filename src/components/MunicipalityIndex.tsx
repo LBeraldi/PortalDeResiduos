@@ -5,13 +5,15 @@ import { Link } from './router'
 import { cityRecords, normalizeName } from '../data/cities'
 import { selectiveCollectionPlans } from '../data/selective-collection-plans.generated'
 
-type Filtro = 'todos' | 'com-plano'
+export type Filtro = 'todos' | 'com-plano'
 
 const planos = new Map(selectiveCollectionPlans.map((plan) => [plan.slug, plan]))
 const comPlano = new Set(planos.keys())
 const inicial = (name: string) => normalizeName(name).charAt(0).toUpperCase()
 
 type MunicipalityIndexProps = {
+  /** Filtro ao abrir; "com-plano" em Municípios Contemplados da coleta seletiva. */
+  filtroInicial?: Filtro
   eyebrow?: string
   title: ReactNode
   description?: ReactNode
@@ -22,9 +24,9 @@ type MunicipalityIndexProps = {
  * /panoramas-da-gestao-de-residuos/ (ADR-001). Busca sem acentos, filtro pelos
  * municípios com plano de coleta seletiva e salto por letra.
  */
-export function MunicipalityIndex({ eyebrow, title, description }: MunicipalityIndexProps) {
+export function MunicipalityIndex({ eyebrow, title, description, filtroInicial = 'todos' }: MunicipalityIndexProps) {
   const [query, setQuery] = useState('')
-  const [filtro, setFiltro] = useState<Filtro>('todos')
+  const [filtro, setFiltro] = useState<Filtro>(filtroInicial)
   const inputRef = useRef<HTMLInputElement>(null)
   const termo = normalizeName(query.trim())
 

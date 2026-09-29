@@ -57,3 +57,10 @@ Formato: contexto, opções, recomendação, status. Decisões aceitas também v
 **Estado atual do código.** (a).
 **Recomendação.** (a); se a meta de altura for importante, (a) + (c).
 **Bloqueia.** nada.
+
+## ADR-008. Arquivos secundários dos planos de coleta seletiva a 3 cliques — PENDENTE
+
+**Contexto.** E10 final (build de produção, 113 páginas): 105 documentos a 2 cliques e 59 a 3, 0 a 4 ou mais. Os 59 a 3 cliques são todos arquivos secundários dos 15 planos de coleta seletiva (cronograma operacional, mapas, anexo de minuta de lei), no Google Drive. O plano principal de cada município está a 2 cliques (Municípios › "Plano de coleta seletiva" na linha, D3.10). Os secundários ficam na ficha do município (Municípios › ficha › arquivo) e em Plano de Coleta Seletiva (Produções › página › arquivo). A NAV-1 pede exceção registrada.
+**Opções.** (a) Aceitar a exceção: plano principal a 2 cliques, arquivos de apoio a 3, na ficha. (b) Listar os 74 arquivos na página Documentos, que deixa de ser a lista curta do acervo não municipal. (c) Pôr na linha do índice um link por arquivo (até 5 por município), o que pesa ainda mais a altura (ver ADR-007).
+**Recomendação.** (a).
+**Bloqueia.** nada.
