@@ -1,6 +1,5 @@
 import { useMemo, useRef, useState, type ReactNode } from 'react'
 import { Search } from 'lucide-react'
-import { Badge } from './Badge'
 import { Eyebrow } from './Eyebrow'
 import { Link } from './router'
 import { cityRecords, normalizeName } from '../data/cities'
@@ -8,7 +7,8 @@ import { selectiveCollectionPlans } from '../data/selective-collection-plans.gen
 
 type Filtro = 'todos' | 'com-plano'
 
-const comPlano = new Set(selectiveCollectionPlans.map((plan) => plan.slug))
+const planos = new Map(selectiveCollectionPlans.map((plan) => [plan.slug, plan]))
+const comPlano = new Set(planos.keys())
 const inicial = (name: string) => normalizeName(name).charAt(0).toUpperCase()
 
 type MunicipalityIndexProps = {
@@ -88,12 +88,26 @@ export function MunicipalityIndex({ eyebrow, title, description }: MunicipalityI
             <section key={letra} className="municipality-group" aria-labelledby={`municipios-${letra.toLowerCase()}`}>
               <h3 id={`municipios-${letra.toLowerCase()}`}>{letra}</h3>
               <ul>
-                {cidades.map((city) => (
-                  <li key={city.slug}>
-                    <Link to={`/cidades/${city.slug}/`} aria-label={`${city.name}: abrir ficha`}>{city.name}</Link>
-                    {comPlano.has(city.slug) && <Badge variant="doc">Plano de coleta seletiva</Badge>}
-                  </li>
-                ))}
+                {cidades.map((city) => {
+                  const plano = planos.get(city.slug)
+                  return (
+                    <li key={city.slug}>
+                      <Link to={`/cidades/${city.slug}/`} className="municipality-name" aria-label={`${city.name}: abrir ficha`}>{city.name}</Link>
+                      <span className="municipality-actions">
+                        <a className="municipality-action" href={`/uploads/2025/03/${city.file}`} target="_blank" rel="noopener">
+                          <span className="municipality-action-long">Panorama · PDF</span><span className="municipality-action-short">PDF</span>
+                          <span className="sr-only"> de {city.name} (abre em nova aba)</span>
+                        </a>
+                        {plano && (
+                          <a className="municipality-action" href={plano.primaryDocumentUrl} target="_blank" rel="noopener">
+                            <span className="municipality-action-long">Plano de coleta seletiva</span><span className="municipality-action-short">Plano</span>
+                            <span className="sr-only"> de {city.name} (abre em nova aba)</span>
+                          </a>
+                        )}
+                      </span>
+                    </li>
+                  )
+                })}
               </ul>
             </section>
           ))}

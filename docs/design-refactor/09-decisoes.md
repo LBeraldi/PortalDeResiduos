@@ -49,3 +49,11 @@ Formato: contexto, opções, recomendação, status. Decisões aceitas também v
 **Recomendação.** (a). A (b) já entra na fase 1 (D1.10 e D1.11) e não depende desta decisão.
 **Bloqueia.** D3.8 a D3.11.
 **Decisão.** (a). Menu: Início · Municípios · Documentos · Produções do Convênio · Notícias · Contato. Documentos vira lista única com filtros; Produções do Convênio vira uma página só.
+
+## ADR-007. Altura do índice de municípios no celular × ações por linha — PENDENTE
+
+**Contexto.** A D3.10 pôs "Panorama · PDF" e "Plano" em cada linha do índice (NAV-1: documento a 2 cliques), com alvo de 44 × 44 px no celular (DS-13). Com 79 linhas de 44 px (3.476 px) mais as partes fixas da página (cabeçalho, herói, ferramentas, rodapé de 901 px: ~1.800 px), o piso fica em ~5.280 px. A PG-02.3 pede ≤ 5.000 px em 390. Medido depois de duas tentativas: `/cidades/` 5.894, `/diretorios/` 5.795, panoramas 6.340 (antes das ações: 4.443, 4.344 e 4.889).
+**Opções.** (a) Aceitar ~5.900 px: NAV-1 tem prioridade (`10-navegacao.md` prevalece sobre `03-spec-paginas.md`). (b) No celular, ações só na ficha (volta a ~4.400 px, mas panorama e plano ficam a 3 cliques). (c) Compactar o rodapé no celular (links em duas colunas, ~−300 px; muda a estrutura mantida pela CP-09.2). (d) Alvos menores que 44 px (viola a DS-13).
+**Estado atual do código.** (a).
+**Recomendação.** (a); se a meta de altura for importante, (a) + (c).
+**Bloqueia.** nada.

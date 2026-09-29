@@ -207,21 +207,36 @@ textarea.field-control { resize: vertical; }
 .municipality-index-count { margin-top: 1rem; font-family: var(--font-mono); font-size: var(--step-meta); color: var(--ink-faint); }
 .municipality-index-empty { display: grid; justify-items: start; gap: 1rem; margin-top: 1rem; padding: 1.25rem; background: var(--paper-sunk); }
 /* Índice remissivo: grupos por letra em colunas (3 no desktop, 2 no celular). */
-.municipality-groups { columns: 3 15rem; column-gap: clamp(1.5rem, 4vw, 3rem); margin-top: 0.75rem; }
+.municipality-groups { columns: 2 22rem; column-gap: clamp(1.5rem, 4vw, 3rem); margin-top: 0.75rem; }
 .municipality-group { break-inside: avoid; padding-top: 0.9rem; }
 .municipality-group h3 {
   padding-bottom: 0.3rem; margin-bottom: 0.2rem; font-size: var(--step-1); color: var(--mata);
   border-bottom: 1px solid var(--line-strong); scroll-margin-top: 5.5rem;
 }
 .municipality-group ul { list-style: none; margin: 0; padding: 0; }
-.municipality-group li { display: flex; flex-wrap: wrap; align-items: center; column-gap: 0.5rem; border-bottom: 1px solid var(--line); }
-.municipality-group li a {
-  display: flex; align-items: center; min-height: 44px; font-weight: 600; color: var(--ink); text-decoration: none;
+.municipality-group li { display: flex; flex-wrap: wrap; align-items: center; column-gap: 1rem; border-bottom: 1px solid var(--line); }
+.municipality-name {
+  display: flex; align-items: center; min-height: 44px; margin-right: auto;
+  font-weight: 600; color: var(--ink); text-decoration: none;
 }
-.municipality-group li a:hover { color: var(--mata); text-decoration: underline; text-underline-offset: 0.18em; }
-.municipality-group li .badge { margin-bottom: 0.5rem; white-space: normal; }
+.municipality-name:hover { color: var(--mata); text-decoration: underline; text-underline-offset: 0.18em; }
+.municipality-actions { display: flex; flex-wrap: wrap; gap: 0 0.9rem; }
+.municipality-action {
+  display: inline-flex; align-items: center; min-height: 36px;
+  font-size: var(--step-small); font-weight: 600; color: var(--mata); text-decoration: none;
+}
+.municipality-action:hover { text-decoration: underline; text-underline-offset: 0.18em; }
+.municipality-action-short { display: none; }
 .municipality-index-note { padding-bottom: var(--section-y); }
 
+/* No celular: uma coluna; ações com rótulo curto e alvo de 44 px (DS-13) à direita do nome. */
 @media (max-width: 700px) {
-  .municipality-groups { columns: 2 9rem; column-gap: 1rem; }
+  .municipality-groups { columns: 1; }
+  .municipality-group li { flex-wrap: nowrap; column-gap: 0.25rem; }
+  .municipality-actions { flex-wrap: nowrap; gap: 0.25rem; }
+  .municipality-action { justify-content: center; min-width: 44px; min-height: 44px; padding: 0 0.4rem; font-family: var(--font-mono); font-size: var(--step-meta); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
+  .municipality-action-long { display: none; }
+  .municipality-action-short { display: inline; }
+  .municipality-group { padding-top: 0.25rem; }
+  .municipality-group h3 { padding: 0.35rem 0 0.15rem; margin: 0; font-size: var(--step-0); }
 }

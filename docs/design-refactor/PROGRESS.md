@@ -5,8 +5,8 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 3
-- Próxima tarefa: D3.10. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1–D3.9. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
-- Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
+- Próxima tarefa: D3.11. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1–D3.10. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Decisões pendentes: ADR-003, ADR-007 (altura do índice no celular × ações por linha) (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
 ## Métricas (atualizar a cada tarefa)
@@ -17,7 +17,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | navegação por botão | 48 | 0 | 0 |
 | hex fora de :root | 14 | 0 | 0 |
 | altura / em 390 | 6.395 | 4.773 | ≤ 4.800 |
-| altura panoramas em 390 | 24.921 | 4.889 | ≤ 5.000 |
+| altura panoramas em 390 | 24.921 | 6.340 (ADR-007 pendente) | ≤ 5.000 |
 | menu visível em 390 | não | sim | sim |
 | destinos internos quebrados | 7 | 0 | 0 |
 | páginas de conteúdo órfãs | 7 | 0 | 0 |
@@ -42,8 +42,13 @@ Texto novo ou alterado visível ao público. Nada disso vai ao ar sem aprovaçã
 | D3.7 | Contato | título da confirmação "Mensagem montada" (era "Abrimos seu aplicativo de e-mail") | spec PG-06.2 |
 | D3.8 | Menu | "Municípios" (substitui "Cidades"), "Documentos" | ADR-006 |
 | D3.9 | Documentos | título "Documentos" (era "Publicações"); filtros "Notas técnicas", "Artigos e revista", "Estudos", "Cartilhas", "Modelos editáveis"; "Título ou tema"; "Nenhum documento encontrado para “termo”."; "Por município"; "N panoramas e os planos de coleta seletiva de N municípios."; "Ir para Municípios"; dica da busca "…e documentos". Removidos: "Conhecimento aplicado / Informação para agir melhor.", "Ver produções do convênio" | ADR-006 e mockup |
+| D3.10 | Índice de municípios | "Panorama · PDF", "Plano de coleta seletiva"; no celular "PDF" e "Plano" | 10-navegacao.md (NAV-1) |
 
 ## Sessões
+
+### 2026-09-29 — D3.10 ações por linha
+
+- "Panorama · PDF" e "Plano de coleta seletiva" direto na linha (NAV-1), alvos de 44 px no celular. `/cidades/` em 390 foi a 5.894 px: conflito com a PG-02.3, registrado como **ADR-007 (pendente)** depois de duas tentativas.
 
 ### 2026-09-29 — D3.9 Documentos
 
