@@ -98,3 +98,21 @@ test('D1.8: o título da aba de ficha e notícia vem dos dados reais', () => {
 test('D1.9: a busca global não mostra o × nativo do navegador', () => {
   assert.match(read('src/styles.css'), /\.search-input::-webkit-search-cancel-button \{[^}]*display: none/)
 })
+
+test('D2.1: tokens da DS-02 em :root e nenhum alias legado', () => {
+  const css = read('src/styles.css')
+  const root = css.match(/:root\s*\{[^}]*\}/)[0]
+  for (const [nome, valor] of Object.entries({
+    '--cerrado-texto': '#8a5a1f', '--field-border': '#8a8470', '--positive': '#256b3f', '--positive-bg': '#e4efe6',
+    '--warning': '#8a5a1f', '--warning-bg': '#f6ecdc', '--negative': '#a13f22', '--negative-bg': '#f6e4de',
+  })) assert.match(root, new RegExp(`${nome}: ${valor};`), nome)
+  assert.doesNotMatch(css, /--(green|deep|mint|soft|white|adequado|rejeito)\b/)
+})
+
+test('D2.1: foco em mata usa --cerrado-claro e o painel de busca (papel) usa o anel padrão', () => {
+  const css = read('src/styles.css')
+  assert.doesNotMatch(css, /\.search-panel :focus-visible/)
+  assert.match(css, /\.site-footer :focus-visible[^{]*\{ outline-color: var\(--cerrado-claro\)/)
+  assert.match(css, /\.search-field:focus-within \{[^}]*outline: 2px solid var\(--cerrado\)/)
+  assert.match(css, /\.search-field-row:focus-within \{[^}]*outline: 2px solid var\(--cerrado\)/)
+})

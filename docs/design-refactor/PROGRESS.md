@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 2
-- Próxima tarefa: D2.1. Concluídas: D0.1, D0.2, D1.1–D1.11. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D2.2. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -15,7 +15,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 |---|---|---|---|
 | font-size < 12 px | 32 | 0 | 0 |
 | navegação por botão | 48 | 0 | 0 |
-| hex fora de :root | 14 | 14 | 0 |
+| hex fora de :root | 14 | 0 | 0 |
 | altura / em 390 | 6.395 | 6.434 (D1.3: temporário) | ≤ 4.800 |
 | altura panoramas em 390 | 24.921 | 24.904 | ≤ 5.000 |
 | menu visível em 390 | não | sim | sim |
@@ -26,6 +26,10 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
 ## Sessões
+
+### 2026-09-29 — D2.1 tokens
+
+- Tokens DS-02 em `:root`; aliases fora; `hexForaDoRoot` 14 → 0; `check-contrast` lê `:root`. Foco: `--cerrado-claro` sobre mata e `--cerrado` em papel (o painel de busca tinha anel quase invisível).
 
 ### 2026-09-29 — D1.11 páginas órfãs (fim da fase 1)
 

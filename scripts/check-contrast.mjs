@@ -1,29 +1,37 @@
 // E1. Contraste dos pares de tokens (WCAG 2.2). Sem dependências.
 // Uso: node scripts/check-contrast.mjs
-// Quando os tokens de 01-spec-design-system.md existirem em src/styles.css,
-// trocar a lista fixa pela leitura de :root (tarefa D2.1).
+// Lê os valores de :root em src/styles.css; os pares são declarados pelo nome do token.
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const css = fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8')
+const bloco = css.match(/:root\s*{[^}]*}/)?.[0] ?? ''
+const tokens = Object.fromEntries([...bloco.matchAll(/--([a-z0-9-]+):\s*(#[0-9a-fA-F]{6})\b/g)].map((m) => [m[1], m[2]]))
+
 const pares = [
-  // [frente, fundo, mínimo, descrição]
-  ['#1a231e', '#f5f3ec', 4.5, 'ink / paper'],
-  ['#55605a', '#f5f3ec', 4.5, 'ink-soft / paper'],
-  ['#55605a', '#fbfaf5', 4.5, 'ink-soft / paper-raised'],
-  ['#636a61', '#f5f3ec', 4.5, 'ink-faint / paper'],
-  ['#636a61', '#ece9de', 4.5, 'ink-faint / paper-sunk'],
-  ['#1b4b3a', '#f5f3ec', 4.5, 'mata / paper'],
-  ['#fbfaf5', '#1b4b3a', 4.5, 'raised / mata (botão)'],
-  ['#edf0e9', '#12352a', 4.5, 'on-mata / mata-deep'],
-  ['#a9c0b0', '#12352a', 4.5, 'on-mata-soft / mata-deep'],
-  ['#d4a15f', '#12352a', 4.5, 'cerrado-claro / mata-deep'],
-  ['#8a5a1f', '#f5f3ec', 4.5, 'cerrado-texto / paper'],
-  ['#8a5a1f', '#fbfaf5', 4.5, 'cerrado-texto / raised'],
-  ['#256b3f', '#e4efe6', 4.5, 'positive'],
-  ['#8a5a1f', '#f6ecdc', 4.5, 'warning'],
-  ['#a13f22', '#f6e4de', 4.5, 'negative'],
-  ['#1b4b3a', '#ece9de', 4.5, 'info (mata / sunk)'],
-  ['#8a8470', '#fbfaf5', 3, 'field-border / raised'],
-  ['#b0742e', '#f5f3ec', 3, 'foco cerrado / paper'],
-  ['#b0742e', '#fbfaf5', 3, 'foco cerrado / raised'],
-  ['#d4a15f', '#12352a', 3, 'foco cerrado-claro / mata-deep'],
+  // [frente, fundo, mínimo, uso]
+  ['ink', 'paper', 4.5, 'texto principal'],
+  ['ink-soft', 'paper', 4.5, 'texto de apoio'],
+  ['ink-soft', 'paper-raised', 4.5, 'texto de apoio em cartão'],
+  ['ink-faint', 'paper', 4.5, 'metadados'],
+  ['ink-faint', 'paper-sunk', 4.5, 'metadados em cabeçalho de tabela'],
+  ['mata', 'paper', 4.5, 'links e títulos de cartão'],
+  ['paper-raised', 'mata', 4.5, 'botão primário'],
+  ['on-mata', 'mata-deep', 4.5, 'texto sobre mata'],
+  ['on-mata-soft', 'mata-deep', 4.5, 'texto de apoio sobre mata'],
+  ['cerrado-claro', 'mata-deep', 4.5, 'rótulo sobre mata'],
+  ['cerrado-texto', 'paper', 4.5, 'categoria de notícia'],
+  ['cerrado-texto', 'paper-raised', 4.5, 'categoria em cartão'],
+  ['positive', 'positive-bg', 4.5, 'selo positivo'],
+  ['warning', 'warning-bg', 4.5, 'selo "Em migração"'],
+  ['negative', 'negative-bg', 4.5, 'erro de formulário'],
+  ['mata', 'paper-sunk', 4.5, 'informação neutra'],
+  ['field-border', 'paper-raised', 3, 'borda de campo (1.4.11)'],
+  ['cerrado', 'paper', 3, 'anel de foco em papel'],
+  ['cerrado', 'paper-raised', 3, 'anel de foco em cartão'],
+  ['cerrado-claro', 'mata-deep', 3, 'anel de foco sobre mata'],
 ]
 const lum = (h) => {
   const c = [0, 2, 4].map((i) => parseInt(h.slice(1 + i, 3 + i), 16) / 255)
@@ -32,10 +40,16 @@ const lum = (h) => {
 }
 const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05) }
 let falhas = 0
-for (const [f, b, min, nome] of pares) {
-  const r = ratio(f, b)
+for (const [f, b, min, uso] of pares) {
+  const nome = `${f} / ${b}`.padEnd(32)
+  if (!tokens[f] || !tokens[b]) {
+    falhas++
+    console.log(`FAIL ${nome} token ausente em :root (${!tokens[f] ? f : b})`)
+    continue
+  }
+  const r = ratio(tokens[f], tokens[b])
   const ok = r >= min
   if (!ok) falhas++
-  console.log(`${ok ? 'OK  ' : 'FAIL'} ${nome.padEnd(32)} ${r.toFixed(2)} (mín. ${min})`)
+  console.log(`${ok ? 'OK  ' : 'FAIL'} ${nome} ${r.toFixed(2)} (mín. ${min}) ${uso}`)
 }
 process.exit(falhas ? 1 : 0)
