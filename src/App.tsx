@@ -191,8 +191,8 @@ function Header({ route, menuOpen, setMenuOpen, navigate }: { route: RouteKey; m
   )
 }
 
-function PageIntro({ eyebrow, title, description, image, crumbs }: { eyebrow: string; title: string; description?: string; image?: string; crumbs?: Crumb[] }) {
-  return <PageHero eyebrow={eyebrow} title={title} description={description} image={image} crumbs={crumbs} />
+function PageIntro({ eyebrow, title, description, crumbs }: { eyebrow: string; title: string; description?: string; crumbs?: Crumb[] }) {
+  return <PageHero eyebrow={eyebrow} title={title} description={description} crumbs={crumbs} />
 }
 
 function NotFound({ navigate }: { navigate: NavigateFn }) {
@@ -219,7 +219,7 @@ function Projects({ navigate }: { navigate: NavigateFn }) {
     { icon: <MapPin />, tag: 'Território', title: 'Cidades', text: 'Acesse informações municipais, pontos de entrega e coleta seletiva.', href: '/cidades/' },
     { icon: <ShieldCheck />, tag: 'Sistema', title: 'Logística Reversa', text: 'Diretrizes e referências para uma destinação ambientalmente adequada.', href: '/logistica-reversa/' },
   ]
-  return <><PageIntro eyebrow="Nossos produtos" title="Produções do Convênio" description="Neste ambiente você encontra os produtos desenvolvidos pelo convênio celebrado entre o Ministério Público de Mato Grosso do Sul e a Universidade Estadual de Mato Grosso do Sul." image={`${ASSET}2021/07/recicla.png`} crumbs={[{ label: 'Início', href: '/' }, { label: 'Produções do Convênio' }]} /><section className="section container"><div className="project-grid">{projects.map((project) => <Link to={project.href} className="project-card" key={project.title}><span className="card-kicker">{project.tag}</span><span className="project-icon">{project.icon}</span><h2>{project.title}</h2><p>{project.text}</p><span className="text-link">Acessar produção <ArrowRight size={15} /></span></Link>)}</div></section></>
+  return <><PageIntro eyebrow="Nossos produtos" title="Produções do Convênio" description="Neste ambiente você encontra os produtos desenvolvidos pelo convênio celebrado entre o Ministério Público de Mato Grosso do Sul e a Universidade Estadual de Mato Grosso do Sul." crumbs={[{ label: 'Início', href: '/' }, { label: 'Produções do Convênio' }]} /><section className="section container"><div className="project-grid">{projects.map((project) => <Link to={project.href} className="project-card" key={project.title}><span className="card-kicker">{project.tag}</span><span className="project-icon">{project.icon}</span><h2>{project.title}</h2><p>{project.text}</p><span className="text-link">Acessar produção <ArrowRight size={15} /></span></Link>)}</div></section></>
 }
 
 function Contact() {

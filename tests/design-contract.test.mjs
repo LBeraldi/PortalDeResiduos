@@ -300,3 +300,12 @@ test('D3.5: Publicações e Cooperativas listam documentos com DocumentRow; capa
   assert.match(readCss(), /\.production-card-cover \{[^}]*aspect-ratio: 4 \/ 3/)
   assert.match(readCss(), /\.production-card-cover img \{[^}]*object-fit: contain/)
 })
+
+test('D3.6: imagem de herói só em notícia, Logística Reversa e Recicla Match (ADR-004)', () => {
+  for (const f of ['src/pages/ProductionPages.tsx', 'src/pages/ResourcePages.tsx', 'src/pages/InstitutionalPages.tsx', 'src/pages/CityPages.tsx', 'src/App.tsx']) {
+    assert.doesNotMatch(read(f), /Hero [^\n]*image=/, f)
+  }
+  assert.equal((read('src/pages/LegacyPages.tsx').match(/<PageHero [^\n]*image=/g) ?? []).length, 2)
+  assert.match(read('src/pages/NewsPages.tsx'), /function NewsHero[^\n]*image=\{image\}/)
+  assert.match(readCss(), /\.page-hero-figure img \{[^}]*object-fit: contain/)
+})

@@ -16,7 +16,7 @@ import { cityRecords } from '../data/cities'
 
 export { cityRecords, type CityRecord } from '../data/cities'
 
-function Hero({ title, description, image, crumbs }: { title: string; description: string; image?: string; crumbs?: Crumb[] }) { return <PageHero eyebrow="Dados municipais" title={title} description={description} image={image} crumbs={crumbs} /> }
+function Hero({ title, description, crumbs }: { title: string; description: string; crumbs?: Crumb[] }) { return <PageHero eyebrow="Dados municipais" title={title} description={description} crumbs={crumbs} /> }
 
 const cityCrumbs = (city?: string) => [
   { label: 'Início', href: '/' },
@@ -25,7 +25,7 @@ const cityCrumbs = (city?: string) => [
 ]
 
 export function CityDirectory({ navigate: _navigate }: { navigate: Navigate }) {
-  return <><Hero title="Cidades" description="Consulte os panoramas municipais e encontre referências para compreender a gestão de resíduos sólidos em Mato Grosso do Sul." image={`${ASSET}2021/07/JOB-090-Banner-Projeto-Resíduos-Sólidos-768x600.jpg`} crumbs={cityCrumbs()} /><MunicipalityIndex eyebrow="Mato Grosso do Sul" title={<>Escolha um <span>município.</span></>} description={`${cityRecords.length} municípios com panorama local identificado no acervo.`} /></>
+  return <><Hero title="Cidades" description="Consulte os panoramas municipais e encontre referências para compreender a gestão de resíduos sólidos em Mato Grosso do Sul." crumbs={cityCrumbs()} /><MunicipalityIndex eyebrow="Mato Grosso do Sul" title={<>Escolha um <span>município.</span></>} description={`${cityRecords.length} municípios com panorama local identificado no acervo.`} /></>
 }
 
 export function Directories({ navigate: _navigate }: { navigate: Navigate }) {
