@@ -52,3 +52,40 @@ Por padrão, o projeto opera nos níveis 2 e 3. Aumentar autonomia exige evidên
 - Não editar manualmente arquivos `*.generated.ts`; corrigir a fonte ou o gerador.
 - Não misturar redesign, migração de conteúdo e correção de comportamento na mesma tarefa sem registrar o motivo.
 - A saída de cada gate deve ser anexada à tarefa ou resumida no handoff.
+
+<!-- Colar ao final do AGENTS.md existente. Não substitui nenhuma seção acima. -->
+
+## Refinamento de design (docs/design-refactor/)
+
+O portal passa por um refinamento visual e de UX **evolutivo**: a identidade "Dossiê público" (papel, mata, cerrado; Spectral, IBM Plex Sans e IBM Plex Mono) fica. Mudam só coisas com justificativa de UX, legibilidade, acessibilidade, consistência ou hierarquia.
+
+### Leitura obrigatória por tipo de tarefa
+
+| Tarefa toca… | Ler antes |
+|---|---|
+| qualquer UI | `docs/design-refactor/00-contexto.md`, `PROGRESS.md` |
+| cor, fonte, espaço, `styles.css` | `01-spec-design-system.md` |
+| componente em `src/components/` | `02-spec-componentes.md` |
+| página em `src/pages/` ou `HomePage.tsx` | `03-spec-paginas.md` |
+| fechamento de tarefa | `04-evals.md`, `05-quality-gates.md` |
+
+Não carregar os demais arquivos sem necessidade.
+
+### Regras de design
+
+1. Cor só por token de `:root` em `src/styles.css`. Nenhum hex novo fora de `:root`.
+2. Nenhum texto abaixo de 12 px (`0.75rem`).
+3. Navegar para outra página é `<Link to>` de `src/components/router.tsx`. `<button>` só para ação na própria página (abrir busca, pausar carrossel, enviar formulário).
+4. Sem gradiente decorativo, glassmorphism, sombra em cartão, deslocamento ou zoom no hover. Uma sombra, só para sobreposições.
+5. Mono (IBM Plex Mono) só para sobrelinha, data, formato de arquivo e número. Navegação, botões e rótulos de formulário em sans.
+6. Imagem de herói só quando mostra o assunto da página. Na dúvida, sem imagem.
+7. Toda lista de municípios vem do mesmo componente e dos catálogos gerados (ver ADR-001).
+8. Número em destaque só se for dado com fonte (regra RC-3).
+
+### Contrato da sessão de design
+
+- Começar lendo `PROGRESS.md` e terminar atualizando-o.
+- Uma tarefa por vez, na ordem de `08-backlog.md`. Não misturar fases.
+- Rodar `npm run check:quality` e, depois da D0.2, `npm run check:design`.
+- Registrar o eval da tarefa em `docs/design-refactor/evals/AAAA-MM-DD-<tarefa>.md`.
+- Decisão pendente em `09-decisoes.md` bloqueia a tarefa que depende dela. Perguntar, não decidir.

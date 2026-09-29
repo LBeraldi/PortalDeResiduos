@@ -8,3 +8,13 @@
 - **Decisão:** não introduzir framework de testes ou lint nesta etapa.
 - **Motivo:** manter a fundação sem instalar dependências e sem ampliar o escopo; os gates iniciais usam TypeScript, Node test runner, validadores locais e Vite.
 - **Próximo passo:** adicionar testes de comportamento de componentes quando houver uma necessidade concreta que justifique um runner de DOM.
+
+## 2026-09-29 — Refinamento de design (ADRs de `docs/design-refactor/09-decisoes.md`)
+
+- **ADR-001 (aceita, opção a):** `/cidades/`, `/diretorios/` e `/panoramas-da-gestao-de-residuos/` usam o mesmo `MunicipalityIndex`; as três URLs continuam.
+- **ADR-002 (aceita, opção a):** remover os links `#facebook` e `#linkedin` do rodapé até existirem URLs oficiais.
+- **ADR-003 (pendente, nível 4):** Playwright e axe não entram como devDependencies; medições de navegador rodam fora do projeto.
+- **ADR-004 (aceita, opção a):** herói só com texto nas páginas sem imagem relacionada; o texto "Sobre o panorama" é escrito a partir do conteúdo já publicado e aprovado pelo dono do projeto antes de publicar.
+- **ADR-005 (aceita, opção a):** o gerador de catálogos grava `sizeBytes`; os arquivos são regenerados com `npm run sync:data`, nunca editados à mão.
+- **ADR-006 (aceita, opção a):** menu Início · Municípios · Documentos · Produções do Convênio · Notícias · Contato; Documentos vira lista única com filtros; Produções do Convênio vira uma página só; nenhuma URL pública é removida.
+- **Motivo:** decisões tomadas pelo dono do projeto em 2026-09-29 a partir da auditoria https://claude.ai/artifact/RNMQP4tTRSNprZRooeNW17.
