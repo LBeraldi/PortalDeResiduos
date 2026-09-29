@@ -116,3 +116,18 @@ test('D2.1: foco em mata usa --cerrado-claro e o painel de busca (papel) usa o a
   assert.match(css, /\.search-field:focus-within \{[^}]*outline: 2px solid var\(--cerrado\)/)
   assert.match(css, /\.search-field-row:focus-within \{[^}]*outline: 2px solid var\(--cerrado\)/)
 })
+
+test('D2.2: escala tipográfica da DS-05 e mono fora da navegação', () => {
+  const css = read('src/styles.css')
+  const root = css.match(/:root\s*\{[^}]*\}/)[0]
+  assert.match(root, /--step-5: clamp\(2\.25rem, 5vw, 4rem\);/)
+  assert.match(root, /--step-4: clamp\(1\.75rem, 3\.4vw, 2\.5rem\);/)
+  assert.match(root, /--step-ui: 0\.9375rem;/)
+  assert.match(root, /--step-small: 0\.875rem;/)
+  const regra = (sel) => css.match(new RegExp(`(?:^|\\n)${sel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')} \\{([^}]*)\\}`))?.[1] ?? ''
+  for (const sel of ['.main-nav a', '.territory-cell', '.contact-form label']) {
+    assert.doesNotMatch(regra(sel), /font-mono/, sel)
+  }
+  assert.match(regra('.main-nav a'), /font-size: var\(--step-ui\)/)
+  assert.doesNotMatch(css, /\.header-search::before \{[^}]*font-mono/)
+})
