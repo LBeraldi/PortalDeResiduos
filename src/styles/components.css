@@ -86,11 +86,11 @@ textarea.field-control { resize: vertical; }
 .brand img { display: block; width: auto; height: 44px; }
 .menu-toggle { display: none; color: var(--ink); padding: 0.4rem; margin-right: -0.4rem; }
 
-.main-nav { display: flex; align-items: center; gap: 1.75rem; margin-left: auto; }
+.main-nav { display: flex; align-items: center; gap: 1.4rem; margin-left: auto; }
 .main-nav a {
   position: relative; padding: 0.5rem 0; background: transparent; text-decoration: none;
   font-family: var(--font-sans); font-size: var(--step-ui); font-weight: 600;
-  color: var(--ink-soft);
+  color: var(--ink-soft); white-space: nowrap;
 }
 .main-nav a::after {
   content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 0;

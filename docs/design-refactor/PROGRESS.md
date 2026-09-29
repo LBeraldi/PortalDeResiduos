@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 3
-- Próxima tarefa: D3.8. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1–D3.7. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D3.9. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1–D3.8. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -40,8 +40,13 @@ Texto novo ou alterado visível ao público. Nada disso vai ao ar sem aprovaçã
 | D3.3 | Página inicial | "Abrir diretórios municipais", "Abrir Projeto Valoriza", "Abrir Nota Técnica"; título "Nota Técnica" (era "Notas Técnicas"); "Abrir sistema GRS" | rótulos já existentes (leitor de tela e Apoio a Decisão) |
 | D3.4 | Notícia | "Em foco" → "Em números" | spec PG-04.3 |
 | D3.7 | Contato | título da confirmação "Mensagem montada" (era "Abrimos seu aplicativo de e-mail") | spec PG-06.2 |
+| D3.8 | Menu | "Municípios" (substitui "Cidades"), "Documentos" | ADR-006 |
 
 ## Sessões
+
+### 2026-09-29 — D3.8 menu
+
+- Menu da ADR-006; `aria-current` `page`/`true` por seção; logo completo ≥ 1280 px e menu móvel ≤ 1080 px, sem estouro de 320 a 1440.
 
 ### 2026-09-29 — D3.7 contato
 

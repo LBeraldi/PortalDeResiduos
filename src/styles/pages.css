@@ -140,13 +140,15 @@
    RESPONSIVO — fundação, chrome e Home
    ========================================================================= */
 
-@media (max-width: 900px) {
-  .topline-right { display: none; }
-  .topline { justify-content: flex-start; }
-  .menu-toggle { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: var(--paper-raised); border: 1px solid var(--line-strong); border-radius: var(--radius); }
-  .header-inner { min-height: 56px; gap: 0.5rem; }
+/* Cabeçalho: logo completo só a partir de 1280 px; menu móvel até 1080 px (6 itens + Buscar, ADR-006). */
+@media (max-width: 1279px) {
   /* Só a marca do projeto (os ~405 px iniciais do logo composto de 853 × 85). */
   .brand img { height: 38px; width: 182px; object-fit: cover; object-position: left center; }
+}
+
+@media (max-width: 1080px) {
+  .menu-toggle { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: var(--paper-raised); border: 1px solid var(--line-strong); border-radius: var(--radius); }
+  .header-inner { min-height: 56px; gap: 0.5rem; }
   .main-nav {
     position: absolute; top: 100%; left: 0; right: 0; z-index: 40;
     display: none; flex-direction: column; align-items: stretch; gap: 0;
@@ -156,10 +158,15 @@
   .main-nav.open { display: flex; }
   .main-nav a { padding: 0.8rem 0; text-align: left; }
   .main-nav a::after { display: none; }
-  /* DOM: logo, menu, navegação, busca. No celular a busca aparece antes do botão de menu. */
+  /* DOM: logo, menu, navegação, busca. No menu móvel a busca aparece antes do botão de menu. */
   .header-search { order: 1; justify-content: center; width: 44px; height: 44px; padding: 0; margin-left: auto; }
   .menu-toggle { order: 2; }
   .header-search-label { display: none; }
+}
+
+@media (max-width: 900px) {
+  .topline-right { display: none; }
+  .topline { justify-content: flex-start; }
 
   .page-hero.has-figure .page-hero-inner { grid-template-columns: 1fr; }
   .home-areas { grid-template-columns: repeat(2, minmax(0, 1fr)); }

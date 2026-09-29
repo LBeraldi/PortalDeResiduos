@@ -101,7 +101,7 @@ function App() {
     <NavProvider navigate={navigate}>
       <div className="app-shell">
         <a className="skip-link" href="#main-content">Pular para o conteúdo</a>
-        <Header route={route} menuOpen={menuOpen} setMenuOpen={setMenuOpen} navigate={navigate} />
+        <Header route={route} path={path} menuOpen={menuOpen} setMenuOpen={setMenuOpen} navigate={navigate} />
         <main id="main-content" tabIndex={-1}>
           {route === 'home' && <HomePage navigate={navigate} />}          {route === 'projects' && routeInfo?.path === '/disposicao-legal/' && <LegalDisposition navigate={navigate} />}
           {route === 'projects' && routeInfo?.path === '/modelo-de-usinas-de-triagem-de-residuos/' && <PlantModel navigate={navigate} />}
@@ -143,14 +143,15 @@ function App() {
 }
 
 const NAV_LINKS = [
-  ['Início', '/', 'home'],
-  ['Produções do Convênio', '/producoes-do-convenio/', 'projects'],
-  ['Cidades', '/cidades/', 'cities'],
-  ['Notícias', '/noticias/', 'news'],
-  ['Contato', '/contact/', 'contact'],
+  ['Início', '/', ['home']],
+  ['Municípios', '/cidades/', ['cities', 'directories']],
+  ['Documentos', '/publicacoes/', ['publications']],
+  ['Produções do Convênio', '/producoes-do-convenio/', ['projects', 'valoriza']],
+  ['Notícias', '/noticias/', ['news', 'article']],
+  ['Contato', '/contact/', ['contact']],
 ] as const
 
-function Header({ route, menuOpen, setMenuOpen, navigate }: { route: RouteKey; menuOpen: boolean; setMenuOpen: (open: boolean) => void; navigate: NavigateFn }) {
+function Header({ route, path, menuOpen, setMenuOpen, navigate }: { route: RouteKey; path: string; menuOpen: boolean; setMenuOpen: (open: boolean) => void; navigate: NavigateFn }) {
   const menuToggleRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -179,11 +180,16 @@ function Header({ route, menuOpen, setMenuOpen, navigate }: { route: RouteKey; m
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
         <nav id="main-navigation" className={`main-nav ${menuOpen ? 'open' : ''}`} aria-label="Navegação principal">
-          {NAV_LINKS.map(([label, href, key]) => (
-            <Link key={href} to={href} className={route === key ? 'active' : ''} aria-current={route === key ? 'page' : undefined}>
+          {NAV_LINKS.map(([label, href, keys]) => {
+            const ativo = (keys as readonly string[]).includes(route)
+            // "page" só na própria página do item; numa subpágina da seção, "true".
+            const atual = ativo ? (path === href ? 'page' : 'true') : undefined
+            return (
+            <Link key={href} to={href} className={ativo ? 'active' : ''} aria-current={atual}>
               {label}
             </Link>
-          ))}
+            )
+          })}
         </nav>
         <SiteSearch navigate={navigate} />
       </div>

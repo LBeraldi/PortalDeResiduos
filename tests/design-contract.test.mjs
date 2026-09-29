@@ -20,7 +20,8 @@ test('D0.2: check:quality roda o gate de design', () => {
 
 test('D1.1: no celular o logo é recortado na marca do projeto e o botão de menu tem 44 px', () => {
   const css = readCss()
-  const mobile = [...css.matchAll(/@media \(max-width: 900px\) \{([\s\S]*?)\n\}/g)].map((m) => m[1]).join('\n')
+  // Desde a D3.8 o cabeçalho quebra em 1279 px (logo) e 1080 px (menu móvel), não mais em 900 px.
+  const mobile = [...css.matchAll(/@media \(max-width: (?:900|1080|1279)px\) \{([\s\S]*?)\n\}/g)].map((m) => m[1]).join('\n')
   assert.match(mobile, /\.brand img \{[^}]*object-fit: cover[^}]*object-position: left/)
   assert.match(mobile, /\.menu-toggle \{[^}]*width: 44px[^}]*height: 44px/)
 })
@@ -179,7 +180,8 @@ test('D2.4: DocumentRow abre em nova aba com aviso para leitor de tela e mostra 
 test('D2.5: barra informativa fora do cabeçalho fixo, Cidades no menu e busca fora do <nav>', () => {
   const app = read('src/App.tsx')
   assert.match(app, /<div className="topline">[\s\S]*?Convênio técnico-científico MPMS · UEMS[\s\S]*?<\/div>\s*<header className="site-header">/)
-  assert.match(app, /\['Cidades', '\/cidades\/', 'cities'\]/)
+  // O rótulo "Cidades" (D2.5) virou "Municípios" na D3.8 (ADR-006); o destino continua /cidades/.
+  assert.match(app, /\['Municípios', '\/cidades\/'/)
   const nav = app.match(/<nav id="main-navigation"[\s\S]*?<\/nav>/)[0]
   assert.doesNotMatch(nav, /SiteSearch/)
   assert.match(read('src/components/SiteSearch.tsx'), /<span className="header-search-label">Buscar<\/span>/)
@@ -315,4 +317,10 @@ test('D3.7: o contato usa Field e a confirmação não afirma que o aplicativo a
   assert.equal((contato.match(/<Field /g) ?? []).length, 4)
   assert.match(contato, /Mensagem montada/)
   assert.doesNotMatch(contato, /Abrimos seu aplicativo/)
+})
+
+test('D3.8: menu da ADR-006', () => {
+  const app = read('src/App.tsx')
+  const itens = [...app.match(/const NAV_LINKS = \[([\s\S]*?)\] as const/)[1].matchAll(/^\s*\['([^']+)', '(\/[^']*)'/gm)].map((m) => `${m[1]} ${m[2]}`)
+  assert.deepEqual(itens, ['Início /', 'Municípios /cidades/', 'Documentos /publicacoes/', 'Produções do Convênio /producoes-do-convenio/', 'Notícias /noticias/', 'Contato /contact/'])
 })
