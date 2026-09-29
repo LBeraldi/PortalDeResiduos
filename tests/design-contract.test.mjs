@@ -94,3 +94,7 @@ test('D1.8: o título da aba de ficha e notícia vem dos dados reais', () => {
   assert.match(app, /cityRecords\.find\(/)
   assert.match(app, /const title = pageTitle\(path, routeInfo\)\n\s*document\.title = title \+ ' · Portal Resíduos MS'/)
 })
+
+test('D1.9: a busca global não mostra o × nativo do navegador', () => {
+  assert.match(read('src/styles.css'), /\.search-input::-webkit-search-cancel-button \{[^}]*display: none/)
+})
