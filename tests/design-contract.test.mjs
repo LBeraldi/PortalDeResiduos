@@ -80,3 +80,9 @@ test('D1.6: o rodapé não tem links sociais sem destino e mantém o e-mail', ()
   assert.doesNotMatch(app, /href="#(facebook|linkedin)"/)
   assert.match(app, /href="mailto:contato@portalresiduosms\.online" aria-label="E-mail"/)
 })
+
+test('D1.7: texto cerrado sobre mata usa --cerrado-claro (5,78:1)', () => {
+  const css = read('src/styles.css')
+  assert.match(css, /\.home-hero-slide-label \{[^}]*color: var\(--cerrado-claro\)/)
+  assert.match(css, /\.home-impact-card--change small span \{ color: var\(--cerrado-claro\)/)
+})
