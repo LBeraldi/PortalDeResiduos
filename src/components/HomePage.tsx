@@ -1,7 +1,7 @@
 import { type FormEvent, useEffect, useRef, useState } from "react"
 import { ArrowRight, BarChart3, BookOpen, ChevronLeft, ChevronRight, Pause, Play, Recycle, Search } from "lucide-react"
 import { openSiteSearch } from "./SiteSearch"
-import { newsRecords } from "../pages/NewsPages"
+import { newsByDate } from "../pages/NewsPages"
 import { territoryStats } from "../data/territory"
 import { searchSite, type SearchEntry } from "../data/search"
 import { Link } from "./router"
@@ -216,7 +216,7 @@ export function HomePage({ navigate }: { navigate: Navigate }) {
     </section>
 
     <section className="section news-section">
-      <div className="container"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" /> Atualizações</div><h2>Notícias do <span>território.</span></h2></div><Link to="/noticias/" className="text-link">Ver todas <ArrowRight size={16} /></Link></div><div className="news-grid">{newsRecords.slice(0, 3).map((item) => <Link to={"/noticias/" + item.slug + "/"} className="news-card" key={item.slug}><div className="news-image"><img src={item.image} alt="" loading="lazy" /><span className="news-date">{item.date}</span></div><div className="news-card-copy"><h3>{item.title}</h3><p>{item.excerpt}</p><span className="text-link">Ler notícia <ArrowRight size={15} /></span></div></Link>)}</div></div>
+      <div className="container"><div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" /> Atualizações</div><h2>Notícias do <span>território.</span></h2></div><Link to="/noticias/" className="text-link">Ver todas <ArrowRight size={16} /></Link></div><div className="news-grid">{newsByDate.slice(0, 3).map((item) => <Link to={"/noticias/" + item.slug + "/"} className="news-card" key={item.slug}><div className="news-image"><img src={item.image} alt="" loading="lazy" /><span className="news-date">{item.date}</span></div><div className="news-card-copy"><h3>{item.title}</h3><p>{item.excerpt}</p><span className="text-link">Ler notícia <ArrowRight size={15} /></span></div></Link>)}</div></div>
     </section>
 
     <section className="section container reverse-strip"><div className="reverse-art"><img src={ASSET + "2021/10/logistica-reversa-ilust.png"} alt="Ciclo de logística reversa" loading="lazy" /></div><div className="reverse-copy"><div className="eyebrow"><span className="eyebrow-line" /> Sistema estadual</div><h2>Logística <span>Reversa</span></h2><p>Um caminho para que embalagens retornem ao setor empresarial e tenham destinação ambientalmente adequada.</p><Link to="/logistica-reversa/" className="text-link">Entender o sistema <ArrowRight size={16} /></Link></div></section>

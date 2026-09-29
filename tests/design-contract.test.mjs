@@ -63,3 +63,14 @@ test('D1.4: navegação interna usa <Link>, nunca <a href="/…"> nem botão com
     assert.doesNotMatch(src, /onClick=\{\(\)\s*=>\s*navigate\(/, f)
   }
 })
+
+test('D1.5: capa e arquivo mostram as notícias da mais recente para a mais antiga', async () => {
+  const { sortByDate } = await import('../src/data/newsDate.ts')
+  const datas = [...read('src/pages/NewsPages.tsx').matchAll(/date: '([^']+)'/g)].map((m) => ({ date: m[1] }))
+  assert.equal(datas.length, 8)
+  const ordem = sortByDate(datas).map((n) => n.date)
+  assert.deepEqual(ordem.slice(0, 3), ['20 de dezembro de 2025', '20 de dezembro de 2025', '15 de dezembro de 2021'])
+  assert.equal(ordem.at(-1), '25 de outubro de 2021')
+  assert.doesNotMatch(read('src/components/HomePage.tsx'), /newsRecords\.slice\(0,\s*3\)/)
+  assert.match(read('src/pages/NewsPages.tsx'), /export const newsByDate = sortByDate\(newsRecords\)/)
+})

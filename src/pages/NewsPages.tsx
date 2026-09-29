@@ -2,6 +2,7 @@ import { PageHero } from '../components/PageHero'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { ArrowRight, CalendarDays, ExternalLink, FileText, Link as LinkIcon, Newspaper } from 'lucide-react'
 import { Link } from '../components/router'
+import { sortByDate } from '../data/newsDate'
 
 const ASSET = '/uploads/'
 type Navigate = (to: string) => void
@@ -145,6 +146,9 @@ export const newsRecords: NewsRecord[] = [
 ]
 
 
+/** Ordem de leitura do portal: da mais recente para a mais antiga (capa e arquivo). */
+export const newsByDate = sortByDate(newsRecords)
+
 function NewsHero({ title, excerpt, image, date }: Pick<NewsRecord, "title" | "excerpt" | "image" | "date">) { return <PageHero tone="mata" eyebrow={date} title={title} description={excerpt} image={image} /> }
 
 const newsCrumbs = (title?: string) => [
@@ -154,7 +158,7 @@ const newsCrumbs = (title?: string) => [
 ]
 
 export function NewsArchive({ navigate }: { navigate: Navigate }) {
-  return <><PageHero tone="mata" eyebrow="Arquivo editorial" title={<>Notícias que ajudam a <span>entender o território.</span></>} description="Resultados, decisões públicas, educação ambiental e os movimentos que transformam a gestão de resíduos sólidos em Mato Grosso do Sul." /><Breadcrumbs items={newsCrumbs()} /><section className="section container news-archive"><div className="news-archive-heading"><div><span className="archive-count">{newsRecords.length} artigos publicados</span><h2>Informação para acompanhar.</h2></div><p>Consulte o conteúdo original organizado por data e tema.</p></div><div className="news-archive-grid">{newsRecords.map((item) => <Link to={`/noticias/${item.slug}/`} className="news-archive-card" key={item.slug}><div className="news-archive-image"><img src={item.image} alt="" /><span>{item.category}</span></div><div className="news-archive-copy"><div className="news-card-meta"><CalendarDays size={14} /> {item.date}</div><h3>{item.title}</h3><p>{item.excerpt}</p><span className="text-link">Ler notícia <ArrowRight size={15} /></span></div></Link>)}</div></section></>
+  return <><PageHero tone="mata" eyebrow="Arquivo editorial" title={<>Notícias que ajudam a <span>entender o território.</span></>} description="Resultados, decisões públicas, educação ambiental e os movimentos que transformam a gestão de resíduos sólidos em Mato Grosso do Sul." /><Breadcrumbs items={newsCrumbs()} /><section className="section container news-archive"><div className="news-archive-heading"><div><span className="archive-count">{newsByDate.length} artigos publicados</span><h2>Informação para acompanhar.</h2></div><p>Consulte o conteúdo original organizado por data e tema.</p></div><div className="news-archive-grid">{newsByDate.map((item) => <Link to={`/noticias/${item.slug}/`} className="news-archive-card" key={item.slug}><div className="news-archive-image"><img src={item.image} alt="" /><span>{item.category}</span></div><div className="news-archive-copy"><div className="news-card-meta"><CalendarDays size={14} /> {item.date}</div><h3>{item.title}</h3><p>{item.excerpt}</p><span className="text-link">Ler notícia <ArrowRight size={15} /></span></div></Link>)}</div></section></>
 }
 
 export function NewsArticle({ path, navigate }: { path: string; navigate: Navigate }) {

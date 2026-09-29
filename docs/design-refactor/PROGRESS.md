@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 1
-- Próxima tarefa: D1.5. Concluídas: D0.1, D0.2, D1.10, D1.1–D1.4. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D1.6. Concluídas: D0.1, D0.2, D1.10, D1.1–D1.5. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -26,6 +26,10 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
 ## Sessões
+
+### 2026-09-29 — D1.5 notícias por data
+
+- `sortByDate` em `src/data/newsDate.ts`; capa mostra as duas de 20/12/2025 e a de 15/12/2021; arquivo do mais novo para o mais antigo.
 
 ### 2026-09-29 — D1.4 navegação por Link
 
