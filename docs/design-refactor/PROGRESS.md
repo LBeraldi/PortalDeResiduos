@@ -23,7 +23,10 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | páginas de conteúdo órfãs | 7 | 0 | 0 |
 | documentos sem caminho por clique | 75 URLs (74 coleta + cartilha) | 0 (105 a 2 cliques, 59 a 3) | 0 |
 | páginas de erro alcançáveis por clique | 4 | 0 | 0 |
-| cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
+| cliques até plano de coleta de Bonito | sem caminho | 2 | ≤ 2 |
+| parte fixa do cabeçalho (390 / 1440) | 99 / 109 px | 57 / 69 px | ≤ 72 |
+| altura / em 1440 | 3.999 | 2.394 | ≤ 3.200 |
+| altura /cidades/ em 390 | 10.510 | 5.894 (ADR-007 pendente) | ≤ 5.000 |
 
 ## Textos públicos para aprovação
 
