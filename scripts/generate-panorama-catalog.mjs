@@ -88,12 +88,13 @@ const records = municipalityNames.map((name) => {
     name,
     file: selected.file,
     cover,
+    sizeBytes: fs.statSync(path.join(uploadsDir, selected.file)).size,
     sourcePostId: selected.id,
     sourceGuid: selected.guid,
   }
 })
 
-const generated = `// Este arquivo é gerado por scripts/generate-panorama-catalog.mjs.\n// Fonte: BD/u195698278_HZYqx.sql + public/uploads/2025/03.\n\nexport type PanoramaRecord = {\n  slug: string\n  name: string\n  file: string\n  cover: string\n  sourcePostId: number\n  sourceGuid: string\n}\n\nexport const panoramaRecords: PanoramaRecord[] = ${JSON.stringify(records, null, 2)}\n`
+const generated = `// Este arquivo é gerado por scripts/generate-panorama-catalog.mjs.\n// Fonte: BD/u195698278_HZYqx.sql + public/uploads/2025/03.\n\nexport type PanoramaRecord = {\n  slug: string\n  name: string\n  file: string\n  cover: string\n  sizeBytes: number\n  sourcePostId: number\n  sourceGuid: string\n}\n\nexport const panoramaRecords: PanoramaRecord[] = ${JSON.stringify(records, null, 2)}\n`
 
 fs.writeFileSync(outputPath, generated)
 console.log(`Catálogo gerado: ${records.length} municípios, ${new Set(records.map((record) => record.file)).size} PDFs e ${new Set(records.map((record) => record.cover)).size} capas.`)

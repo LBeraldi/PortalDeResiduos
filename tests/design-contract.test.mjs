@@ -147,3 +147,28 @@ test('D2.3: Badge, Alert e Field existem com as variantes e ligações da CP-08'
   assert.match(css, /\.alert--error \{[^}]*border-left-color: var\(--negative\)/)
   assert.match(css, /\.field-control \{[^}]*min-height: 44px[^}]*border: 1px solid var\(--field-border\)/)
 })
+
+test('D2.4: o catálogo de panoramas grava o tamanho real de cada PDF (ADR-005)', () => {
+  const src = read('src/data/panoramas.generated.ts')
+  const pares = [...src.matchAll(/"file": "([^"]+)",[\s\S]*?"sizeBytes": (\d+)/g)]
+  assert.equal(pares.length, 79)
+  for (const [, file, size] of pares) {
+    assert.equal(Number(size), fs.statSync(path.join(root, 'public/uploads/2025/03', file)).size, file)
+  }
+})
+
+test('D2.4: formatSize escreve o tamanho em pt-BR', async () => {
+  const { formatSize } = await import('../src/data/fileSize.ts')
+  assert.equal(formatSize(3250585), '3,1 MB')
+  assert.equal(formatSize(839680), '820 KB')
+  assert.equal(formatSize(undefined), '')
+})
+
+test('D2.4: DocumentRow abre em nova aba com aviso para leitor de tela e mostra a origem', () => {
+  const row = read('src/components/DocumentRow.tsx')
+  assert.match(row, /target="_blank" rel="noopener"/)
+  assert.match(row, /<span className="sr-only"> \(abre em nova aba\)<\/span>/)
+  assert.match(row, /'Arquivo local'/)
+  assert.match(row, /'Google Drive'/)
+  assert.match(row, /'Abrir no Drive'/)
+})

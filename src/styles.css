@@ -274,6 +274,28 @@ textarea.field-control { resize: vertical; }
 .field-hint { font-size: var(--step-small); color: var(--ink-soft); }
 .field-error { font-size: var(--step-small); font-weight: 600; color: var(--negative); }
 
+/* --- Linha de documento (CP-07) --- */
+.document-row {
+  display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 1rem; align-items: center;
+  padding: 0.9rem 0; border-top: 1px solid var(--line);
+}
+.document-row-thumb {
+  display: grid; place-items: center; width: 52px; height: 64px; overflow: hidden;
+  color: var(--mata); background: var(--paper-raised); border: 1px solid var(--line-strong);
+}
+.document-row-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.document-row-body h3 { font-family: var(--font-sans); font-size: var(--step-0); font-weight: 600; line-height: 1.35; letter-spacing: 0; }
+.document-row-meta {
+  display: flex; flex-wrap: wrap; gap: 0.25rem 0.75rem; margin-top: 0.3rem;
+  font-family: var(--font-mono); font-size: var(--step-meta); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-faint);
+}
+.document-row-action { min-height: 44px; padding: 0.55rem 0.9rem; }
+@media (max-width: 560px) {
+  .document-row { grid-template-columns: 44px minmax(0, 1fr); }
+  .document-row-thumb { width: 44px; height: 54px; }
+  .document-row-action { grid-column: 2; justify-self: start; }
+}
+
 /* =========================================================================
    CHROME — barra de registro + cabeçalho
    ========================================================================= */
