@@ -32,16 +32,16 @@ Rodapé só com links que funcionam. **Depende da ADR-002.**
 
 ## Critérios de aceite
 
-- [ ] Comportamento principal
-- [ ] Regressão coberta por teste ou contrato (`tests/design-contract.test.mjs`)
-- [ ] Acessibilidade e responsividade avaliadas (E7 e E8, 390 e 1440)
-- [ ] `npm run check:quality` passou
-- [ ] `npm run check:design` passou, com teto atualizado quando aplicável
-- [ ] `docs/design-refactor/PROGRESS.md` atualizado
+- [x] Comportamento principal
+- [x] Regressão coberta por teste ou contrato (`tests/design-contract.test.mjs`)
+- [x] Acessibilidade e responsividade avaliadas (E7 e E8, 390 e 1440)
+- [x] `npm run check:quality` passou
+- [x] `npm run check:design` passou, com teto atualizado quando aplicável
+- [x] `docs/design-refactor/PROGRESS.md` atualizado
 
 ## Handoff
 
-- Alterações:
-- Evidências:
-- Limitações/riscos:
-- Próximo passo:
+- Alterações: `src/App.tsx` (dois links e dois imports removidos), contrato em `tests/design-contract.test.mjs`.
+- Evidências: `docs/design-refactor/evals/2026-09-29-D1.6.md`.
+- Limitações/riscos: quando houver URLs oficiais, voltam com a ADR-002 revista.
+- Próximo passo: D1.7.

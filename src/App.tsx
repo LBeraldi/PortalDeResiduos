@@ -4,9 +4,7 @@ import {
   BarChart3,
   Check,
   FileText,
-  Globe2,
   Leaf,
-  MessageCircle,
   Mail,
   MapPin,
   Menu,
@@ -225,7 +223,7 @@ function Contact() {
 }
 
 function Footer({ navigate }: { navigate: NavigateFn }) {
-  return <footer className="site-footer"><div className="container footer-main"><div className="footer-brand"><img src={`${ASSET}2021/07/logo_white-1.png`} alt="Portal Resíduos MS" /><p>Informação, cooperação e ferramentas para uma gestão responsável dos resíduos sólidos.</p><div className="socials"><a href="#facebook" aria-label="Facebook"><Globe2 size={17} /></a><a href="#linkedin" aria-label="LinkedIn"><MessageCircle size={17} /></a><a href="mailto:contato@portalresiduosms.online" aria-label="E-mail"><Mail size={17} /></a></div></div><div><h3>Explorar</h3><Link to="/#sobre-projeto">Sobre o projeto</Link><Link to="/producoes-do-convenio/">Produções do convênio</Link><Link to="/noticias/">Notícias</Link></div><div><h3>Ferramentas</h3><Link to="/cidades/">Cidades</Link><Link to="/diretorios/">Diretórios</Link><Link to="/publicacoes/">Publicações</Link><Link to="/projeto-valoriza/">Projeto Valoriza</Link></div><div className="footer-contact"><h3>Fale com a gente</h3><p>contato@portalresiduosms.online</p><p>Campo Grande — MS</p><Link to="/contact/" className="footer-cta">Enviar mensagem <ArrowRight size={15} /></Link></div></div><div className="footer-bottom container"><span>© {new Date().getFullYear()} Portal Resíduos MS</span><span>Projeto Disposição Legal · MPMS + UEMS</span></div></footer>
+  return <footer className="site-footer"><div className="container footer-main"><div className="footer-brand"><img src={`${ASSET}2021/07/logo_white-1.png`} alt="Portal Resíduos MS" /><p>Informação, cooperação e ferramentas para uma gestão responsável dos resíduos sólidos.</p><div className="socials"><a href="mailto:contato@portalresiduosms.online" aria-label="E-mail"><Mail size={17} /></a></div></div><div><h3>Explorar</h3><Link to="/#sobre-projeto">Sobre o projeto</Link><Link to="/producoes-do-convenio/">Produções do convênio</Link><Link to="/noticias/">Notícias</Link></div><div><h3>Ferramentas</h3><Link to="/cidades/">Cidades</Link><Link to="/diretorios/">Diretórios</Link><Link to="/publicacoes/">Publicações</Link><Link to="/projeto-valoriza/">Projeto Valoriza</Link></div><div className="footer-contact"><h3>Fale com a gente</h3><p>contato@portalresiduosms.online</p><p>Campo Grande — MS</p><Link to="/contact/" className="footer-cta">Enviar mensagem <ArrowRight size={15} /></Link></div></div><div className="footer-bottom container"><span>© {new Date().getFullYear()} Portal Resíduos MS</span><span>Projeto Disposição Legal · MPMS + UEMS</span></div></footer>
 }
 
 export default App

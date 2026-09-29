@@ -74,3 +74,9 @@ test('D1.5: capa e arquivo mostram as notícias da mais recente para a mais anti
   assert.doesNotMatch(read('src/components/HomePage.tsx'), /newsRecords\.slice\(0,\s*3\)/)
   assert.match(read('src/pages/NewsPages.tsx'), /export const newsByDate = sortByDate\(newsRecords\)/)
 })
+
+test('D1.6: o rodapé não tem links sociais sem destino e mantém o e-mail', () => {
+  const app = read('src/App.tsx')
+  assert.doesNotMatch(app, /href="#(facebook|linkedin)"/)
+  assert.match(app, /href="mailto:contato@portalresiduosms\.online" aria-label="E-mail"/)
+})
