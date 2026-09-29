@@ -1,11 +1,15 @@
 import { PageHero } from '../components/PageHero'
 import type { Crumb } from '../components/Breadcrumbs'
 import { Eyebrow } from '../components/Eyebrow'
-import { ArrowRight, BarChart3, BookOpen, ExternalLink, FileArchive, FileText, Gauge, HandHeart, Laptop, Recycle, Users } from 'lucide-react'
+import { ArrowRight, BarChart3, BookOpen, ExternalLink, FileArchive, FileText, Gauge, HandHeart, Laptop, Recycle, Search, Users } from 'lucide-react'
 import { Link } from '../components/router'
 import { DocumentRow } from '../components/DocumentRow'
 import { documents } from '../data/documents'
 import { documentSizes } from '../data/document-sizes.generated'
+import { useRef, useState } from 'react'
+import { cityRecords, normalizeName } from '../data/cities'
+import type { DocumentType, PortalDocument } from '../data/documents'
+import { selectiveCollectionPlans } from '../data/selective-collection-plans.generated'
 
 const ASSET = '/uploads/'
 type Navigate = (to: string) => void
@@ -20,9 +24,42 @@ export function Cooperatives() {
   return <><ResourceHero eyebrow="Inclusão e cidadania" title="Cooperativas" description="Materiais para apoiar a organização, a formalização e o reconhecimento do trabalho dos catadores." crumbs={[{ label: 'Início', href: '/' }, { label: 'Cooperativas' }]} /><section className="resource-section section container"><div className="resource-intro"><div><Eyebrow>Fortalecer a reciclagem</Eyebrow><h2>Quem faz a transformação acontecer.</h2></div><p>As cooperativas e associações de catadores exercem um papel ambiental, econômico e social essencial. Esta área reúne referências para facilitar o acesso a informações e documentos de apoio.</p></div><div className="resource-stats"><div><Users size={21} /><strong>Trabalho reconhecido</strong><span>Organização e inclusão socioprodutiva.</span></div><div><Recycle size={21} /><strong>Materiais recuperados</strong><span>Mais reciclagem e menos rejeitos.</span></div><div><HandHeart size={21} /><strong>Cooperação</strong><span>Instituições trabalhando em rede.</span></div></div><h2 className="resource-list-title">Materiais disponíveis</h2><div className="document-list">{documents.filter((doc) => doc.context === '/cooperativas/').map((doc) => <DocumentRow key={doc.href} title={doc.title} type={doc.type} description={doc.description} href={doc.href} format={doc.format} sizeBytes={documentSizes[doc.href]} origin="local" cover={doc.cover} />)}</div></section></>
 }
 
+type Grupo = { id: string; label: string; tipos: DocumentType[] }
+
+// Tipos agrupados como na proposta da página Documentos (10-navegacao.md).
+const GRUPOS: Grupo[] = [
+  { id: 'todos', label: 'Todos', tipos: [] },
+  { id: 'notas', label: 'Notas técnicas', tipos: ['Nota técnica'] },
+  { id: 'artigos', label: 'Artigos e revista', tipos: ['Artigo', 'Revista'] },
+  { id: 'estudos', label: 'Estudos', tipos: ['Estudo'] },
+  { id: 'cartilhas', label: 'Cartilhas', tipos: ['Cartilha'] },
+  { id: 'modelos', label: 'Modelos editáveis', tipos: ['Modelo editável'] },
+]
+const noGrupo = (doc: PortalDocument, grupo: Grupo) => grupo.tipos.length === 0 || grupo.tipos.includes(doc.type)
+
+/** Documentos (/publicacoes/ e /documentos/): a lista única do acervo não municipal, com filtro e busca. */
 export function PublicationsPage({ navigate: _navigate }: { navigate: Navigate }) {
-  const publicacoes = documents.filter((doc) => doc.context === '/publicacoes/')
-  return <><ResourceHero eyebrow="Biblioteca do projeto" title="Publicações" description="Estudos, artigos, notas técnicas e materiais de referência para apoiar decisões sobre resíduos sólidos." crumbs={[{ label: 'Início', href: '/' }, { label: 'Publicações' }]} /><section className="resource-section section container"><div className="resource-intro"><div><Eyebrow>Conhecimento aplicado</Eyebrow><h2>Informação para <span>agir melhor.</span></h2></div><p>Reunimos os principais materiais produzidos pelo projeto em uma biblioteca simples de consultar. Abra o arquivo para ler, baixar ou compartilhar.</p></div><div className="library-toolbar"><span><FileText size={16} /> {publicacoes.length} materiais locais</span><Link to="/producoes-do-convenio/" className="text-link">Ver produções do convênio <ArrowRight size={15} /></Link></div><div className="document-list">{publicacoes.map((doc) => <DocumentRow key={doc.href} title={doc.title} type={doc.type} description={doc.description} href={doc.href} format={doc.format} sizeBytes={documentSizes[doc.href]} origin="local" cover={doc.cover} />)}</div></section></>
+  const [grupoId, setGrupoId] = useState('todos')
+  const [query, setQuery] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+  const grupo = GRUPOS.find((item) => item.id === grupoId) ?? GRUPOS[0]
+  const termo = normalizeName(query.trim())
+  const visiveis = documents.filter((doc) => noGrupo(doc, grupo) && normalizeName(`${doc.title} ${doc.type} ${doc.description}`).includes(termo))
+  const limpar = () => { setQuery(''); inputRef.current?.focus() }
+  return <><ResourceHero eyebrow="Biblioteca do projeto" title="Documentos" description="Estudos, artigos, notas técnicas e materiais de referência para apoiar decisões sobre resíduos sólidos." crumbs={[{ label: 'Início', href: '/' }, { label: 'Documentos' }]} />
+    <section className="section container document-library" aria-label="Lista de documentos">
+      <div className="municipality-index-tools">
+        <label className="search-field"><Search size={17} aria-hidden="true" /><span className="sr-only">Buscar no acervo</span><input ref={inputRef} type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Título ou tema" /></label>
+        <div className="segmented" role="group" aria-label="Filtrar por tipo">
+          {GRUPOS.map((item) => <button key={item.id} type="button" aria-pressed={grupoId === item.id} onClick={() => setGrupoId(item.id)}>{item.label} <span className="segmented-count">{documents.filter((doc) => noGrupo(doc, item)).length}</span></button>)}
+        </div>
+      </div>
+      <p className="municipality-index-count" aria-live="polite">{visiveis.length} {visiveis.length === 1 ? 'documento' : 'documentos'}{termo ? <> para “{query.trim()}”</> : null}</p>
+      {visiveis.length === 0
+        ? <div className="municipality-index-empty"><p>Nenhum documento encontrado para “{query}”.</p><button type="button" className="button button-ghost" onClick={limpar}>Limpar busca</button></div>
+        : <div className="document-list">{visiveis.map((doc) => <DocumentRow key={doc.href} title={doc.title} type={doc.type} description={doc.description} href={doc.href} format={doc.format} sizeBytes={documentSizes[doc.href]} origin="local" cover={doc.cover} />)}</div>}
+      <div className="document-library-note"><Eyebrow>Por município</Eyebrow><p>{cityRecords.length} panoramas e os planos de coleta seletiva de {selectiveCollectionPlans.length} municípios.</p><Link to="/cidades/" className="text-link">Ir para Municípios <ArrowRight size={15} /></Link></div>
+    </section></>
 }
 
 export function TechnicalNote() {

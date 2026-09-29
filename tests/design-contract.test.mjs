@@ -324,3 +324,15 @@ test('D3.8: menu da ADR-006', () => {
   const itens = [...app.match(/const NAV_LINKS = \[([\s\S]*?)\] as const/)[1].matchAll(/^\s*\['([^']+)', '(\/[^']*)'/gm)].map((m) => `${m[1]} ${m[2]}`)
   assert.deepEqual(itens, ['Início /', 'Municípios /cidades/', 'Documentos /publicacoes/', 'Produções do Convênio /producoes-do-convenio/', 'Notícias /noticias/', 'Contato /contact/'])
 })
+
+test('D3.9: Documentos lista os 11 com filtro por tipo e a busca lê a mesma fonte', () => {
+  const pagina = read('src/pages/ResourcePages.tsx').match(/export function PublicationsPage[\s\S]*?\n\}/)[0]
+  assert.match(pagina, /<DocumentRow /)
+  assert.match(pagina, /GRUPOS/)
+  assert.match(pagina, /Nenhum documento encontrado para “\{query\}”\./)
+  assert.match(read('src/data/siteMap.ts'), /page\('\/publicacoes\/', 'Documentos'/)
+  const busca = read('src/data/search.ts')
+  assert.doesNotMatch(busca, /Revista-IBRAPARC\.pdf|publicationEntries/)
+  assert.match(busca, /from '\.\/documents'/)
+  assert.match(busca, /selectiveCollectionPlans/)
+})

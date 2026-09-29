@@ -800,3 +800,8 @@
   .home-hero-search-suggestions button { grid-template-columns: 4.75rem minmax(0, 1fr) auto; gap: 0.55rem; padding: 0.72rem 0.62rem; }
   .home-hero-search-result-kind { font-size: 0.75rem; }
 }
+
+/* Documentos: lista única do acervo não municipal (D3.9). */
+.document-library .document-list { margin-top: 0.5rem; }
+.document-library-note { display: grid; gap: 0.6rem; justify-items: start; margin-top: 2.5rem; padding: 1.25rem 1.4rem; background: var(--paper-raised); border: 1px solid var(--line); }
+.document-library-note p { color: var(--ink-soft); font-size: var(--step-small); }

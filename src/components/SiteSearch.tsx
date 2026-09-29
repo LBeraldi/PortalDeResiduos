@@ -20,7 +20,7 @@ export function openSiteSearch(query = "") {
 
 /**
  * Busca do portal. Índice 100% client-side (rotas, notícias, municípios e
- * publicações). Abre um painel modal sobre a página; `Esc` fecha; as setas
+ * documentos). Abre um painel modal sobre a página; `Esc` fecha; as setas
  * percorrem os resultados; `Enter` abre o resultado ativo.
  */
 export function SiteSearch({ navigate }: SiteSearchProps) {
@@ -155,7 +155,7 @@ export function SiteSearch({ navigate }: SiteSearchProps) {
               <div className="search-results" aria-live="polite">
                 {query.trim().length < 2 ? (
                   <p className="search-hint">
-                    Digite ao menos duas letras. A busca cobre páginas do portal, notícias, municípios e publicações.
+                    Digite ao menos duas letras. A busca cobre páginas do portal, notícias, municípios e documentos.
                   </p>
                 ) : results.length === 0 ? (
                   <p className="search-hint">Nada encontrado para “{query}”. Tente outro termo.</p>

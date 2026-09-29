@@ -34,7 +34,7 @@ export const siteRoutes: SiteRoute[] = [
   page('/noticias/', 'Notícias', 'news', { status: 'foundation' }),
   page('/contact/', 'Contato', 'contact', { status: 'foundation' }),
   page('/cidades/', 'Cidades', 'cities', { status: 'foundation' }),
-  page('/publicacoes/', 'Publicações', 'publications', { status: 'foundation' }),
+  page('/publicacoes/', 'Documentos', 'publications', { status: 'foundation' }),
   page('/projeto-valoriza/', 'Projeto Valoriza', 'valoriza', { status: 'foundation' }),
   page('/diretorios/', 'Diretórios', 'directories', { status: 'foundation' }),
   page('/producoes-do-convenio/', 'Produções do Convênio', 'projects', { status: 'foundation' }),

@@ -1,12 +1,15 @@
 // Índice de busca do portal — montado uma única vez a partir dos dados estáticos
 // já presentes no bundle: rotas (siteMap), notícias (NewsPages), municípios
-// (CityPages) e publicações. Sem dependências novas, sem back-end.
+// (cities.ts), documentos do acervo (documents.ts) e dos planos de coleta seletiva.
+// Sem dependências novas, sem back-end.
 
 import { siteRoutes } from './siteMap'
 import { newsRecords } from '../pages/NewsPages'
 import { cityRecords } from './cities'
+import { documents } from './documents'
+import { selectiveCollectionPlans } from './selective-collection-plans.generated'
 
-export type SearchKind = 'Página' | 'Notícia' | 'Município' | 'Publicação'
+export type SearchKind = 'Página' | 'Notícia' | 'Município' | 'Documento'
 
 export type SearchEntry = {
   label: string
@@ -88,29 +91,40 @@ const cityEntries: SearchEntry[] = cityRecords.map((city) => ({
   keywords: 'panorama municipal gestão de resíduos',
 }))
 
-// Espelha a lista de PublicationsPage (ResourcePages.tsx). PDFs servidos de /uploads.
-const publicationEntries: SearchEntry[] = [
-  { label: 'Revista IBRAPARC', href: '/uploads/2025/12/Revista-IBRAPARC.pdf' },
-  { label: 'Cadeia de Reciclagem em Mato Grosso do Sul', href: '/uploads/2025/12/artigo_Cadeia-de-Reciclagem.pdf' },
-  { label: 'Artigo sobre resíduos sólidos', href: '/uploads/2021/11/artigo2-1.pdf' },
-  { label: 'Nota técnica sobre taxa de RSU', href: '/uploads/2021/11/Nota-tecnica-Taxa-RSU-FINAL-1.pdf' },
-  { label: 'Resíduos sólidos e destinação legal', href: '/uploads/2021/11/Artigo-RSDL-1.pdf' },
-  { label: 'Nota Técnica — Catadores de materiais recicláveis', href: '/uploads/2025/12/NOTA_TECNICA_-_Catadores__revisada.pdf' },
-  { label: 'Panorama e Censo dos Catadores', href: '/uploads/2025/12/Panorama-e-Censo-dos-Catadores-LIVRO-versao-final.pdf' },
-].map((item) => ({ ...item, kind: 'Publicação' as const, external: true, keywords: 'pdf documento estudo publicação' }))
+// Documentos do acervo (mesma fonte da página Documentos): o resultado abre o arquivo (NAV-6).
+const documentEntries: SearchEntry[] = documents.map((doc) => ({
+  label: doc.title,
+  kind: 'Documento',
+  href: doc.href,
+  external: true,
+  keywords: `${doc.type} ${doc.format} ${doc.description}`,
+}))
+
+// Documentos dos planos de coleta seletiva (15 municípios). URL repetida na fonte entra uma vez (a primeira).
+const planEntries: SearchEntry[] = []
+const planUrls = new Set<string>()
+for (const plan of selectiveCollectionPlans) {
+  for (const doc of plan.documents) {
+    if (planUrls.has(doc.url)) continue
+    planUrls.add(doc.url)
+    const detalhe = doc.description && doc.description !== `${plan.name.toUpperCase()} - MS` ? ` — ${doc.description}` : ''
+    planEntries.push({ label: `${plan.name}: ${doc.title}${detalhe}`, kind: 'Documento', href: doc.url, external: true, keywords: `plano de coleta seletiva ${plan.name}` })
+  }
+}
 
 export const searchIndex: SearchEntry[] = [
   ...routeEntries,
   ...newsEntries,
   ...cityEntries,
-  ...publicationEntries,
+  ...documentEntries,
+  ...planEntries,
 ]
 
 const KIND_WEIGHT: Record<SearchKind, number> = {
   Página: 0.6,
   Município: 0.2,
   Notícia: 0,
-  Publicação: 0,
+  Documento: 0,
 }
 
 export function searchSite(query: string, limit = 8): SearchEntry[] {
