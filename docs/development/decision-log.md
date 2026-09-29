@@ -18,3 +18,15 @@
 - **ADR-005 (aceita, opção a):** o gerador de catálogos grava `sizeBytes`; os arquivos são regenerados com `npm run sync:data`, nunca editados à mão.
 - **ADR-006 (aceita, opção a):** menu Início · Municípios · Documentos · Produções do Convênio · Notícias · Contato; Documentos vira lista única com filtros; Produções do Convênio vira uma página só; nenhuma URL pública é removida.
 - **Motivo:** decisões tomadas pelo dono do projeto em 2026-09-29 a partir da auditoria https://claude.ai/artifact/RNMQP4tTRSNprZRooeNW17.
+
+## 2026-09-29 — Gate de design (D0.2)
+
+- **Decisão:** criar `npm run check:design` (`scripts/check-contrast.mjs` e `scripts/check-design-rules.mjs`, sem dependências) e incluí-lo em `check:quality`, antes do build.
+- **Motivo:** proteger os tokens de cor, a fonte mínima de 12 px, o uso de hex fora de `:root` e a navegação por `<Link>` durante o refinamento de design.
+- **Consequência:** `check-design-rules.mjs` funciona como catraca. Cada tarefa que melhora uma métrica baixa o teto no mesmo commit; subir um teto exige ADR.
+
+## 2026-09-29 — Execução contínua das fases de design
+
+- **Decisão:** o dono do projeto pediu a execução de todas as fases (D0 a D3) na ordem do backlog, com review do código ao final, em vez de um PR revisado por vez.
+- **Como fica:** uma branch e um commit por tarefa, empilhados. Texto público novo ou alterado usa o texto já proposto nas specs e na auditoria aprovada e fica listado em `docs/design-refactor/PROGRESS.md` para aprovação antes de publicar (inclui "Sobre o panorama", ADR-004). Nenhum arquivo é apagado; arquivos que ficarem sem uso são listados no handoff. Dependências continuam proibidas (ADR-003 pendente).
+

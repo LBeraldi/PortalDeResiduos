@@ -11,7 +11,8 @@
     "check:types": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
     "check:data": "node scripts/validate-project.mjs",
-    "check:quality": "npm run check:types && npm test && npm run check:data && npm run build"
+    "check:design": "node scripts/check-contrast.mjs && node scripts/check-design-rules.mjs",
+    "check:quality": "npm run check:types && npm test && npm run check:data && npm run check:design && npm run build"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 0
-- Próxima tarefa: D0.2. D0.1 e D1.10 concluídas; review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D1.1. D0.1 e D1.10 concluídas; review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -26,6 +26,11 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
 ## Sessões
+
+### 2026-09-29 — D0.2 gate de design
+
+- `check:design` criado e incluído em `check:quality`; `tests/design-contract.test.mjs` criado (Red → Green).
+- Próximo: D1.1.
 
 ### 2026-09-29 — D0.1 baseline
 
