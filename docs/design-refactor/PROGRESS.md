@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 2
-- Próxima tarefa: D2.3. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1, D2.2. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D2.4. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.3. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -26,6 +26,10 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
 ## Sessões
+
+### 2026-09-29 — D2.3 Badge, Alert, Field
+
+- Três componentes novos, só com tokens; ainda sem uso (entram na D2.4, D3.2 e D3.7).
 
 ### 2026-09-29 — D2.2 escala tipográfica
 
