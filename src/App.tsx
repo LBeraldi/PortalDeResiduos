@@ -13,12 +13,12 @@ import {
   ShieldCheck,
   X,
 } from 'lucide-react'
-import { resolveRoute, type RouteKind } from './data/siteMap'
+import { resolveRoute, type RouteKind, type SiteRoute } from './data/siteMap'
 import { LandfillDifference, LegalDisposition, PlantModel, SeparateWaste } from './pages/InstitutionalPages'
 import { Cooperatives, DecisionSupport, PublicationsPage, TechnicalNote, UserGuide, ValorizaHub } from './pages/ResourcePages'
 import { CatadoresOverview, Composting, EducationPlans, EnvironmentalEducation, MaterialsCompiled, Municipalities, Panoramas, ProductionHub, SelectiveCollection } from './pages/ProductionPages'
-import { CityDetail, CityDirectory, Directories } from './pages/CityPages'
-import { NewsArchive, NewsArticle } from './pages/NewsPages'
+import { CityDetail, CityDirectory, Directories, cityRecords } from './pages/CityPages'
+import { NewsArchive, NewsArticle, newsRecords } from './pages/NewsPages'
 import { LegacyNotice, ReciclaMatch, ReverseLogistics } from './pages/LegacyPages'
 import { HomePage } from './components/HomePage'
 import { PageHero } from './components/PageHero'
@@ -30,6 +30,17 @@ const ASSET = '/uploads/'
 type RouteKey = Exclude<RouteKind, 'not-found'> | 'not-found'
 
 const routeFromPath = (path: string): RouteKey => resolveRoute(path)?.kind ?? 'not-found'
+
+/** Título da aba: fichas e notícias usam o nome real; o resto usa o título do siteMap. */
+function pageTitle(path: string, routeInfo: SiteRoute | null): string {
+  if (!routeInfo) return 'Página não encontrada'
+  const slug = path.split('/').filter(Boolean).pop() ?? ''
+  if (routeInfo.kind === 'article') return newsRecords.find((record) => record.slug === slug)?.title ?? routeInfo.title
+  if (routeInfo.kind === 'cities' && routeInfo.path !== '/cidades/') {
+    return cityRecords.find((city) => city.slug === slug || city.legacyPath === routeInfo.path)?.name ?? routeInfo.title
+  }
+  return routeInfo.title
+}
 
 function App() {
   const [path, setPath] = useState(window.location.pathname)
@@ -65,7 +76,7 @@ function App() {
   const routeInfo = resolveRoute(path)
 
   useEffect(() => {
-    const title = routeInfo?.title ?? 'Página não encontrada'
+    const title = pageTitle(path, routeInfo)
     document.title = title + ' · Portal Resíduos MS'
     document
       .querySelector('meta[name=description]')

@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 1
-- Próxima tarefa: D1.8. Concluídas: D0.1, D0.2, D1.10, D1.1–D1.7. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D1.9. Concluídas: D0.1, D0.2, D1.10, D1.1–D1.8. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -26,6 +26,10 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
 ## Sessões
+
+### 2026-09-29 — D1.8 título da aba
+
+- Tarefa escrita a partir do template. Ficha e notícia usam o nome real no título (`pageTitle` em `App.tsx`, com `cityRecords` e `newsRecords`).
 
 ### 2026-09-29 — D1.7 fonte mínima e contraste
 

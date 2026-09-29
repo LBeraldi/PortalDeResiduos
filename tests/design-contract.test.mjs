@@ -86,3 +86,11 @@ test('D1.7: texto cerrado sobre mata usa --cerrado-claro (5,78:1)', () => {
   assert.match(css, /\.home-hero-slide-label \{[^}]*color: var\(--cerrado-claro\)/)
   assert.match(css, /\.home-impact-card--change small span \{ color: var\(--cerrado-claro\)/)
 })
+
+test('D1.8: o título da aba de ficha e notícia vem dos dados reais', () => {
+  const app = read('src/App.tsx')
+  assert.match(app, /function pageTitle\(/)
+  assert.match(app, /newsRecords\.find\(/)
+  assert.match(app, /cityRecords\.find\(/)
+  assert.match(app, /const title = pageTitle\(path, routeInfo\)\n\s*document\.title = title \+ ' · Portal Resíduos MS'/)
+})
