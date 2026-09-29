@@ -89,7 +89,7 @@ function HomeHeroSearch({ navigate }: { navigate: Navigate }) {
           <p>Nenhum resultado para “{query}”. Continue com Enter para buscar no acervo completo.</p>
         ) : (
           <ul role="listbox" aria-label="Sugestões de busca">
-            {results.map((entry) => <li key={`-`} role="option"><button type="button" onClick={() => openEntry(entry)}><span className="home-hero-search-result-kind">{entry.kind}</span><span>{entry.label}</span><ArrowRight size={15} aria-hidden="true" /></button></li>)}
+            {results.map((entry) => <li key={`${entry.kind}-${entry.href}`} role="option"><button type="button" onClick={() => openEntry(entry)}><span className="home-hero-search-result-kind">{entry.kind}</span><span>{entry.label}</span><ArrowRight size={15} aria-hidden="true" /></button></li>)}
           </ul>
         )}
       </div>}

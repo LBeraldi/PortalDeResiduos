@@ -37,16 +37,16 @@ Foco sempre visível no campo; lista de sugestões sem aviso de chave no console
 
 ## Critérios de aceite
 
-- [ ] Comportamento principal
-- [ ] Regressão coberta por teste ou contrato (`tests/design-contract.test.mjs`)
-- [ ] Acessibilidade e responsividade avaliadas (E7 e E8, 390 e 1440)
-- [ ] `npm run check:quality` passou
-- [ ] `npm run check:design` passou, com teto atualizado quando aplicável
-- [ ] `docs/design-refactor/PROGRESS.md` atualizado
+- [x] Comportamento principal
+- [x] Regressão coberta por teste ou contrato (`tests/design-contract.test.mjs`)
+- [x] Acessibilidade e responsividade avaliadas (E7 e E8, 390 e 1440)
+- [x] `npm run check:quality` passou
+- [x] `npm run check:design` passou, com teto atualizado quando aplicável
+- [x] `docs/design-refactor/PROGRESS.md` atualizado
 
 ## Handoff
 
-- Alterações:
-- Evidências:
-- Limitações/riscos:
-- Próximo passo:
+- Alterações: `src/components/HomePage.tsx` (chave `${kind}-${href}`), `src/styles.css` (`--cerrado-claro` e `:focus-within`), `tests/design-contract.test.mjs`.
+- Evidências: `docs/design-refactor/evals/2026-09-29-D1.2.md` — contorno 2 px no foco em 390 e 1440; avisos de chave 3 → 0.
+- Limitações/riscos: CP-04.3 (`aria-activedescendant`) não coberto; a tarefa pede manter o comportamento das setas.
+- Próximo passo: D1.3.

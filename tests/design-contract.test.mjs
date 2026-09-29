@@ -28,3 +28,12 @@ test('D1.1: Esc fecha o menu móvel e devolve o foco ao botão', () => {
   assert.match(app, /event\.key !== 'Escape'/)
   assert.match(app, /menuToggleRef\.current\?\.focus\(\)/)
 })
+
+test('D1.2: a busca do herói mostra foco e as sugestões têm chave única', () => {
+  const home = read('src/components/HomePage.tsx')
+  assert.doesNotMatch(home, /key=\{`-`\}/)
+  assert.match(home, /key=\{`\$\{entry\.kind\}-\$\{entry\.href\}`\}/)
+  const css = read('src/styles.css')
+  assert.match(css, /--cerrado-claro: #d4a15f;/)
+  assert.match(css, /\.home-hero-search-form:focus-within \{[^}]*outline: 2px solid var\(--cerrado-claro\)/)
+})
