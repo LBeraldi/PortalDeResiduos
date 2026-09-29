@@ -1,5 +1,5 @@
 import { type FormEvent, useEffect, useRef, useState } from "react"
-import { ArrowRight, BarChart3, BookOpen, ChevronLeft, ChevronRight, Recycle, Search } from "lucide-react"
+import { ArrowRight, BarChart3, BookOpen, ChevronLeft, ChevronRight, Pause, Play, Recycle, Search } from "lucide-react"
 import { openSiteSearch } from "./SiteSearch"
 import { newsRecords } from "../pages/NewsPages"
 import { territoryStats } from "../data/territory"
@@ -97,22 +97,23 @@ function HomeHeroSearch({ navigate }: { navigate: Navigate }) {
   )
 }
 
-function InstitutionalSlideContent({ slide }: { slide: InstitutionalSlide }) {
+function HighlightContent({ slide }: { slide: InstitutionalSlide }) {
   return <>
     <p className="home-hero-slide-label">{slide.label}</p>
-    <h1>{slide.title}</h1>
+    <h2>{slide.title}</h2>
     <p>{slide.text}</p>
     {slide.stat && slide.statLabel && <div className="home-hero-stat"><strong>{slide.stat}</strong><span>{slide.statLabel}</span></div>}
   </>
 }
 
+const [introSlide, ...highlights] = institutionalSlides
+
 function HomeInstitutionalHero({ navigate }: { navigate: Navigate }) {
-  const [activeSlide, setActiveSlide] = useState(0)
-  const [enteringSlide, setEnteringSlide] = useState<number | null>(null)
-  const [transitionDirection, setTransitionDirection] = useState<"next" | "previous">("next")
-  const [paused, setPaused] = useState(false)
+  const [active, setActive] = useState(0)
+  const [userPaused, setUserPaused] = useState(false)
+  const [hoverPaused, setHoverPaused] = useState(false)
   const [reducedMotion, setReducedMotion] = useState(false)
-  const slide = institutionalSlides[activeSlide]
+  const paused = userPaused || hoverPaused || reducedMotion
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -123,60 +124,44 @@ function HomeInstitutionalHero({ navigate }: { navigate: Navigate }) {
   }, [])
 
   useEffect(() => {
-    if (paused || reducedMotion || enteringSlide !== null) return
-    const interval = window.setInterval(() => {
-      setTransitionDirection("next")
-      setEnteringSlide((activeSlide + 1) % institutionalSlides.length)
-    }, 5000)
+    if (paused) return
+    const interval = window.setInterval(() => setActive((current) => (current + 1) % highlights.length), 8000)
     return () => window.clearInterval(interval)
-  }, [activeSlide, enteringSlide, paused, reducedMotion])
+  }, [paused])
 
-  const showSlide = (next: number, direction: "next" | "previous") => {
-    const normalized = (next + institutionalSlides.length) % institutionalSlides.length
-    if (normalized === activeSlide || enteringSlide !== null) return
-    if (reducedMotion) {
-      setActiveSlide(normalized)
-      return
-    }
-    setTransitionDirection(direction)
-    setEnteringSlide(normalized)
-  }
-
-  const finishTransition = () => {
-    if (enteringSlide === null) return
-    setActiveSlide(enteringSlide)
-    setEnteringSlide(null)
-  }
+  const show = (next: number) => setActive((next + highlights.length) % highlights.length)
 
   return (
-    <section className="home-institutional-hero" id="sobre-projeto" aria-label="Sobre o Projeto Resíduos Sólidos">
+    <section className="home-institutional-hero" id="sobre-projeto" aria-labelledby="home-hero-title">
       <div className="container home-institutional-hero-inner">
-        <div
+        <div className="home-hero-intro">
+          <div className="eyebrow home-hero-eyebrow"><span className="eyebrow-line" /> Projeto Resíduos Sólidos — Disposição Legal</div>
+          <h1 id="home-hero-title">Informação para dar o destino certo.</h1>
+          <p className="home-hero-lead">{introSlide.text}</p>
+          <HomeHeroSearch navigate={navigate} />
+        </div>
+        <section
           className="home-hero-carousel"
-          role="region"
-          aria-roledescription="carrossel"
-          aria-label="Sobre o Projeto Resíduos Sólidos"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocusCapture={() => setPaused(true)}
+          aria-roledescription="carrossel" aria-label="Destaques"
+          onMouseEnter={() => setHoverPaused(true)}
+          onMouseLeave={() => setHoverPaused(false)}
+          onFocusCapture={() => setHoverPaused(true)}
           onBlurCapture={(event) => {
-            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setPaused(false)
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setHoverPaused(false)
           }}
         >
-          <div className="eyebrow home-hero-eyebrow"><span className="eyebrow-line" /> Projeto Resíduos Sólidos — Disposição Legal</div>
-          <div className="home-hero-slide-viewport">
-            <div className={"home-hero-slide" + (enteringSlide !== null ? " is-leaving to-" + transitionDirection : "")} aria-live="off" aria-hidden={enteringSlide !== null}><InstitutionalSlideContent slide={slide} /></div>
-            {enteringSlide !== null && <div className={"home-hero-slide is-entering from-" + transitionDirection} aria-live="off" onAnimationEnd={finishTransition}><InstitutionalSlideContent slide={institutionalSlides[enteringSlide]} /></div>}
+          <div className="home-hero-slides" aria-live={paused ? "polite" : "off"}>
+            {highlights.map((item, index) => <div key={item.label} className={"home-hero-slide" + (index === active ? " is-active" : "")} role="group" aria-roledescription="destaque" aria-label={(index + 1) + " de " + highlights.length} aria-hidden={index !== active}><HighlightContent slide={item} /></div>)}
           </div>
           <div className="home-hero-controls">
-            <button type="button" className="home-hero-nav" onClick={() => showSlide(activeSlide - 1, "previous")} aria-label="Mostrar mensagem anterior" disabled={enteringSlide !== null}><ChevronLeft size={17} /></button>
-            <div className="home-hero-dots" aria-label="Selecionar mensagem institucional">
-              {institutionalSlides.map((item, index) => <button type="button" key={item.label} className={index === activeSlide ? "is-active" : ""} onClick={() => showSlide(index, index > activeSlide ? "next" : "previous")} aria-label={"Mostrar mensagem " + (index + 1) + ": " + item.label} aria-current={index === activeSlide ? "true" : undefined} disabled={enteringSlide !== null}><span className="sr-only">{item.label}</span></button>)}
+            <button type="button" className="home-hero-nav" onClick={() => show(active - 1)} aria-label="Destaque anterior"><ChevronLeft size={17} /></button>
+            <button type="button" className="home-hero-nav" onClick={() => setUserPaused(!userPaused)} aria-label={userPaused ? "Continuar destaques" : "Pausar destaques"}>{userPaused ? <Play size={15} /> : <Pause size={15} />}</button>
+            <div className="home-hero-dots">
+              {highlights.map((item, index) => <button type="button" key={item.label} className={index === active ? "is-active" : ""} onClick={() => show(index)} aria-label={"Mostrar destaque " + (index + 1) + ": " + item.label} aria-current={index === active ? "true" : undefined} />)}
             </div>
-            <button type="button" className="home-hero-nav" onClick={() => showSlide(activeSlide + 1, "next")} aria-label="Mostrar próxima mensagem" disabled={enteringSlide !== null}><ChevronRight size={17} /></button>
+            <button type="button" className="home-hero-nav" onClick={() => show(active + 1)} aria-label="Próximo destaque"><ChevronRight size={17} /></button>
           </div>
-        </div>
-        <HomeHeroSearch navigate={navigate} />
+        </section>
       </div>
     </section>
   )

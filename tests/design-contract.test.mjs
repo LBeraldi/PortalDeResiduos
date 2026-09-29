@@ -37,3 +37,19 @@ test('D1.2: a busca do herói mostra foco e as sugestões têm chave única', ()
   assert.match(css, /--cerrado-claro: #d4a15f;/)
   assert.match(css, /\.home-hero-search-form:focus-within \{[^}]*outline: 2px solid var\(--cerrado-claro\)/)
 })
+
+test('D1.3: a página inicial tem um único h1 fixo, fora do carrossel', () => {
+  const home = read('src/components/HomePage.tsx')
+  assert.equal((home.match(/<h1[\s>]/g) ?? []).length, 1)
+  assert.match(home, /<h1[^>]*>Informação para dar o destino certo\.<\/h1>/)
+  assert.doesNotMatch(home, /<h1>\{slide\.title\}<\/h1>/)
+})
+
+test('D1.3: destaques trocam a cada 8 s, com pausa e região viva só quando pausado', () => {
+  const home = read('src/components/HomePage.tsx')
+  assert.match(home, /aria-roledescription="carrossel" aria-label="Destaques"/)
+  assert.match(home, /setInterval\([^\n]*, 8000\)/)
+  assert.match(home, /"Pausar destaques"/)
+  assert.match(home, /"Continuar destaques"/)
+  assert.match(home, /className="home-hero-slides" aria-live=\{paused \? "polite" : "off"\}/)
+})

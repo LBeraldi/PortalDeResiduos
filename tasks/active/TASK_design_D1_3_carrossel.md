@@ -38,16 +38,16 @@ H1 estável; os outros quatro slides viram destaques com pausa, anterior e próx
 
 ## Critérios de aceite
 
-- [ ] Comportamento principal
-- [ ] Regressão coberta por teste ou contrato (`tests/design-contract.test.mjs`)
-- [ ] Acessibilidade e responsividade avaliadas (E7 e E8, 390 e 1440)
-- [ ] `npm run check:quality` passou
-- [ ] `npm run check:design` passou, com teto atualizado quando aplicável
-- [ ] `docs/design-refactor/PROGRESS.md` atualizado
+- [x] Comportamento principal
+- [x] Regressão coberta por teste ou contrato (`tests/design-contract.test.mjs`)
+- [x] Acessibilidade e responsividade avaliadas (E7 e E8, 390 e 1440)
+- [x] `npm run check:quality` passou
+- [x] `npm run check:design` passou, com teto atualizado quando aplicável
+- [x] `docs/design-refactor/PROGRESS.md` atualizado
 
 ## Handoff
 
-- Alterações:
-- Evidências:
-- Limitações/riscos:
-- Próximo passo:
+- Alterações: `src/components/HomePage.tsx` (H1 fixo, destaques, pausa, 8 s), `src/styles.css` (herói em duas colunas no desktop, destaques empilhados em grid, fade de 180 ms), `tests/design-contract.test.mjs`.
+- Evidências: `docs/design-refactor/evals/2026-09-29-D1.3.md`.
+- Limitações/riscos: altura de `/` em 390 px +129 px (6.436) até a D3.3; o layout do herói mudou para duas colunas no desktop (mockup da auditoria), além do que a tarefa pedia; novos rótulos de controle aguardam aprovação.
+- Próximo passo: D1.4.

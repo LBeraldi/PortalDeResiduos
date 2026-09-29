@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 1
-- Próxima tarefa: D1.3. Concluídas: D0.1, D0.2, D1.10, D1.1, D1.2. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D1.4. Concluídas: D0.1, D0.2, D1.10, D1.1, D1.2, D1.3. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -16,7 +16,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | font-size < 12 px | 32 | 32 | 0 |
 | navegação por botão | 48 | 48 | 0 |
 | hex fora de :root | 14 | 14 | 0 |
-| altura / em 390 | 6.395 | 6.307 | ≤ 4.800 |
+| altura / em 390 | 6.395 | 6.436 (D1.3: +129 temporário) | ≤ 4.800 |
 | altura panoramas em 390 | 24.921 | 24.900 | ≤ 5.000 |
 | menu visível em 390 | não | sim | sim |
 | destinos internos quebrados | 7 | 0 | 0 |
@@ -26,6 +26,12 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 | cliques até plano de coleta de Bonito | sem caminho | 4 | ≤ 2 (fase 3) |
 
 ## Sessões
+
+### 2026-09-29 — D1.3 H1 fixo e destaques
+
+- H1 fixo; destaques com `<h2>`, 8 s, pausa, `aria-live` só quando pausado; movimento reduzido parado. Herói em duas colunas no desktop.
+- Altura de `/`: 1440 3.999 → 3.839; 390 6.307 → 6.436 (+129, regressão temporária conhecida, a conferir na D3.3).
+- Textos de interface novos na lista de aprovação (ver eval).
 
 ### 2026-09-29 — D1.2 foco na busca do herói
 
