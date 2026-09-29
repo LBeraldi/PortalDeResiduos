@@ -41,15 +41,23 @@ Todo destino interno do código existe; o caminho Produções › Materiais Comp
 
 ## Critérios de aceite
 
-- [ ] Comportamento principal
-- [ ] Regressão coberta por teste ou contrato (`tests/navigation-contract.test.mjs`)
-- [ ] Acessibilidade e responsividade avaliadas
-- [ ] `npm run check:quality` passou
-- [ ] `docs/design-refactor/PROGRESS.md` atualizado
+- [x] Comportamento principal
+- [x] Regressão coberta por teste ou contrato (`tests/navigation-contract.test.mjs`)
+- [x] Acessibilidade e responsividade avaliadas (390 e 1440 px, teclado com foco visível, console sem erros)
+- [x] `npm run check:quality` passou
+- [x] `docs/design-refactor/PROGRESS.md` atualizado
 
 ## Handoff
 
-- Alterações:
-- Evidências:
+- Alterações: `src/pages/ProductionPages.tsx`, com 7 destinos internos trocados por rotas que já existem no `siteMap`. Sem rota nova, sem texto alterado, sem mudança visual. `tests/navigation-contract.test.mjs` veio com a instalação do pacote.
+- Evidências: `docs/design-refactor/evals/2026-09-29-D1.10.md`.
+  - Red com 7 destinos, depois Green.
+  - `check:quality` verde: 4 testes, 60 rotas, 79 panoramas, 15 planos.
+  - E4: 0 páginas de erro alcançáveis (antes 4) e 74 de 74 URLs de coleta seletiva alcançáveis (antes 0).
+  - Plano de Bonito a 4 cliques.
+  - Navegador: 13 → 0 cliques em página de erro nas páginas da tarefa, em 390 e 1440 px; teclado ok; screenshots antes/depois.
 - Limitações/riscos:
-- Próximo passo: D1.11 (páginas órfãs)
+  - A meta NAV-1 (2 cliques) só vem na fase 3.
+  - Achado de dados: em Bonito, dois documentos apontam para o mesmo arquivo do Drive.
+  - "Municípios contemplados" (compostagem) lista os panoramas. É o comportamento anterior.
+- Próximo passo: D0.1 (baseline), depois D1.11 (páginas órfãs).
