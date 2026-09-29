@@ -38,3 +38,9 @@
 - **Decisão:** índice remissivo — grupos por letra (`<h3>` + lista), em 3 colunas no desktop e 2 no celular. O nome do município é o link para a ficha. O selo "Panorama publicado" aparece nos 79 e por isso não distingue ninguém: fica fora da linha, e só o selo "Plano de coleta seletiva" (15) aparece. A descrição de cada rota já informa que os 79 têm panorama.
 - **Resultado:** `/cidades/` 4.497 px (390) e 2.724 px (1440); `/diretorios/` 4.344 px (390). `/panoramas-da-gestao-de-residuos/` fica em 5.263 px (390) até a D3.6 tirar a capa do herói (ADR-004).
 - **Consequência:** as ações por linha da D3.10 (Panorama · PDF, Plano) entram ao lado do nome, dentro da coluna.
+
+## 2026-09-29 — Fonte única de documentos e tamanho gerado (D3.5)
+
+- **Decisão:** `src/data/documents.ts` passa a ser a fonte dos 11 documentos do acervo que não são de um município, com os títulos e descrições já publicados. A ADR-005 (tamanho gerado, nunca digitado) se estende a eles: `scripts/generate-document-sizes.mjs` grava `src/data/document-sizes.generated.ts` a partir de `public/uploads`, e `npm run sync:data` roda o novo gerador.
+- **Motivo:** RC-1 (tipo, formato, tamanho e origem sem digitação manual) e uma lista só para as páginas e a busca (D3.9).
+- **Sem ano:** o único ano disponível é o da pasta de upload, que não é o ano de publicação; a PG-05.2 fica sem ano até existir o dado.

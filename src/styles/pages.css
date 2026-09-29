@@ -417,6 +417,7 @@
 .file-card h3 { margin: 0.9rem 0 0.55rem; color: var(--ink); font-size: var(--step-1); line-height: 1.15; }
 .file-card p { flex: 1; margin: 0 0 1.25rem; color: var(--ink-soft); font-size: var(--step-small); line-height: 1.65; }
 .library-toolbar { margin: 0 0 1.75rem; }
+.document-list { border-bottom: 1px solid var(--line); }
 .publications-grid { grid-template-columns: repeat(3, 1fr); }
 .document-feature,
 .valoriza-feature { display: grid; grid-template-columns: minmax(220px, 350px) 1fr; gap: clamp(2.5rem, 8vw, 7rem); align-items: center; }
@@ -471,8 +472,8 @@
 .catalogue-heading > p { max-width: 46ch; margin: 0; color: var(--ink-soft); font-size: var(--step-small); line-height: 1.8; }
 .production-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.15rem; }
 .production-card { display: grid; grid-template-columns: 36% 1fr; min-height: 17rem; padding: 0; overflow: hidden; text-align: left; }
-.production-card-cover { position: relative; overflow: hidden; background: var(--paper-sunk); }
-.production-card-cover img { width: 100%; height: 100%; min-height: 17rem; object-fit: cover; }
+.production-card-cover { position: relative; align-self: start; aspect-ratio: 4 / 3; overflow: hidden; background: var(--paper); border-right: 1px solid var(--line); }
+.production-card-cover img { width: 100%; height: 100%; object-fit: contain; }
 .production-card-icon { position: absolute; right: 0.9rem; bottom: 0.9rem; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; color: var(--paper); background: var(--mata); border-radius: 50%; }
 .production-card-body { display: flex; flex-direction: column; align-items: flex-start; padding: 1.7rem 1.65rem 1.4rem; }
 .production-card-body h2 { margin: 0.9rem 0 0.6rem; color: var(--ink); font-size: var(--step-2); letter-spacing: -0.02em; }

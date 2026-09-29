@@ -278,3 +278,25 @@ test('D3.4: a notícia mostra data e resumo uma vez e a trilha não repete o tí
   assert.match(artigo, /numericFacts\(item\.facts\)/)
   assert.doesNotMatch(src, /label: title \}/)
 })
+
+test('D3.5: documents.ts é a fonte única dos 11 documentos do acervo', async () => {
+  const { documents } = await import('../src/data/documents.ts')
+  assert.equal(documents.length, 11)
+  const porTipo = {}
+  for (const d of documents) porTipo[d.type] = (porTipo[d.type] ?? 0) + 1
+  assert.deepEqual(porTipo, { 'Nota técnica': 2, Artigo: 3, Revista: 1, Estudo: 1, Cartilha: 2, 'Modelo editável': 2 })
+  const { documentSizes } = await import('../src/data/document-sizes.generated.ts')
+  for (const d of documents) assert.equal(documentSizes[d.href], fs.statSync(path.join(root, 'public', d.href)).size, d.href)
+})
+
+test('D3.5: Publicações e Cooperativas listam documentos com DocumentRow; capas 4:3 em Produções', () => {
+  const src = read('src/pages/ResourcePages.tsx')
+  for (const nome of ['PublicationsPage', 'Cooperatives']) {
+    const bloco = src.match(new RegExp(`export function ${nome}[\\s\\S]*?\\n\\}`))[0]
+    assert.match(bloco, /<DocumentRow /, nome)
+    assert.match(bloco, /documents\.filter/, nome)
+    assert.doesNotMatch(bloco, /FileCard/, nome)
+  }
+  assert.match(readCss(), /\.production-card-cover \{[^}]*aspect-ratio: 4 \/ 3/)
+  assert.match(readCss(), /\.production-card-cover img \{[^}]*object-fit: contain/)
+})

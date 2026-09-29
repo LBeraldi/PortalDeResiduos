@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 3
-- Próxima tarefa: D3.5. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1–D3.4. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D3.6. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1–D3.5. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -41,6 +41,10 @@ Texto novo ou alterado visível ao público. Nada disso vai ao ar sem aprovaçã
 | D3.4 | Notícia | "Em foco" → "Em números" | spec PG-04.3 |
 
 ## Sessões
+
+### 2026-09-29 — D3.5 publicações
+
+- `documents.ts` com os 11 documentos e tamanho gerado (`generate-document-sizes.mjs` em `sync:data`); Publicações e Cooperativas com `DocumentRow`; capas 4:3 sem corte em Produções. Sem "ano" (dado inexistente).
 
 ### 2026-09-29 — D3.4 notícia
 

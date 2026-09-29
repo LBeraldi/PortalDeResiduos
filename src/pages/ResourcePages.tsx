@@ -3,38 +3,26 @@ import type { Crumb } from '../components/Breadcrumbs'
 import { Eyebrow } from '../components/Eyebrow'
 import { ArrowRight, BarChart3, BookOpen, ExternalLink, FileArchive, FileText, Gauge, HandHeart, Laptop, Recycle, Users } from 'lucide-react'
 import { Link } from '../components/router'
+import { DocumentRow } from '../components/DocumentRow'
+import { documents } from '../data/documents'
+import { documentSizes } from '../data/document-sizes.generated'
 
 const ASSET = '/uploads/'
 type Navigate = (to: string) => void
 
 function ResourceHero({ eyebrow, title, description, image, crumbs }: { eyebrow: string; title: string; description: string; image?: string; crumbs?: Crumb[] }) { return <PageHero eyebrow={eyebrow} title={title} description={description} image={image} crumbs={crumbs} /> }
 
-function FileCard({ title, type, text, href, image }: { title: string; type: string; text: string; href: string; image: string }) {
-  return <a className="file-card" href={href} target="_blank" rel="noreferrer"><img src={image} alt="" /><div className="file-card-body"><span className="doc-type">{type}</span><h3>{title}</h3><p>{text}</p><span className="text-link">Abrir arquivo <ArrowRight size={15} /></span></div></a>
-}
-
 function ToolPanel({ icon, eyebrow, title, text, href, label }: { icon: React.ReactNode; eyebrow: string; title: string; text: string; href: string; label: string }) {
   return <article className="tool-panel"><div className="tool-panel-icon">{icon}</div><Eyebrow>{eyebrow}</Eyebrow><h2>{title}</h2><p>{text}</p><a className="button button-primary" href={href} target="_blank" rel="noreferrer">{label} <ExternalLink size={15} /></a></article>
 }
 
 export function Cooperatives() {
-  const files = [
-    { title: 'Cartilha para cooperativas', type: 'PDF · Cartilha', text: 'Material de apoio para organização e fortalecimento das cooperativas de catadores.', href: `${ASSET}2022/08/cartilha_compressed.pdf`, image: `${ASSET}2022/08/cartilha_compressed-pdf.jpg` },
-    { title: 'Modelo de Estatuto e Ata', type: 'DOCX · Modelo', text: 'Documento editável para apoiar a formalização e a organização da cooperativa.', href: `${ASSET}2023/02/Modelo-Estatuto-de-Ata-oficial.docx`, image: `${ASSET}2022/08/word-doc-icon.png` },
-    { title: 'Estatuto de Cooperativa', type: 'DOC · Modelo', text: 'Referência de estatuto para consulta e adaptação conforme a realidade local.', href: `${ASSET}2023/02/Estatudo-de-Cooperativa-oficial.doc`, image: `${ASSET}2022/08/word-doc-icon.png` },
-  ]
-  return <><ResourceHero eyebrow="Inclusão e cidadania" title="Cooperativas" description="Materiais para apoiar a organização, a formalização e o reconhecimento do trabalho dos catadores." image={`${ASSET}2022/08/cartilha_frente.png`} crumbs={[{ label: 'Início', href: '/' }, { label: 'Cooperativas' }]} /><section className="resource-section section container"><div className="resource-intro"><div><Eyebrow>Fortalecer a reciclagem</Eyebrow><h2>Quem faz a transformação acontecer.</h2></div><p>As cooperativas e associações de catadores exercem um papel ambiental, econômico e social essencial. Esta área reúne referências para facilitar o acesso a informações e documentos de apoio.</p></div><div className="resource-stats"><div><Users size={21} /><strong>Trabalho reconhecido</strong><span>Organização e inclusão socioprodutiva.</span></div><div><Recycle size={21} /><strong>Materiais recuperados</strong><span>Mais reciclagem e menos rejeitos.</span></div><div><HandHeart size={21} /><strong>Cooperação</strong><span>Instituições trabalhando em rede.</span></div></div><h2 className="resource-list-title">Materiais disponíveis</h2><div className="file-grid">{files.map((file) => <FileCard key={file.title} {...file} />)}</div></section></>
+  return <><ResourceHero eyebrow="Inclusão e cidadania" title="Cooperativas" description="Materiais para apoiar a organização, a formalização e o reconhecimento do trabalho dos catadores." image={`${ASSET}2022/08/cartilha_frente.png`} crumbs={[{ label: 'Início', href: '/' }, { label: 'Cooperativas' }]} /><section className="resource-section section container"><div className="resource-intro"><div><Eyebrow>Fortalecer a reciclagem</Eyebrow><h2>Quem faz a transformação acontecer.</h2></div><p>As cooperativas e associações de catadores exercem um papel ambiental, econômico e social essencial. Esta área reúne referências para facilitar o acesso a informações e documentos de apoio.</p></div><div className="resource-stats"><div><Users size={21} /><strong>Trabalho reconhecido</strong><span>Organização e inclusão socioprodutiva.</span></div><div><Recycle size={21} /><strong>Materiais recuperados</strong><span>Mais reciclagem e menos rejeitos.</span></div><div><HandHeart size={21} /><strong>Cooperação</strong><span>Instituições trabalhando em rede.</span></div></div><h2 className="resource-list-title">Materiais disponíveis</h2><div className="document-list">{documents.filter((doc) => doc.context === '/cooperativas/').map((doc) => <DocumentRow key={doc.href} title={doc.title} type={doc.type} description={doc.description} href={doc.href} format={doc.format} sizeBytes={documentSizes[doc.href]} origin="local" cover={doc.cover} />)}</div></section></>
 }
 
-export function PublicationsPage({ navigate }: { navigate: Navigate }) {
-  const files = [
-    { title: 'Revista IBRAPARC', type: 'PDF · Revista', text: 'Publicação recente sobre gestão e políticas públicas de resíduos sólidos.', href: `${ASSET}2025/12/Revista-IBRAPARC.pdf`, image: `${ASSET}2025/12/Revista-IBRAPARC-pdf.jpg` },
-    { title: 'Cadeia de Reciclagem', type: 'PDF · Artigo', text: 'Discussões e referências para compreender a cadeia da reciclagem em MS.', href: `${ASSET}2025/12/artigo_Cadeia-de-Reciclagem.pdf`, image: `${ASSET}2025/12/artigo_Cadeia-de-Reciclagem-pdf.jpg` },
-    { title: 'Artigo sobre resíduos sólidos', type: 'PDF · Artigo', text: 'Material técnico produzido no âmbito do projeto.', href: `${ASSET}2021/11/artigo2-1.pdf`, image: `${ASSET}2021/11/artigo2-1-pdf.jpg` },
-    { title: 'Nota técnica sobre taxa de RSU', type: 'PDF · Nota técnica', text: 'Referência para discussão de custos e financiamento dos serviços.', href: `${ASSET}2021/11/Nota-tecnica-Taxa-RSU-FINAL-1.pdf`, image: `${ASSET}2021/11/Nota-tecnica-Taxa-RSU-FINAL-1-pdf.jpg` },
-    { title: 'Resíduos sólidos e destinação legal', type: 'PDF · Artigo', text: 'Análise sobre a destinação ambientalmente adequada dos rejeitos.', href: `${ASSET}2021/11/Artigo-RSDL-1.pdf`, image: `${ASSET}2021/11/Artigo-RSDL-1-pdf.jpg` },
-  ]
-  return <><ResourceHero eyebrow="Biblioteca do projeto" title="Publicações" description="Estudos, artigos, notas técnicas e materiais de referência para apoiar decisões sobre resíduos sólidos." image={`${ASSET}2025/12/Revista-IBRAPARC-pdf.jpg`} crumbs={[{ label: 'Início', href: '/' }, { label: 'Publicações' }]} /><section className="resource-section section container"><div className="resource-intro"><div><Eyebrow>Conhecimento aplicado</Eyebrow><h2>Informação para <span>agir melhor.</span></h2></div><p>Reunimos os principais materiais produzidos pelo projeto em uma biblioteca simples de consultar. Abra o arquivo para ler, baixar ou compartilhar.</p></div><div className="library-toolbar"><span><FileText size={16} /> {files.length} materiais locais</span><Link to="/producoes-do-convenio/" className="text-link">Ver produções do convênio <ArrowRight size={15} /></Link></div><div className="file-grid publications-grid">{files.map((file) => <FileCard key={file.title} {...file} />)}</div></section></>
+export function PublicationsPage({ navigate: _navigate }: { navigate: Navigate }) {
+  const publicacoes = documents.filter((doc) => doc.context === '/publicacoes/')
+  return <><ResourceHero eyebrow="Biblioteca do projeto" title="Publicações" description="Estudos, artigos, notas técnicas e materiais de referência para apoiar decisões sobre resíduos sólidos." image={`${ASSET}2025/12/Revista-IBRAPARC-pdf.jpg`} crumbs={[{ label: 'Início', href: '/' }, { label: 'Publicações' }]} /><section className="resource-section section container"><div className="resource-intro"><div><Eyebrow>Conhecimento aplicado</Eyebrow><h2>Informação para <span>agir melhor.</span></h2></div><p>Reunimos os principais materiais produzidos pelo projeto em uma biblioteca simples de consultar. Abra o arquivo para ler, baixar ou compartilhar.</p></div><div className="library-toolbar"><span><FileText size={16} /> {publicacoes.length} materiais locais</span><Link to="/producoes-do-convenio/" className="text-link">Ver produções do convênio <ArrowRight size={15} /></Link></div><div className="document-list">{publicacoes.map((doc) => <DocumentRow key={doc.href} title={doc.title} type={doc.type} description={doc.description} href={doc.href} format={doc.format} sizeBytes={documentSizes[doc.href]} origin="local" cover={doc.cover} />)}</div></section></>
 }
 
 export function TechnicalNote() {
