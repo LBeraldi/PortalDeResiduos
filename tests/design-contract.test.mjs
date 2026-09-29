@@ -238,3 +238,14 @@ test('D3.1: as três rotas de municípios usam o mesmo MunicipalityIndex', () =>
   assert.match(indice, /Nenhum município encontrado para “\{query\}”\./)
   assert.match(indice, /Limpar busca/)
 })
+
+test('D3.2: a ficha lista os documentos reais e explica o panorama uma vez', () => {
+  const src = read('src/pages/CityPages.tsx')
+  const ficha = src.match(/export function CityDetail[\s\S]*?\n\}/)[0]
+  assert.match(ficha, /<DocumentRow /)
+  assert.match(ficha, /selectiveCollectionPlans/)
+  assert.match(ficha, /<Badge variant="positive">Panorama publicado<\/Badge>/)
+  assert.doesNotMatch(src, /city-data-strip|Compare este município|Um retrato local para orientar/)
+  assert.equal((src.match(/Sobre o panorama/g) ?? []).length, 1)
+  assert.match(src.match(/function UnknownCity[\s\S]*?\n\}/)[0], /<Alert tone="warning"/)
+})

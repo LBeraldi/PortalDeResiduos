@@ -8,6 +8,8 @@ type PageHeroProps = {
   image?: string
   /** Trilha de navegação, mostrada acima da sobrelinha e do título (CP-10.1). */
   crumbs?: Crumb[]
+  /** Conteúdo curto abaixo da descrição, como selos. */
+  children?: ReactNode
 }
 
 /**
@@ -16,7 +18,7 @@ type PageHeroProps = {
  * LegacyPages e o antigo `PageIntro` de App.tsx. Sempre em papel: o verde-mata
  * fica para a página inicial e o rodapé (CP-10.2).
  */
-export function PageHero({ eyebrow, title, description, image, crumbs }: PageHeroProps) {
+export function PageHero({ eyebrow, title, description, image, crumbs, children }: PageHeroProps) {
   return (
     <section className={`page-hero${image ? ' has-figure' : ''}`}>
       <div className="container page-hero-inner">
@@ -27,6 +29,7 @@ export function PageHero({ eyebrow, title, description, image, crumbs }: PageHer
           </div>
           <h1>{title}</h1>
           {description && <p className="page-hero-desc">{description}</p>}
+          {children && <div className="page-hero-extra">{children}</div>}
         </div>
         {image && (
           <div className="page-hero-figure">

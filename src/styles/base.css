@@ -30,7 +30,6 @@ h2 { font-size: var(--step-4); line-height: 1.08; }
 /* Sobre mata o anel usa --cerrado-claro (5,78:1); em papel, o --cerrado padrão (3,51:1). */
 .production-band :focus-visible,
 .resource-band-dark :focus-visible,
-.city-next :focus-visible,
 .tool-panel :focus-visible,
 .site-footer :focus-visible { outline-color: var(--cerrado-claro); }
 main:focus { outline: none; }
@@ -86,14 +85,12 @@ main:focus { outline: none; }
 .production-band .button,
 .resource-band-dark .button,
 .band-content .button,
-.city-next .button,
 .site-footer .button {
   color: var(--mata-deep); background: var(--paper); border-color: var(--paper);
 }
 .production-band .button:hover,
 .resource-band-dark .button:hover,
 .band-content .button:hover,
-.city-next .button:hover,
 .site-footer .button:hover { background: var(--on-mata-strong); border-color: var(--on-mata-strong); }
 
 /* --- Hover de cartão (DS-11): a borda escurece e o título ganha sublinhado; nada se desloca. --- */
@@ -114,7 +111,7 @@ main:focus { outline: none; }
 .text-link svg { flex: none;  }
 .production-band .text-link,
 .resource-band-dark .text-link,
-.city-next .text-link { color: var(--on-mata); }
+
 
 /* --- Primitivo: ficha de dados (ledger) --- */
 .ledger {

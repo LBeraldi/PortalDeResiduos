@@ -5,7 +5,7 @@ Memória de trabalho entre sessões. O agente lê no início e atualiza no fim d
 ## Estado
 
 - Fase atual: 3
-- Próxima tarefa: D3.2. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
+- Próxima tarefa: D3.3. Concluídas: D0.1, D0.2, D1.1–D1.11, D2.1–D2.8, D3.1, D3.2. Review do código ao fim de todas as fases (pedido do dono do projeto em 2026-09-29).
 - Decisões pendentes: ADR-003 (ADR-001, 002, 004, 005 e 006 aceitas com a opção (a) em 2026-09-29)
 - Níveis promovidos: nenhum
 
@@ -36,8 +36,13 @@ Texto novo ou alterado visível ao público. Nada disso vai ao ar sem aprovaçã
 | D2.5 | Cabeçalho | botão "Buscar"; item de menu "Cidades" | spec CP-01.4 e CP-01.5 |
 | D2.7 | Contato | trilha "Início / Contato" (rótulos existentes) | spec CP-10.1 |
 | D3.1 | Índice de municípios | "Todos", "Com plano de coleta seletiva", "N de 79 municípios para “termo”", "Nenhum município encontrado para “termo”.", "Limpar busca", selo "Plano de coleta seletiva" | spec CP-06 e mockup |
+| D3.2 | Ficha do município | **"Sobre o panorama"**: "Diagnóstico da gestão, do gerenciamento e da disposição final dos resíduos sólidos no município, parte do levantamento feito para os 79 municípios de Mato Grosso do Sul." (ADR-004: aprovar antes de publicar); "Documentos deste município"; "N documentos"; "Panorama de gestão de resíduos de <Município>" | texto já publicado em Disposição Legal |
 
 ## Sessões
+
+### 2026-09-29 — D3.2 ficha do município
+
+- Ficha com `DocumentRow` (panorama com tamanho + arquivos do plano nos 15), selos no herói, sem imagem nem blocos falsos; "Sobre o panorama" com texto único **pendente de aprovação** (ADR-004).
 
 ### 2026-09-29 — D3.1 índice de municípios
 
